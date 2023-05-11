@@ -4,6 +4,8 @@ import {Helmet} from 'react-helmet-async'
 import HireButton from '../../common/hire-button/HireButton'
 import Help, {HelpItem} from './Help'
 import Reviews, {Review} from './Reviews'
+import {Swiper, SwiperSlide} from 'swiper/react'
+import {Autoplay} from 'swiper'
 
 const HELP_ITEMS: HelpItem[] = [
   {
@@ -172,6 +174,44 @@ const HomePage = () => {
       </section>
 
       <Reviews items={REVIEWS} />
+
+      <section className={styles.team}>
+        <h1>
+          Команда и <br />
+          оборудование
+        </h1>
+
+        <h2>
+          Специалисты ПРОМВИЗИО – это операторы, пилоты БВС, монтажёры и видеографы с уникальным опытом индустриального
+          видеопроизводства.
+          <span className={styles.icons}>
+            <img src='/icons/lightning.svg' alt='lightning' />
+            <img src='/icons/lightning.svg' alt='lightning' />
+          </span>
+        </h2>
+
+        <Swiper
+          className={styles.swiper}
+          modules={[Autoplay]}
+          slidesPerView={3.5}
+          grabCursor
+          loop
+          speed={600}
+          autoplay={{delay: 2500, disableOnInteraction: false}}
+        >
+          {[1, 2, 3, 4, 1, 2, 3, 4].map((slide, index) => (
+            <SwiperSlide className={styles.slide} key={index}>
+              <img src={`/media/home/slide-${slide}.png`} alt='team picture' />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
+        <h3>
+          Все сотрудники, задействованные в съёмочном процессе на производственных объектах, снабжены персональными СИЗ,
+          имеют актуальные удостоверения по охране труда, а также действующие сертификаты BOSIET/FOET. При необходимости
+          наши специалисты могут пройти необходимое специализированное дополнительное обучение.
+        </h3>
+      </section>
     </Page>
   )
 }

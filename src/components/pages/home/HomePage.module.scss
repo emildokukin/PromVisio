@@ -1,7 +1,5 @@
 .page {
-  @include mobile {
-    padding-bottom: 56px;
-  }
+  padding-bottom: 128px;
 }
 
 .banner {
@@ -100,5 +98,45 @@
       border: none;
       background-color: $gray-div;
     }
+  }
+}
+
+.team {
+  margin-top: 132px;
+
+  h1,
+  h2,
+  h3 {
+    padding-left: 272px;
+  }
+
+  h2 {
+    position: relative;
+    max-width: 80%;
+    margin-top: 64px;
+  }
+
+  .icons {
+    position: absolute;
+    top: 0;
+    left: $padding-x;
+
+    img {
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  .swiper {
+    margin-top: 64px;
+
+    :global .swiper-wrapper {
+      transition-timing-function: ease-in-out;
+    }
+  }
+
+  h3 {
+    max-width: 60%;
+    margin-top: 64px;
   }
 }
