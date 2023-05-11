@@ -1,0 +1,264 @@
+.page {
+  @include mobile {
+    padding-bottom: 56px;
+  }
+}
+
+.swiper {
+  $mobile-button-padding: 110px;
+
+  width: 100%;
+  height: 564px;
+
+  @include mobile {
+    height: calc(85vw + #{$mobile-button-padding});
+  }
+
+  &-wrapper {
+    position: relative;
+    width: calc(100% - 160px);
+    padding: 57px 48px 0;
+    margin: 0 auto;
+
+    @include mobile {
+      width: $mobile-w;
+      padding: 24px 0 0;
+    }
+  }
+
+  &-slide {
+    height: 100%;
+
+    @include mobile {
+      &::after {
+        position: absolute;
+        z-index: 3;
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+        border-radius: 24px;
+        background: linear-gradient(
+          0deg,
+          rgb(36 71 114 / 50%),
+          rgb(36 71 114 / 50%)
+        );
+        content: '';
+        inset: 0;
+      }
+    }
+
+    img {
+      min-height: auto;
+      border-radius: 24px;
+
+      @include mobile {
+        position: relative;
+        z-index: 2;
+      }
+    }
+
+    &-white {
+      color: $white;
+    }
+
+    &-pushed {
+      @include mobile {
+        img {
+          object-position: 80%;
+        }
+      }
+    }
+  }
+
+  &-banner {
+    @include mobile {
+      z-index: 4;
+      width: calc(100% - 32px);
+      justify-content: center;
+    }
+  }
+
+  &-button {
+    @include mobile {
+      bottom: #{-$mobile-button-padding} !important;
+      left: -16px !important;
+      width: calc(100% + 32px);
+    }
+  }
+
+  &-arrow {
+    @include mobile {
+      top: unset !important;
+      bottom: 46px;
+    }
+  }
+
+  :global .swiper {
+    &-slide {
+      padding-bottom: 50px;
+
+      @include mobile {
+        padding-bottom: $mobile-button-padding;
+      }
+    }
+
+    &-pagination {
+      @include mobile {
+        top: unset !important;
+        bottom: 70px !important;
+      }
+
+      &-bullet {
+        width: 16px;
+        height: 16px;
+
+        @include mobile {
+          width: 8px;
+          height: 8px;
+        }
+      }
+    }
+  }
+}
+
+.action {
+  margin-top: -24px;
+}
+
+.pros {
+  display: flex;
+  justify-content: space-between;
+
+  @include mobile {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+}
+
+.pro {
+  width: 168px;
+
+  @include mobile {
+    width: 100%;
+  }
+
+  &-icon {
+    display: flex;
+    height: 168px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    margin-bottom: 38px;
+    background: $blue;
+    box-shadow: 0 16px 32px 8px rgb(0 0 0 / 5%);
+
+    .inversed & {
+      background: $white;
+    }
+
+    @include mobile {
+      height: auto;
+      min-height: 82px;
+      justify-content: flex-start;
+      padding: 16px;
+      margin-bottom: 0;
+    }
+
+    img {
+      width: 60px;
+      height: 60px;
+
+      @include mobile {
+        width: 32px;
+        height: 32px;
+        margin-right: 16px;
+      }
+    }
+  }
+
+  &-title {
+    @include font(1, 32--18, 20--23, 700);
+
+    margin-bottom: 24px;
+    color: $blue;
+
+    .inversed & {
+      @include mobile {
+        color: $blue;
+      }
+    }
+
+    @include mobile {
+      margin-bottom: 0;
+      color: $white;
+    }
+  }
+
+  &-text {
+    @include font(1, 16--12, 20--14);
+
+    color: $dark;
+
+    .inversed & {
+      @include mobile {
+        color: $blue;
+      }
+    }
+
+    @include mobile {
+      color: $white;
+    }
+  }
+}
+
+.gear {
+  background-image: url('/media/home/gear.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  @include mobile {
+    width: 100%;
+    padding: 32px 3%;
+  }
+
+  & > * {
+    color: $white !important;
+  }
+
+  &-chips {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 60px;
+    gap: 16px;
+
+    @include mobile {
+      flex-direction: column;
+      margin-bottom: 0;
+    }
+  }
+
+  &-chip {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 32px 24px;
+    border-radius: 16px;
+    background: $blue;
+    gap: 58px;
+
+    @include mobile {
+      padding: 24px;
+      gap: 8px;
+    }
+
+    &-title {
+      @include font(1, 32--18, 20--24, 700);
+    }
+
+    &-text {
+      @include font(1, 16--12, 20--18);
+    }
+  }
+}

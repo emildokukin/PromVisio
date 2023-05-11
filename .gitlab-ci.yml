@@ -1,0 +1,51 @@
+stages:
+  - build
+  - up
+
+before_script:
+  - echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin registry.gitlab.com
+
+after_script:
+  - docker logout registry.gitlab.com
+
+variables:
+  TAG: $CI_COMMIT_REF_NAME
+
+build:
+  stage: build
+  script:
+    - docker compose build
+    - docker compose push
+  only:
+    - dev
+    - master
+  tags:
+    - builder
+
+up_dev:
+  environment: development
+  stage: up
+  variables:
+    GIT_STRATEGY: none
+    GIT_CHECKOUT: "false"
+  script:
+    - docker compose pull
+    - docker compose up -d --no-build
+  only:
+    - dev
+  tags:
+    - development
+
+up_prod:
+  environment: production
+  stage: up
+  variables:
+    GIT_STRATEGY: none
+    GIT_CHECKOUT: "false"
+  script:
+    - docker compose pull
+    - docker compose up -d --no-build
+  only:
+    - master
+  tags:
+    - production
