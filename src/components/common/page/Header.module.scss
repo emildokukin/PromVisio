@@ -10,11 +10,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 8px 32px;
-  background-color: $blue;
+  background-color: $general-bg;
 
   @include mobile {
     height: 56px;
     padding: 12px 8px;
   }
-
 }
