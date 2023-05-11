@@ -37,6 +37,8 @@ const Slider = ({items}: {items: Review[]}) => {
         onSwiper={(swiper) => setSwiper(swiper)}
         onSlideChange={onSlideChange}
         spaceBetween={72}
+        grabCursor
+        speed={500}
       >
         {items.map((item, index) => (
           <SwiperSlide className={styles.slide} key={index}>
