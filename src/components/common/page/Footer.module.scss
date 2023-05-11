@@ -42,12 +42,14 @@
   justify-content: center;
   border-radius: 100%;
   background-color: $gray-div;
+  color: $general-accent;
 
   &:not(:first-child) {
     margin-left: 10px;
   }
 
-  img {
+  img,
+  svg {
     width: 22px;
     height: auto;
     object-fit: contain;

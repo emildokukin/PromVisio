@@ -1,6 +1,7 @@
 import HireButton from '../hire-button/HireButton'
 import LinkComponent from '../link-component/LinkComponent'
 import styles from './Footer.module.scss'
+import {ReactComponent as Phone} from '../../../icons/phone-small.svg'
 
 const Footer = () => {
   return (
@@ -28,7 +29,7 @@ const Footer = () => {
       <div className={styles.action}>
         <LinkComponent link='tel:+79039689048' className={styles.phone}>
           <div className={styles.social}>
-            <img src='/icons/phone-footer.svg' alt='phone' />
+            <Phone />
           </div>
 
           <h2>+7 (903) 968 9048</h2>
