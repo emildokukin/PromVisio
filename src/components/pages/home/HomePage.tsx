@@ -3,6 +3,7 @@ import Page from '../../common/page/Page'
 import {Helmet} from 'react-helmet-async'
 import HireButton from '../../common/hire-button/HireButton'
 import Help, {HelpItem} from './Help'
+import Reviews, {Review} from './Reviews'
 
 const HELP_ITEMS: HelpItem[] = [
   {
@@ -29,6 +30,74 @@ const HELP_ITEMS: HelpItem[] = [
       </>
     ),
     text: 'Наш контент демонстрировался на ПМЭФ, ВЭФ, Транспортной неделе, Международном арктическом форуме. Заявите о себе в профессиональном сообществе.'
+  }
+]
+
+const REVIEWS: Review[] = [
+  {
+    title: '«Работы выполнены на высоком профессиональном уровне, в полном объеме, с надлежащим качеством»',
+    signature: '/media/home/signature-1.png',
+    format: 'PDF',
+    link: '#',
+    name: 'В.В. Черепанов',
+    role: 'Генеральный директор • ООО «Газпром Недра»',
+    image: '/media/home/gazprom-nedra.png'
+  },
+  {
+    title: '«Был создан качественный имиджевый медиапродукт, который отображает компетенции и опыт специалистов»',
+    signature: '/media/home/signature-2.png',
+    format: 'PDF',
+    link: '#',
+    name: 'С.А. Обухов',
+    role: 'Заместитель генерального директора по строительству скважин',
+    image: '/media/home/aurora.png'
+  },
+  {
+    title: '«Четкая организация труда, высокий профессионализм отвечают требованиям ООО «Газпром недра»',
+    signature: '/media/home/signature-3.png',
+    format: 'PDF',
+    link: '#',
+    name: 'В.Л. Плотников',
+    role: 'Заместитель генерального директора — главный инженер',
+    image: '/media/home/gazprom-nedra.png'
+  },
+  {
+    title:
+      '«За успешное выполнение работ по фото- и видеосъемке комплексных морских учений аварийно-спасательных формирований в акватории Карского моря»',
+    signature: '/media/home/signature-4.png',
+    format: 'PDF',
+    link: '#',
+    name: 'В.Ю. Слободян',
+    role: 'Генеральный директор • ИЭПИ',
+    image: '/media/home/institute.png'
+  },
+  {
+    title: '«Был создан качественный имиджевый медиапродукт, который отображает компетенции и опыт специалистов»',
+    signature: '/media/home/signature-2.png',
+    format: 'PDF',
+    link: '#',
+    name: 'С.А. Обухов',
+    role: 'Заместитель генерального директора по строительству скважин',
+    image: '/media/home/aurora.png'
+  },
+  {
+    title: '«Четкая организация труда, высокий профессионализм отвечают требованиям ООО «Газпром недра»',
+    signature: '/media/home/signature-3.png',
+    format: 'PDF',
+    link: '#',
+    name: 'В.Л. Плотников',
+    role: 'Заместитель генерального директора — главный инженер',
+    image: '/media/home/gazprom-nedra.png'
+  },
+  {
+    title:
+      '«За успешное выполнение работ по фото- и видеосъемке комплексных морских учений аварийно-спасательных формирований в акватории Карского моря»',
+    signature: '/media/home/signature-4.png',
+    format: 'PDF',
+    link: '#',
+    name: 'В.Ю. Слободян',
+    role: 'Генеральный директор • ИЭПИ',
+    image: '/media/home/institute.png'
   }
 ]
 
@@ -101,6 +170,8 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
+      <Reviews items={REVIEWS} />
     </Page>
   )
 }

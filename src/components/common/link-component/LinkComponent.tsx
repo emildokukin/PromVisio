@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 
 interface LinkComponentProps {
   link: string
-  linkExternal: string
+  linkExternal: boolean
   children: ReactNode
 }
 
