@@ -26,8 +26,6 @@
   }
 
   h1 {
-    @include font-desktop-h1;
-
     display: inline;
 
     img {
@@ -40,9 +38,67 @@
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+  }
+}
 
-    h2 {
-      @include font-desktop-h2;
+.customers {
+  padding: 0 $padding-x 0;
+  margin-top: 128px;
+
+  .content {
+    padding: 88px 95px 97px 112px;
+    border: 3px solid $general-accent;
+  }
+
+  h1,
+  h3 {
+    padding-left: 112px;
+  }
+
+  h3 {
+    position: relative;
+    margin-top: 64px;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 48px;
+      height: 48px;
+    }
+  }
+
+  .images {
+    display: flex;
+    margin-top: 80px;
+    gap: 85px;
+
+    .left,
+    .right {
+      display: grid;
+      list-style-type: none;
+
+      img {
+        max-height: 77%;
+        object-fit: contain;
+      }
+    }
+
+    .left {
+      gap: 50px 90px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .right {
+      gap: 50px 65px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .line {
+      width: 1px;
+      height: auto;
+      border: none;
+      background-color: $gray-div;
     }
   }
 }

@@ -1,0 +1,57 @@
+.help {
+  padding: 0 $padding-x 0;
+  margin-top: 128px;
+
+  .items,
+  h1 {
+    padding-left: calc(272px - #{$padding-x});
+  }
+}
+
+.items {
+  margin-top: 88px;
+  list-style-type: none;
+}
+
+.item {
+  cursor: pointer;
+
+  &:not(:last-child) {
+    padding-bottom: 48px;
+    border-bottom: solid 2px #202020;
+  }
+
+  &:not(:first-child) {
+    padding-top: 40px;
+  }
+
+  h2 {
+    position: relative;
+    user-select: none;
+  }
+
+  h3 {
+    display: none;
+    max-width: 80%;
+    margin-top: 24px;
+    user-select: none;
+
+    &.toggled {
+      display: block;
+    }
+  }
+
+  .arrow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 32px;
+    height: 32px;
+    margin: auto 0;
+
+    &.toggled {
+      transform: rotate(180deg);
+    }
+  }
+}
