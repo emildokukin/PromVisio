@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 8px 32px;
-  background-color: $general-bg;
+  background-color: transparent;
 
   @include mobile {
     height: 56px;
