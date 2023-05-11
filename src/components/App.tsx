@@ -1,10 +1,5 @@
 import {Helmet, HelmetProvider} from 'react-helmet-async'
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate
-} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom'
 import HomePage from './pages/home/HomePage'
 import ScrollToHashElement from './utils/scrollToHashElement'
 import ScrollToTop from './utils/scrollToTop'
