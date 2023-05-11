@@ -1,9 +1,66 @@
 .footer {
-  @include font(1, 16, 26);
+  display: flex;
+  justify-content: space-between;
+  padding: 68px $padding-x $padding-x;
+  background-color: $deep-gray;
+  color: $white;
+}
 
+.info {
   display: flex;
   flex-direction: column;
-  padding: 63px $padding-x 24px;
-  background-color: $general-bg;
-  color: $white;
+
+  hr {
+    height: 1px;
+    border: none;
+    margin-top: 68px;
+    background-color: $gray-div;
+  }
+}
+
+.email {
+  display: block;
+  margin-left: 117px;
+}
+
+.copyright {
+  @include font-desktop-txt-regular;
+
+  margin-top: 40px;
+  color: $gray;
+}
+
+.socials {
+  display: flex;
+}
+
+.social {
+  display: flex;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  background-color: $gray-div;
+
+  &:not(:first-child) {
+    margin-left: 10px;
+  }
+
+  img {
+    width: 22px;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+.action {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.phone {
+  display: flex;
+  gap: 22px;
 }
