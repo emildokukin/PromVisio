@@ -70,8 +70,6 @@ a {
   text-decoration: none;
 
   @include hover {
-    &:hover {
-      text-decoration: none;
-    }
+    text-decoration: none;
   }
 }

@@ -26,9 +26,7 @@
   }
 
   @include hover {
-    &:hover {
-      background-color: $general-accent-hover;
-    }
+    background-color: $general-accent-hover;
   }
 
   span {

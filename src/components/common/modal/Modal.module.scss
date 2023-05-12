@@ -118,9 +118,7 @@ $submit-button-width-mob: 108px;
   }
 
   @include hover {
-    &:hover {
-      background-color: $gray;
-    }
+    background-color: $gray;
   }
 
   svg {
@@ -193,8 +191,6 @@ $submit-button-width-mob: 108px;
   }
 
   @include hover {
-    &:hover {
-      background-color: $general-accent-hover;
-    }
+    background-color: $general-accent-hover;
   }
 }
