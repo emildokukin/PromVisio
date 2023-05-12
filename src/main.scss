@@ -51,7 +51,9 @@ a {
   color: inherit;
   text-decoration: none;
 
-  &:hover {
-    text-decoration: none;
+  @include hover {
+    &:hover {
+      text-decoration: none;
+    }
   }
 }
