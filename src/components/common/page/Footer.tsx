@@ -1,7 +1,7 @@
 import HireButton from '../hire-button/HireButton'
 import LinkComponent from '../link-component/LinkComponent'
 import styles from './Footer.module.scss'
-import {ReactComponent as Phone} from '../../../icons/phone-small.svg'
+import {ReactComponent as PhoneSVG} from '../../../icons/phone-small.svg'
 import {ReactComponent as Envelope} from '../../../icons/envelope.svg'
 import useMedia from '../../utils/useMedia'
 import clsx from 'clsx'
@@ -10,7 +10,7 @@ interface FooterProps {
   showHireButton?: boolean
 }
 
-const Email = ({isMobile}: {isMobile?: boolean}) => (
+export const Email = ({isMobile}: {isMobile?: boolean}) => (
   <LinkComponent link='emailto:info@promvisio.ru' className={styles.email}>
     {isMobile && (
       <div className={styles.social}>
@@ -22,7 +22,23 @@ const Email = ({isMobile}: {isMobile?: boolean}) => (
   </LinkComponent>
 )
 
-const Copyright = () => <p className={styles.copyright}>© 2023 «ПРОМВИЗИО»</p>
+export const Phone = () => (
+  <LinkComponent link='tel:+79039689048' className={styles.phone}>
+    <div className={styles.social}>
+      <PhoneSVG />
+    </div>
+
+    <h2>+7 (903) 968 9048</h2>
+  </LinkComponent>
+)
+
+export const Copyright = ({isShort}: {isShort?: boolean}) => (
+  <>
+    <hr className={clsx(styles.line, {[styles.lineShort]: isShort})} />
+
+    <p className={styles.copyright}>© 2023 «ПРОМВИЗИО»</p>
+  </>
+)
 
 const Footer = ({showHireButton}: FooterProps) => {
   const {isDesktop, isMobile} = useMedia()
@@ -42,32 +58,20 @@ const Footer = ({showHireButton}: FooterProps) => {
           {isDesktop && <Email />}
         </div>
 
-        <hr className={styles.line} />
+        {isMobile && <hr className={styles.line} />}
 
         {isDesktop && <Copyright />}
       </div>
 
       <div className={styles.action}>
-        <LinkComponent link='tel:+79039689048' className={styles.phone}>
-          <div className={styles.social}>
-            <Phone />
-          </div>
-
-          <h2>+7 (903) 968 9048</h2>
-        </LinkComponent>
+        <Phone />
 
         {isMobile && <Email isMobile />}
 
         {showHireButton && <HireButton />}
       </div>
 
-      {isMobile && (
-        <>
-          <hr className={clsx(styles.line, styles.lineShort)} />
-
-          <Copyright />
-        </>
-      )}
+      {isMobile && <Copyright isShort />}
     </footer>
   )
 }
