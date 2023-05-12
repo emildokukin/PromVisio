@@ -72,7 +72,9 @@ const Header = () => {
   return (
     <>
       <header className={styles.header} id='header'>
-        <img src='/icons/logo.svg' alt='logo prom visio' className={styles.logo} />
+        <LinkComponent link='/'>
+          <img src='/icons/logo.svg' alt='logo prom visio' className={styles.logo} />
+        </LinkComponent>
 
         {isDesktop && <Links />}
 
