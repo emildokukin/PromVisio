@@ -1,7 +1,6 @@
 import styles from './HomePage.module.scss'
 import Page from '../../common/page/Page'
 import {Helmet} from 'react-helmet-async'
-import HireButton from '../../common/hire-button/HireButton'
 import Help, {HelpItem} from './Help'
 import Reviews, {Review} from './Reviews'
 import {Swiper, SwiperSlide} from 'swiper/react'
@@ -105,7 +104,7 @@ const REVIEWS: Review[] = [
 
 const HomePage = () => {
   return (
-    <Page className={styles.page}>
+    <Page className={styles.page} floatingHireButton>
       <Helmet>
         <title>Главная</title>
       </Helmet>
@@ -128,8 +127,6 @@ const HomePage = () => {
               <br />
               Даже в самых сложных условиях.
             </h2>
-
-            <HireButton />
           </div>
         </div>
       </section>

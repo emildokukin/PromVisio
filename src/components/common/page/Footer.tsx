@@ -3,7 +3,11 @@ import LinkComponent from '../link-component/LinkComponent'
 import styles from './Footer.module.scss'
 import {ReactComponent as Phone} from '../../../icons/phone-small.svg'
 
-const Footer = () => {
+interface FooterProps {
+  showHireButton?: boolean
+}
+
+const Footer = ({showHireButton}: FooterProps) => {
   return (
     <footer className={styles.footer} id='footer'>
       <div className={styles.info}>
@@ -35,7 +39,7 @@ const Footer = () => {
           <h2>+7 (903) 968 9048</h2>
         </LinkComponent>
 
-        <HireButton />
+        {showHireButton && <HireButton />}
       </div>
     </footer>
   )

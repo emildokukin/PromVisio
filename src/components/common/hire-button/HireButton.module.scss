@@ -10,10 +10,10 @@
   background-color: $general-accent;
   cursor: pointer;
   outline: none;
-  transition: background-color 0.15s ease-in;
+  transition: background-color 0.15s linear;
 
   &:hover {
-    background-color: rgba($color: $general-accent, $alpha: 80%);
+    background-color: $general-accent-hover;
   }
 
   span {
@@ -26,4 +26,11 @@
     width: 20px;
     height: 20px;
   }
+}
+
+.floating {
+  position: fixed;
+  z-index: $floating-button-z;
+  right: $padding-x;
+  bottom: $padding-x;
 }

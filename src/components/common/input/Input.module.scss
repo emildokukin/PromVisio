@@ -1,0 +1,51 @@
+.label {
+  @include font-desktop-txt-bold;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: $light-gray;
+
+  img {
+    width: 8px;
+    object-fit: contain;
+  }
+}
+
+.wrapper {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  &:not(:first-child) {
+    margin-top: 24px;
+  }
+}
+
+.error {
+  margin-top: 4px;
+  color: $general-accent;
+}
+
+.default {
+  @include font-desktop-h3;
+
+  padding: 16px;
+  border: 2px solid $gray-div;
+  margin-top: 4px;
+  background-color: $deep-gray;
+  color: $white;
+  outline: none;
+
+  &::placeholder {
+    @include font-desktop-h3;
+
+    color: $gray;
+  }
+}
+
+.textarea {
+  min-height: 162px;
+  box-sizing: border-box;
+  resize: none;
+}

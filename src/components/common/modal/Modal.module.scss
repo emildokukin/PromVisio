@@ -1,0 +1,131 @@
+$submit-button-width: 128px;
+
+.modal {
+  position: fixed;
+  z-index: $modal-z;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba($black, 0.5);
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s ease-out;
+
+  &-active {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.content {
+  position: relative;
+  display: flex;
+  width: 752px;
+  height: 100%;
+  max-height: calc(100vh - 100px);
+  align-items: stretch;
+  padding-bottom: calc(#{$submit-button-width} / 2);
+  pointer-events: none;
+  transform: scale(0.5);
+  transition: all 0.4s ease-out;
+
+  &-active {
+    pointer-events: all;
+    transform: scale(1);
+  }
+}
+
+.logo {
+  display: flex;
+  width: 112px;
+  align-items: flex-start;
+  padding-top: 90px;
+  background-color: $gray;
+
+  img {
+    width: auto;
+    height: 34px;
+    object-fit: contain;
+    transform: translateX(-8px) rotate(-90deg);
+  }
+}
+
+.form {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 36px 32px 43px;
+  background-color: $deep-gray;
+}
+
+.inputs {
+  overflow: auto;
+  margin-top: 32px;
+  margin-bottom: auto;
+}
+
+.cross {
+  position: absolute;
+  z-index: 2;
+  top: 40px;
+  right: 28px;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  background-color: #1e1e1e;
+  cursor: pointer;
+  transition: all 0.1s linear;
+
+  &:hover {
+    background-color: $gray;
+  }
+
+  svg {
+    width: 20px;
+    color: $general-accent;
+  }
+}
+
+.important {
+  @include font-small;
+
+  margin-top: 40px;
+  color: $gray;
+  text-align: right;
+
+  img {
+    width: 8px;
+    height: fit-content;
+    margin-left: 10px;
+    object-fit: contain;
+  }
+}
+
+.button {
+  @include font-desktop-txt-bold;
+
+  position: absolute;
+  bottom: calc(-#{$submit-button-width} / 2);
+  left: 32px;
+  display: flex;
+  width: $submit-button-width;
+  height: $submit-button-width;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 100%;
+  background-color: $general-accent;
+  cursor: pointer;
+  transition: background-color 0.15s linear;
+
+  &:hover {
+    background-color: $general-accent-hover;
+  }
+}
