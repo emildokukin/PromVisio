@@ -1,4 +1,5 @@
 $submit-button-width: 128px;
+$submit-button-width-mob: 108px;
 
 .modal {
   position: fixed;
@@ -23,14 +24,21 @@ $submit-button-width: 128px;
 .content {
   position: relative;
   display: flex;
-  width: 752px;
   height: 100%;
-  max-height: calc(100vh - 100px);
   align-items: stretch;
-  padding-bottom: calc(#{$submit-button-width} / 2);
   pointer-events: none;
   transform: scale(0.5);
   transition: all 0.4s ease-out;
+
+  @include desktop {
+    width: 752px;
+    max-height: calc(100vh - 100px);
+    padding-bottom: calc(#{$submit-button-width} / 2);
+  }
+
+  @include mobile {
+    width: 100%;
+  }
 
   &-active {
     pointer-events: all;
@@ -44,6 +52,10 @@ $submit-button-width: 128px;
   align-items: flex-start;
   padding-top: 90px;
   background-color: $gray;
+
+  @include mobile {
+    display: none;
+  }
 
   img {
     width: auto;
@@ -60,28 +72,50 @@ $submit-button-width: 128px;
   flex-direction: column;
   padding: 36px 32px 43px;
   background-color: $deep-gray;
+
+  @include mobile {
+    padding: 24px 16px;
+
+    h2 {
+      @include font-desktop-menu;
+    }
+  }
 }
 
 .inputs {
   overflow: auto;
   margin-top: 32px;
-  margin-bottom: auto;
+
+  @include mobile {
+    margin-top: 24px;
+  }
 }
 
 .cross {
   position: absolute;
   z-index: 2;
-  top: 40px;
-  right: 28px;
   display: flex;
-  width: 40px;
-  height: 40px;
   align-items: center;
   justify-content: center;
   border-radius: 100%;
   background-color: #1e1e1e;
   cursor: pointer;
   transition: all 0.1s linear;
+
+  @include desktop {
+    top: 40px;
+    right: 28px;
+    width: 40px;
+    height: 40px;
+  }
+
+  @include mobile {
+    top: 24px;
+    right: 16px;
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+  }
 
   &:hover {
     background-color: $gray;
@@ -93,30 +127,46 @@ $submit-button-width: 128px;
   }
 }
 
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 40px;
+  margin-top: auto;
+
+  @include mobile {
+    padding-top: 24px;
+  }
+}
+
 .important {
   @include font-small;
 
-  margin-top: 40px;
+  width: 100%;
   color: $gray;
   text-align: right;
+
+  @include mobile {
+    display: flex;
+    margin-left: 42px;
+  }
 
   img {
     width: 8px;
     height: fit-content;
     margin-left: 10px;
     object-fit: contain;
+
+    @include mobile {
+      margin-top: 2px;
+    }
   }
 }
 
 .button {
-  @include font-desktop-txt-bold;
-
-  position: absolute;
-  bottom: calc(-#{$submit-button-width} / 2);
-  left: 32px;
   display: flex;
   width: $submit-button-width;
   height: $submit-button-width;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   border: none;
@@ -124,6 +174,21 @@ $submit-button-width: 128px;
   background-color: $general-accent;
   cursor: pointer;
   transition: background-color 0.15s linear;
+
+  @include desktop {
+    @include font-desktop-txt-bold;
+
+    position: absolute;
+    bottom: calc(-#{$submit-button-width} / 2);
+    left: 32px;
+  }
+
+  @include mobile {
+    @include font-adapt-txt-regular;
+
+    width: $submit-button-width-mob;
+    height: $submit-button-width-mob;
+  }
 
   &:hover {
     background-color: $general-accent-hover;

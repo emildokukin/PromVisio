@@ -24,13 +24,15 @@ const Modal = ({active, toggle, children, title, image, onSubmit}: ModalProps) =
 
         <div className={styles.inputs}>{children}</div>
 
-        <p className={styles.important}>
-          Очень важные поля для заполнения <img src='/icons/asterisk.svg' alt='asterisk' />
-        </p>
+        <div className={styles.bottom}>
+          <button type='submit' className={styles.button}>
+            ОТПРАВИТЬ
+          </button>
 
-        <button type='submit' className={styles.button}>
-          ОТПРАВИТЬ
-        </button>
+          <p className={styles.important}>
+            Очень важные поля для заполнения <img src='/icons/asterisk.svg' alt='asterisk' />
+          </p>
+        </div>
       </form>
 
       <div className={styles.cross} onClick={toggle}>

@@ -4,6 +4,10 @@
   padding: 68px $padding-x $padding-x;
   background-color: $deep-gray;
   color: $white;
+
+  @include mobile {
+    display: none;
+  }
 }
 
 .info {
