@@ -1,6 +1,6 @@
 .header {
   position: absolute;
-  z-index: 9;
+  z-index: $header-z;
   top: 0;
   right: 0;
   left: 0;
@@ -24,13 +24,28 @@
 .links {
   ul {
     display: flex;
-    height: 20px;
-    gap: 36px;
     list-style-type: none;
+
+    @include desktop {
+      height: 20px;
+      gap: 36px;
+    }
+
+    @include mobile {
+      flex-direction: column;
+      gap: 20px;
+    }
   }
 
   li {
     @include font-desktop-menu;
+
+    @include mobile {
+      &:not(:last-child) {
+        padding-bottom: 24px;
+        border-bottom: 1px solid rgba($gray-div, 0.5);
+      }
+    }
   }
 }
 
@@ -73,9 +88,46 @@
 }
 
 .border {
-  position: relative;
-  top: -12px;
-  height: 45px;
-  padding: 10px 16px 12px;
-  border: 2px solid $general-accent;
+  @include desktop {
+    position: relative;
+    top: -12px;
+    height: 45px;
+    padding: 10px 16px 12px;
+    border: 2px solid $general-accent;
+  }
+
+  @include mobile {
+    display: flex;
+
+    &::after {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 100%;
+      margin: auto 0 auto 12px;
+      background: $general-accent;
+      content: '\A';
+    }
+  }
+}
+
+.menu {
+  position: fixed;
+  z-index: $header-menu-z;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  padding: 128px $padding-mx 22px;
+  background-color: $deep-gray;
+  inset: 0 0 0 100vw;
+  transition: all 0.3s ease-in-out;
+
+  &.visible {
+    left: 0;
+  }
+
+  .bottom {
+    margin-top: auto;
+  }
 }

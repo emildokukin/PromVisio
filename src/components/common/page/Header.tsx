@@ -2,7 +2,10 @@ import LinkComponent from '../link-component/LinkComponent'
 import styles from './Header.module.scss'
 import {useCallback, useState} from 'react'
 import {ReactComponent as PhoneSVG} from '../../../icons/phone-small.svg'
+import {ReactComponent as Hamburger} from '../../../icons/hamburger.svg'
 import useMedia from '../../utils/useMedia'
+import clsx from 'clsx'
+import {Copyright as FooterCopyright, Email as FooterEmail, Phone as FooterPhone} from './Footer'
 
 const Links = () => (
   <nav className={styles.links}>
@@ -33,9 +36,21 @@ const Phone = () => (
   </LinkComponent>
 )
 
+const Menu = ({isVisible}: {isVisible?: boolean}) => (
+  <div className={clsx(styles.menu, {[styles.visible]: isVisible})}>
+    <Links />
+
+    <div className={styles.bottom}>
+      <FooterPhone />
+      <FooterEmail isMobile />
+      <FooterCopyright />
+    </div>
+  </div>
+)
+
 const Header = () => {
   const [isOpened, setIsOpened] = useState(false)
-  const {isDesktop} = useMedia()
+  const {isDesktop, isMobile} = useMedia()
 
   const triggerMenuState = useCallback(() => {
     if (document) {
@@ -46,13 +61,19 @@ const Header = () => {
   }, [isOpened])
 
   return (
-    <header className={styles.header} id='header' onClick={triggerMenuState}>
-      <img src='/icons/logo.svg' alt='logo prom visio' className={styles.logo} />
+    <>
+      <header className={styles.header} id='header'>
+        <img src='/icons/logo.svg' alt='logo prom visio' className={styles.logo} />
 
-      {isDesktop && <Links />}
+        {isDesktop && <Links />}
 
-      {isDesktop && <Phone />}
-    </header>
+        {isDesktop && <Phone />}
+
+        {isMobile && <Hamburger className={styles.hamburger} onClick={triggerMenuState} />}
+      </header>
+
+      <Menu isVisible={isOpened} />
+    </>
   )
 }
 

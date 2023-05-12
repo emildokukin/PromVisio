@@ -50,6 +50,10 @@
   bottom: $padding-x;
 
   @include mobile {
+    z-index: calc(#{$header-menu-z} - 1);
+  }
+
+  @include mobile {
     right: $padding-mx;
     bottom: $padding-mx;
   }
