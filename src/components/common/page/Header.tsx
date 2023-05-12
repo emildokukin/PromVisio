@@ -7,10 +7,18 @@ import useMedia from '../../utils/useMedia'
 const Links = () => (
   <nav className={styles.links}>
     <ul>
-      <li>Галерея</li>
-      <li>Вестник</li>
-      <li>История одного проекта</li>
-      <li>Потенциал ПРО</li>
+      <li>
+        <LinkComponent link='#'>Галерея</LinkComponent>
+      </li>
+      <li>
+        <LinkComponent link='#'>Вестник</LinkComponent>
+      </li>
+      <li>
+        <LinkComponent link='#'>История одного проекта</LinkComponent>
+      </li>
+      <li className={styles.border}>
+        <LinkComponent link='#'>Потенциал ПРО</LinkComponent>
+      </li>
     </ul>
   </nav>
 )
