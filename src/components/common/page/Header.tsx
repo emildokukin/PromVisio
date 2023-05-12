@@ -1,7 +1,8 @@
 import LinkComponent from '../link-component/LinkComponent'
 import styles from './Header.module.scss'
 import {useCallback, useState} from 'react'
-import {ReactComponent as Phone} from '../../../icons/phone-small.svg'
+import {ReactComponent as PhoneSVG} from '../../../icons/phone-small.svg'
+import useMedia from '../../utils/useMedia'
 
 const Links = () => (
   <nav className={styles.links}>
@@ -14,8 +15,19 @@ const Links = () => (
   </nav>
 )
 
+const Phone = () => (
+  <LinkComponent link='tel:+79039689048' className={styles.phone}>
+    <div className={styles.social}>
+      <PhoneSVG />
+    </div>
+
+    <p>+7 (903) 968_90–48</p>
+  </LinkComponent>
+)
+
 const Header = () => {
   const [isOpened, setIsOpened] = useState(false)
+  const {isDesktop} = useMedia()
 
   const triggerMenuState = useCallback(() => {
     if (document) {
@@ -29,15 +41,9 @@ const Header = () => {
     <header className={styles.header} id='header' onClick={triggerMenuState}>
       <img src='/icons/logo.svg' alt='logo prom visio' className={styles.logo} />
 
-      <Links />
+      {isDesktop && <Links />}
 
-      <LinkComponent link='tel:+79039689048' className={styles.phone}>
-        <div className={styles.social}>
-          <Phone />
-        </div>
-
-        <p>+7 (903) 968_90–48</p>
-      </LinkComponent>
+      {isDesktop && <Phone />}
     </header>
   )
 }

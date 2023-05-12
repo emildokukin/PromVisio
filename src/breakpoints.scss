@@ -10,6 +10,12 @@
   }
 }
 
+@mixin hover {
+  @media (hover: hover) {
+    @content;
+  }
+}
+
 @mixin custom($min-width: false, $max-width: false) {
   @if $min-width and not $max-width {
     @media screen and (min-width: $min-width) {

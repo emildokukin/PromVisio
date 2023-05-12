@@ -9,15 +9,18 @@
   height: $header-height;
   align-items: center;
   justify-content: space-between;
-  padding: 45px $padding-x 0;
   background-color: transparent;
+
+  @include desktop {
+    padding: 45px $padding-x 0;
+  }
+
+  @include mobile {
+    padding: 24px $padding-mx 0;
+  }
 }
 
 .links {
-  @include mobile {
-    display: none;
-  }
-
   ul {
     display: flex;
     gap: 36px;
@@ -30,9 +33,16 @@
 }
 
 .logo {
-  width: 128px;
   height: auto;
   object-fit: contain;
+
+  @include desktop {
+    width: 128px;
+  }
+
+  @include mobile {
+    width: 96px;
+  }
 }
 
 .phone {

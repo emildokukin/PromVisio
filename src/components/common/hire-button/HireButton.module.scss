@@ -1,19 +1,34 @@
 .button {
   display: flex;
-  width: 100%;
-  max-width: 416px;
-  height: 48px;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px;
   border: none;
   background-color: $general-accent;
   cursor: pointer;
   outline: none;
   transition: background-color 0.15s linear;
 
-  &:hover {
-    background-color: $general-accent-hover;
+  @include desktop {
+    width: 100%;
+    max-width: 416px;
+    height: 48px;
+    padding: 12px 16px;
+  }
+
+  @include mobile {
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+
+    span {
+      display: none;
+    }
+  }
+
+  @include hover {
+    &:hover {
+      background-color: $general-accent-hover;
+    }
   }
 
   span {
@@ -33,4 +48,9 @@
   z-index: $floating-button-z;
   right: $padding-x;
   bottom: $padding-x;
+
+  @include mobile {
+    right: $padding-mx;
+    bottom: $padding-mx;
+  }
 }

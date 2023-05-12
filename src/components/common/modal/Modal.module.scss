@@ -74,7 +74,7 @@ $submit-button-width-mob: 108px;
   background-color: $deep-gray;
 
   @include mobile {
-    padding: 24px 16px;
+    padding: 24px $padding-mx;
 
     h2 {
       @include font-desktop-menu;
@@ -111,7 +111,7 @@ $submit-button-width-mob: 108px;
 
   @include mobile {
     top: 24px;
-    right: 16px;
+    right: $padding-mx;
     width: 24px;
     height: 24px;
     background-color: transparent;

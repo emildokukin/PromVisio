@@ -47,6 +47,8 @@
 
   @include mobile {
     @include font-adapt-txt-regular;
+
+    padding: 12px;
   }
 
   &::placeholder {
