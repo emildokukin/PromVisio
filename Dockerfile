@@ -8,6 +8,6 @@ COPY ./public* ./public
 COPY ./src ./src
 RUN npm run build
 
-FROM nginx:1.22
+FROM nginx:1.22-alpine-slim
 COPY nginx/default.conf.template /etc/nginx/templates/default.conf.template
 COPY --from=builder /app/dist/ /var/www/frontend/
