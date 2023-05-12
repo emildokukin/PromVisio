@@ -9,26 +9,22 @@
     flex-direction: column;
     padding: 26px $padding-mx 22px;
   }
-
- 
-} 
+}
 
 .line {
-    height: 1px;
-    border: none;
-    margin-top: 68px;
-    background-color: $gray-div;
+  height: 1px;
+  border: none;
+  margin-top: 68px;
+  background-color: $gray-div;
 
-    @include mobile {
-      margin-top: 26px;
+  @include mobile {
+    margin-top: 26px;
 
-      &-short {
+    &-short {
       max-width: calc(100% - 56px);
     }
-    }
-
-          
   }
+}
 
 .info {
   display: flex;
