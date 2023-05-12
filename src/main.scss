@@ -23,15 +23,33 @@ hr {
 }
 
 h1 {
-  @include font-desktop-h1;
+  @include desktop {
+    @include font-desktop-h1;
+  }
+
+  @include mobile {
+    @include font-adapt-h1;
+  }
 }
 
 h2 {
-  @include font-desktop-h2;
+  @include desktop {
+    @include font-desktop-h2;
+  }
+
+  @include mobile {
+    @include font-adapt-h2;
+  }
 }
 
 h3 {
-  @include font-desktop-h3;
+  @include desktop {
+    @include font-desktop-h3;
+  }
+
+  @include mobile {
+    @include font-adapt-h3;
+  }
 }
 
 ul,

@@ -21,14 +21,29 @@
     justify-content: space-between;
     padding: 173px $padding-x $padding-x;
     inset: 0;
+
+    @include mobile {
+      justify-content: flex-start;
+      padding: 128px $padding-mx 0;
+    }
   }
 
   h1 {
     display: inline;
 
+    @include mobile {
+      @include font-adapt-h2;
+    }
+
     img {
       width: 112px;
       height: 73px;
+
+      @include mobile {
+        width: 32px;
+        height: 18px;
+        margin: 0 4px;
+      }
     }
   }
 
@@ -36,26 +51,63 @@
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+
+    h2 {
+      @include mobile {
+        @include font-adapt-txt-regular;
+      }
+    }
+
+    @include mobile {
+      margin-top: 16px;
+    }
   }
 }
 
 .customers {
-  padding: 0 $padding-x 0;
-  margin-top: 128px;
+  @include desktop {
+    padding: 0 $padding-x 0;
+    margin-top: 128px;
+  }
+
+  @include mobile {
+    padding-left: $padding-mx;
+    margin-top: 56px;
+  }
 
   .content {
-    padding: 88px 95px 97px 112px;
-    border: 3px solid $general-accent;
+    @include desktop {
+      padding: 88px 95px 97px 112px;
+      border: 3px solid $general-accent;
+    }
+
+    @include mobile {
+      padding-bottom: 18px;
+      border-right: 4px solid $general-accent;
+    }
   }
 
   h1,
   h3 {
-    padding-left: 112px;
+    @include desktop {
+      padding-left: 112px;
+    }
+
+    @include mobile {
+      padding-right: 28px;
+    }
   }
 
   h3 {
     position: relative;
     margin-top: 64px;
+
+    @include mobile {
+      @include font-adapt-txt-regular;
+
+      margin-top: 16px;
+      color: $light-gray;
+    }
 
     img {
       position: absolute;
@@ -63,18 +115,35 @@
       left: 0;
       width: 48px;
       height: 48px;
+
+      @include mobile {
+        display: none;
+      }
     }
   }
 
   .images {
-    display: flex;
-    margin-top: 80px;
-    gap: 85px;
+    @include desktop {
+      display: flex;
+      margin-top: 80px;
+      gap: 85px;
+    }
+
+    @include mobile {
+      display: grid;
+      margin-top: 36px;
+      gap: 32px;
+      overflow-x: auto;
+    }
 
     .left,
     .right {
       display: grid;
       list-style-type: none;
+
+      @include mobile {
+        grid-auto-flow: column;
+      }
 
       img {
         max-height: 77%;
@@ -83,13 +152,39 @@
     }
 
     .left {
-      gap: 50px 90px;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      @include desktop {
+        gap: 50px 90px;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        grid-template-rows: repeat(auto-fill, minmax(0, 1fr));
+      }
+
+      @include mobile {
+        gap: 10px 20vw;
+        grid-template-rows: repeat(2, minmax(0, 1fr));
+
+        li {
+          display: flex;
+          width: 20vw;
+          align-items: flex-end;
+        }
+      }
     }
 
     .right {
-      gap: 50px 65px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      @include desktop {
+        gap: 50px 65px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(auto-fill, minmax(0, 1fr));
+      }
+
+      @include mobile {
+        gap: 10vw;
+        grid-template-rows: 1fr;
+
+        li {
+          width: 26vw;
+        }
+      }
     }
 
     .line {
@@ -97,6 +192,11 @@
       height: auto;
       border: none;
       background-color: $gray-div;
+
+      @include mobile {
+        width: 100%;
+        height: 1px;
+      }
     }
   }
 }
