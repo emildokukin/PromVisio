@@ -5,6 +5,7 @@ import Help, {HelpItem} from './Help'
 import Reviews, {Review} from './Reviews'
 import {Swiper, SwiperSlide} from 'swiper/react'
 import {Autoplay} from 'swiper'
+import useMedia from '../../utils/useMedia'
 
 const HELP_ITEMS: HelpItem[] = [
   {
@@ -103,6 +104,8 @@ const REVIEWS: Review[] = [
 ]
 
 const HomePage = () => {
+  const {isMobile, isDesktop} = useMedia()
+
   return (
     <Page className={styles.page} floatingHireButton>
       <Helmet>
@@ -181,16 +184,18 @@ const HomePage = () => {
         <h2>
           Специалисты ПРОМВИЗИО – это операторы, пилоты БВС, монтажёры и видеографы с уникальным опытом индустриального
           видеопроизводства.
-          <span className={styles.icons}>
-            <img src='/icons/lightning.svg' alt='lightning' />
-            <img src='/icons/lightning.svg' alt='lightning' />
-          </span>
+          {isDesktop && (
+            <span className={styles.icons}>
+              <img src='/icons/lightning.svg' alt='lightning' />
+              <img src='/icons/lightning.svg' alt='lightning' />
+            </span>
+          )}
         </h2>
 
         <Swiper
           className={styles.swiper}
           modules={[Autoplay]}
-          slidesPerView={3.5}
+          slidesPerView={isMobile ? 1.15 : 3.5}
           grabCursor
           loop
           speed={600}

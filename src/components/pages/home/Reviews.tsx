@@ -35,7 +35,7 @@ const Slider = ({items}: {items: Review[]}) => {
       <Swiper
         modules={[Navigation]}
         className={styles.swiper}
-        slidesPerView={isMobile ? 1 : 1.5}
+        slidesPerView={isMobile ? 1.1 : 1.5}
         onSwiper={(swiper) => setSwiper(swiper)}
         onSlideChange={onSlideChange}
         spaceBetween={isMobile ? 16 : 72}

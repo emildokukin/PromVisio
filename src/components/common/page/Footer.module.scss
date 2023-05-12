@@ -6,36 +6,102 @@
   color: $white;
 
   @include mobile {
-    display: none;
+    flex-direction: column;
+    padding: 26px $padding-mx 22px;
   }
-}
 
-.info {
-  display: flex;
-  flex-direction: column;
+ 
+} 
 
-  hr {
+.line {
     height: 1px;
     border: none;
     margin-top: 68px;
     background-color: $gray-div;
+
+    @include mobile {
+      margin-top: 26px;
+
+      &-short {
+      max-width: calc(100% - 56px);
+    }
+    }
+
+          
   }
+
+.info {
+  display: flex;
+  flex-direction: column;
 }
 
 .email {
   display: block;
-  margin-left: 117px;
+
+  @include desktop {
+    margin-left: 117px;
+  }
+
+  @include mobile {
+    display: flex;
+    align-items: center;
+    margin-top: 14px;
+    gap: 8px;
+  }
+}
+
+.phone {
+  display: flex;
+  gap: 22px;
+
+  @include mobile {
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.email h2,
+.phone h2 {
+  @include mobile {
+    @include font-desktop-txt-regular;
+  }
 }
 
 .copyright {
-  @include font-desktop-txt-regular;
-
   margin-top: 40px;
   color: $gray;
+
+  @include desktop {
+    @include font-desktop-txt-regular;
+  }
+
+  @include mobile {
+    @include font-small;
+
+    margin-top: 20px;
+  }
 }
 
 .socials {
   display: flex;
+
+  .social {
+    @include mobile {
+      width: auto;
+      background-color: transparent;
+
+      img {
+        width: 20px;
+      }
+
+      span {
+        @include font-desktop-txt-regular;
+
+        margin-left: 8px;
+        color: $white;
+      }
+    }
+  }
 }
 
 .social {
@@ -48,8 +114,19 @@
   background-color: $gray-div;
   color: $general-accent;
 
+  @include mobile {
+    width: 20px;
+    height: 20px;
+    background-color: $general-accent;
+    color: $gray;
+  }
+
   &:not(:first-child) {
     margin-left: 10px;
+
+    @include mobile {
+      margin-left: 24px;
+    }
   }
 
   img,
@@ -57,6 +134,10 @@
     width: 22px;
     height: auto;
     object-fit: contain;
+
+    @include mobile {
+      width: 11px;
+    }
   }
 }
 
@@ -64,9 +145,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-}
 
-.phone {
-  display: flex;
-  gap: 22px;
+  @include mobile {
+    margin-top: 26px;
+  }
 }
