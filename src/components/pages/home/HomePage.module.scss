@@ -155,7 +155,6 @@
       @include desktop {
         gap: 50px 90px;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        grid-template-rows: repeat(auto-fill, minmax(0, 1fr));
       }
 
       @include mobile {
@@ -174,7 +173,6 @@
       @include desktop {
         gap: 50px 65px;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        grid-template-rows: repeat(auto-fill, minmax(0, 1fr));
       }
 
       @include mobile {

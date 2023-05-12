@@ -5,6 +5,7 @@ import {Navigation, Swiper as SwiperType} from 'swiper'
 import {useState} from 'react'
 import SliderButton from '../../common/slider/SliderButton'
 import LinkComponent from '../../common/link-component/LinkComponent'
+import useMedia from '../../utils/useMedia'
 
 export interface Review {
   title: string
@@ -21,6 +22,7 @@ const Slider = ({items}: {items: Review[]}) => {
   const [isEnd, setIsEnd] = useState(false)
   const [isBeginning, setIsBeginning] = useState(true)
   const [index, setIndex] = useState(1)
+  const {isMobile, isDesktop} = useMedia()
 
   const onSlideChange = (swiper: SwiperType) => {
     setIsBeginning(swiper.isBeginning)
@@ -33,10 +35,10 @@ const Slider = ({items}: {items: Review[]}) => {
       <Swiper
         modules={[Navigation]}
         className={styles.swiper}
-        slidesPerView={1.5}
+        slidesPerView={isMobile ? 1 : 1.5}
         onSwiper={(swiper) => setSwiper(swiper)}
         onSlideChange={onSlideChange}
-        spaceBetween={72}
+        spaceBetween={isMobile ? 16 : 72}
         grabCursor
         speed={500}
       >
@@ -45,7 +47,7 @@ const Slider = ({items}: {items: Review[]}) => {
             <h2>{item.title}</h2>
 
             <div className={styles.content}>
-              <img className={styles.signature} src={item.signature} alt='signature' />
+              {isDesktop && <img className={styles.signature} src={item.signature} alt='signature' />}
 
               <hr />
 
@@ -59,30 +61,36 @@ const Slider = ({items}: {items: Review[]}) => {
                   <p>{item.role}</p>
                 </div>
 
-                <img src={item.image} className={styles.company} />
+                {isDesktop && <img src={item.image} className={styles.company} />}
               </div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
 
-      <SliderButton
-        onClick={() => swiper?.slidePrev()}
-        className={clsx(styles.arrow, {[styles.disabled]: isBeginning})}
-      />
-      <SliderButton
-        onClick={() => swiper?.slideNext()}
-        next
-        className={clsx(styles.arrow, styles.arrowNext, {[styles.disabled]: isEnd})}
-      />
-      <p className={styles.index}>
-        {index} <span>/</span> {swiper?.slides?.length}
-      </p>
+      {isDesktop && (
+        <>
+          <SliderButton
+            onClick={() => swiper?.slidePrev()}
+            className={clsx(styles.arrow, {[styles.disabled]: isBeginning})}
+          />
+          <SliderButton
+            onClick={() => swiper?.slideNext()}
+            next
+            className={clsx(styles.arrow, styles.arrowNext, {[styles.disabled]: isEnd})}
+          />
+          <p className={styles.index}>
+            {index} <span>/</span> {swiper?.slides?.length}
+          </p>
+        </>
+      )}
     </div>
   )
 }
 
 const Reviews = ({items}: {items: Review[]}) => {
+  const {isDesktop} = useMedia()
+
   return (
     <section className={styles.reviews}>
       <h1 className={styles.title}>Отзывы</h1>
@@ -95,11 +103,13 @@ const Reviews = ({items}: {items: Review[]}) => {
 
       <Slider items={items} />
 
-      <p className={styles.nda}>
-        Мы гарантируем конфиденциальность информации и соблюдение корпоративной тайны, поэтому в договор включается
-        соглашение о неразглашении (NDA). Использование полученного фото- и видеоматериала возможно только с письменного
-        разрешения заказчика.
-      </p>
+      {isDesktop && (
+        <p className={styles.nda}>
+          Мы гарантируем конфиденциальность информации и соблюдение корпоративной тайны, поэтому в договор включается
+          соглашение о неразглашении (NDA). Использование полученного фото- и видеоматериала возможно только с
+          письменного разрешения заказчика.
+        </p>
+      )}
     </section>
   )
 }

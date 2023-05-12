@@ -1,23 +1,48 @@
 .reviews {
-  padding-left: $padding-x;
-  margin-top: 128px;
+  @include desktop {
+    padding-left: $padding-x;
+    margin-top: 128px;
+  }
+
+  @include mobile {
+    padding: 24px 0 34px $padding-mx;
+    margin-top: 32px;
+    background-color: $deep-gray;
+  }
 }
 
 .title,
 .description,
 .nda {
-  padding-left: calc(272px - #{$padding-x});
+  @include desktop {
+    padding-left: calc(272px - #{$padding-x});
+  }
+
+  @include mobile {
+    padding-right: $padding-mx;
+  }
 }
 
 .description,
 .nda {
-  max-width: 80%;
+  @include desktop {
+    max-width: 80%;
+  }
 }
 
 .description {
-  @include font-desktop-txt-regular;
+  @include desktop {
+    @include font-desktop-txt-regular;
 
-  margin-top: 64px;
+    margin-top: 64px;
+  }
+
+  @include mobile {
+    @include font-adapt-txt-regular;
+
+    margin-top: 16px;
+    color: $light-gray;
+  }
 }
 
 .nda {
@@ -38,6 +63,10 @@
     border: none;
     margin-top: 48px;
     background-color: $gray-div;
+
+    @include mobile {
+      margin-top: 24px;
+    }
   }
 }
 
@@ -47,16 +76,27 @@
 }
 
 .format {
-  @include font-desktop-txt-bold;
-
   display: flex;
-  width: 64px;
-  height: 64px;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   border-radius: 100%;
   background-color: $general-accent;
   color: $black;
+
+  @include desktop {
+    @include font-desktop-txt-bold;
+
+    width: 64px;
+    height: 64px;
+  }
+
+  @include mobile {
+    @include font-adapt-txt-regular;
+
+    width: 48px;
+    height: 48px;
+  }
 }
 
 .name {
@@ -65,8 +105,18 @@
   justify-content: center;
   margin-left: 36px;
 
+  @include mobile {
+    margin-left: 16px;
+  }
+
   h4 {
-    @include font-desktop-txt-regular;
+    @include desktop {
+      @include font-desktop-txt-regular;
+    }
+
+    @include mobile {
+      @include font-adapt-txt-regular;
+    }
   }
 
   p {
@@ -74,6 +124,11 @@
 
     margin-top: 2px;
     color: $gray;
+
+    @include mobile {
+      height: 28px;
+      margin-top: 4px;
+    }
   }
 }
 
@@ -97,13 +152,27 @@
 }
 
 .swiper {
-  padding-right: $padding-x !important;
   user-select: none;
+
+  @include desktop {
+    padding-right: $padding-x !important;
+  }
+
+  @include mobile {
+    padding-right: $padding-mx !important;
+  }
 
   &-wrapper {
     position: relative;
-    padding-left: calc(272px - #{$padding-x});
-    margin-top: 64px;
+
+    @include desktop {
+      padding-left: calc(272px - #{$padding-x});
+      margin-top: 64px;
+    }
+
+    @include mobile {
+      margin-top: 24px;
+    }
   }
 
   :global .swiper-slide {
@@ -111,6 +180,12 @@
     height: auto;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  h2 {
+    @include mobile {
+      @include font-adapt-h3;
+    }
   }
 }
 
