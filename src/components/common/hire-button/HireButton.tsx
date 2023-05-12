@@ -26,10 +26,17 @@ const HireButton = ({floating}: HireButtonProps) => {
       </button>
 
       <Modal active={isModalVisible} toggle={toggleModalVisibility} title='Нанять нас' image='/icons/logo.svg'>
-        <Input label='Тема' name='theme' required />
+        <Input label='Тема' name='theme' type='text' required />
         <Textarea label='Текст сообщения' name='message' />
-        <Input label='Номер телефона' name='phone_number' placeholder='+7' required onChange={handlePhoneChange} />
-        <Input label='Email' name='email' required />
+        <Input
+          label='Номер телефона'
+          name='phone_number'
+          placeholder='+7'
+          type='tel'
+          required
+          onChange={handlePhoneChange}
+        />
+        <Input label='Email' name='email' type='email' required />
       </Modal>
     </>
   )
