@@ -1,11 +1,3 @@
-.page {
-  padding-bottom: 128px;
-
-  @include mobile {
-    padding-bottom: 36px;
-  }
-}
-
 .banner {
   position: relative;
   height: 100vh;

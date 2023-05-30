@@ -1,0 +1,31 @@
+.content {
+  padding: 170px $padding-x 0;
+}
+
+.sections {
+  display: flex;
+  width: fit-content;
+  padding: 4px;
+  background-color: $gray-div;
+  list-style-type: none;
+  margin-inline: auto;
+
+  .section {
+    @include font-desktop-h2;
+
+    width: fit-content;
+    padding: 8px 24px;
+    color: $white;
+    cursor: pointer;
+    transition: all 0.25s ease-in;
+
+    &-current {
+      background-color: $white;
+      color: $gray-div;
+    }
+  }
+}
+
+.gallery {
+  list-style-type: none;
+}

@@ -12,7 +12,7 @@ const Links = () => (
   <nav className={styles.links}>
     <ul>
       <li>
-        <LinkComponent link='#'>Галерея</LinkComponent>
+        <LinkComponent link='/gallery'>Галерея</LinkComponent>
       </li>
       <li>
         <LinkComponent link='#'>Вестник</LinkComponent>

@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import {ReactNode, useEffect} from 'react'
-import styles from './Modal.module.scss'
+import styles from './FormModal.module.scss'
 import {ReactComponent as Cross} from '../../../icons/cross.svg'
 
 interface ModalProps {

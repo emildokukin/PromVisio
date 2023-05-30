@@ -107,7 +107,7 @@ const HomePage = () => {
   const {isMobile, isDesktop} = useMedia()
 
   return (
-    <Page className={styles.page} floatingHireButton>
+    <Page floatingHireButton>
       <Helmet>
         <title>Главная</title>
       </Helmet>

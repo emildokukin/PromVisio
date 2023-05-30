@@ -1,6 +1,6 @@
 import {ChangeEvent, useCallback, useState} from 'react'
 import styles from './HireButton.module.scss'
-import Modal from '../modal/Modal'
+import Modal from '../modal/FormModal'
 import clsx from 'clsx'
 import {Input} from '../input/Input'
 import {Textarea} from '../input/Textarea'
