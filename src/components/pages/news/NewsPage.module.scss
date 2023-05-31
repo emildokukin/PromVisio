@@ -1,0 +1,20 @@
+.news {
+  padding: 174px 0 0;
+
+  h1 {
+    @include font-desktop-h1;
+
+    text-align: center;
+  }
+
+  .newsContainer {
+    display: grid;
+    max-height: fit-content;
+    padding: 0 $padding-x;
+    margin-top: 80px;
+
+    // grid-template-rows: 730px;
+    gap: 60px 32px;
+    grid-template-columns: 1fr 1fr;
+  }
+}

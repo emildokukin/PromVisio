@@ -1,0 +1,51 @@
+.container {
+  display: block;
+
+  .image {
+    max-height: 480px;
+  }
+
+  .textContainer {
+    padding: 0 80px;
+    margin-top: -72px;
+
+    h2 {
+      @include font-desktop-h2;
+    }
+
+    h3 {
+      @include font-adapt-h3;
+
+      margin-top: 24px;
+    }
+
+    .dateAndLink {
+      @include font-desktop-txt-regular;
+
+      display: flex;
+      margin-top: 24px;
+      gap: 5px;
+
+      time {
+        color: $gray;
+      }
+
+      object {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .globeSvg {
+          display: inline;
+          max-width: 16px;
+          max-height: 16px;
+          align-items: center;
+        }
+
+        .linkToGazprom {
+          color: $general-accent;
+        }
+      }
+    }
+  }
+}

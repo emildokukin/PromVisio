@@ -4,6 +4,7 @@ import HomePage from './pages/home/HomePage'
 import ScrollToHashElement from './utils/scrollToHashElement'
 import ScrollToTop from './utils/scrollToTop'
 import GalleryPage from './pages/gallery/GalleryPage'
+import NewsPage from './pages/news/NewsPage'
 
 const App = () => (
   <HelmetProvider>
@@ -16,6 +17,7 @@ const App = () => (
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/gallery' element={<GalleryPage />} />
+        <Route path='/news' element={<NewsPage />} />
 
         <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
