@@ -47,7 +47,13 @@ const Slider = ({items}: {items: Review[]}) => {
             <h2>{item.title}</h2>
 
             <div className={styles.content}>
-              {isDesktop && <img className={styles.signature} src={item.signature} alt='signature' />}
+              {isDesktop && (
+                <img
+                  className={clsx(styles.signature, {[styles.signatureShifted]: index === 1})}
+                  src={item.signature}
+                  alt='signature'
+                />
+              )}
 
               <hr />
 
@@ -97,8 +103,8 @@ const Reviews = ({items}: {items: Review[]}) => {
 
       <p className={styles.description}>
         Деятельность ПРОМВИЗИО отмечена множеством благодарственных писем от руководителей компаний нефтегазовой сферы,
-        а контент, произведённый нашей компанией, демонстрировался на тематических мероприятиях высшего уровня: ПМЭФ,
-        ВЭФ, Арктический форум, Транспортная неделя, заседания Русского географического общества.
+        ведущих деятельность на континентальном шельфе Российской федерации, а также организаций, выполняющих
+        вспомогательные функции при таких работах.
       </p>
 
       <Slider items={items} />

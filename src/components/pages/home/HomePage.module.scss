@@ -247,6 +247,10 @@
       margin-top: 24px;
     }
 
+    .slide {
+      height: auto !important;
+    }
+
     :global .swiper-wrapper {
       transition-timing-function: ease-in-out;
     }
