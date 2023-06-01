@@ -48,6 +48,8 @@
       gap: 5px;
 
       time {
+        @include font-adapt-txt-regular;
+
         color: $gray;
       }
 
