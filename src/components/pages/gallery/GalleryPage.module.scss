@@ -60,12 +60,18 @@
     background-color: rgba($gray-div, 0.7);
     opacity: 0;
   }
+
+  &.video {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .item {
   position: relative;
 
   @include hover {
+    cursor: pointer;
+
     .decor {
       opacity: 1;
     }
