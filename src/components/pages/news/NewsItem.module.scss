@@ -1,4 +1,4 @@
-.container {
+.wrapper {
   $gradient-z: 1;
 
   position: relative;
@@ -31,7 +31,7 @@
     @include image-position;
   }
 
-  .textContainer {
+  .info {
     position: relative;
     z-index: calc(#{$gradient-z} + 1);
     padding: 0 80px;
@@ -63,7 +63,7 @@
       }
     }
 
-    .dateAndLink {
+    &-bottom {
       @include font-desktop-txt-regular;
 
       display: flex;

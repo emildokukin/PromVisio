@@ -1,12 +1,13 @@
-.container {
+.dots {
   display: flex;
   justify-content: space-between;
   padding: 0 $padding-x;
 
-  .middleDotsContainer {
+  &-middle {
     display: flex;
     justify-content: space-between;
     gap: 8px;
+    list-style-type: none;
 
     .dot {
       @include font-desktop-txt-bold;
@@ -27,31 +28,31 @@
         height: 40px;
         font-size: 14px;
       }
-    }
 
-    .activeDot {
-      border: 2px solid $gray;
-      background-color: transparent;
-      color: $white;
+      &-active {
+        border: 2px solid $gray;
+        background-color: transparent;
+        color: $white;
+      }
     }
   }
 
-  .arrowDisabled {
-    color: $gray-div;
-  }
+  .arrow {
+    &-disabled {
+      color: $gray-div;
+    }
 
-  .arrowLeft {
-    svg {
+    &-left svg {
       max-width: 53px;
       transform: scale(-1, 1);
     }
-  }
 
-  .arrowRight {
-    color: $general-accent;
+    &-right {
+      color: $general-accent;
 
-    svg {
-      max-width: 53px;
+      svg {
+        max-width: 53px;
+      }
     }
   }
 

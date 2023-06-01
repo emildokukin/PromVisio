@@ -1,8 +1,9 @@
 import clsx from 'clsx'
 import styles from './NewsPagination.module.scss'
-import {ReactComponent as ArrowSvg} from '../../../icons/slider-arrow.svg'
+import {ReactComponent as ArrowSVG} from '../../../icons/slider-arrow.svg'
 import useMedia from '../../utils/useMedia'
 
+// TODO: use to determine dots count
 // interface newsPagination {
 //     newsTotal: number
 //     maxPoints: number
@@ -14,37 +15,29 @@ const NewsPagination = () => {
   const {isDesktop} = useMedia()
 
   return (
-    <div className={styles.container}>
+    <div className={styles.dots}>
       {isDesktop && (
         <div className={clsx(styles.arrowLeft, styles.arrowDisabled)}>
-          <ArrowSvg />
+          <ArrowSVG />
         </div>
       )}
 
-      <ul className={styles.middleDotsContainer}>
-        {[
-          <div key={0} className={clsx(styles.dot, styles.activeDot)}>
-            1
-          </div>,
-          Array(totalCircles - 3)
-            .fill(0)
-            .map((_, index) => (
-              <div key={index + 1} className={styles.dot}>
-                {index + 2}
-              </div>
-            )),
-          <div key={123123} className={styles.dot}>
-            ...
-          </div>,
-          <div key={321312} className={styles.dot}>
-            999
-          </div>
-        ]}
+      <ul className={styles.dotsMiddle}>
+        <li className={clsx(styles.dot, styles.dotActive)}>1</li>
+        {Array(totalCircles - 3)
+          .fill(0)
+          .map((_, index) => (
+            <li key={index + 1} className={styles.dot}>
+              {index + 2}
+            </li>
+          ))}
+        <li className={styles.dot}>...</li>
+        <li className={styles.dot}>999</li>
       </ul>
 
       {isDesktop && (
         <div className={styles.arrowRight}>
-          <ArrowSvg />
+          <ArrowSVG />
         </div>
       )}
     </div>

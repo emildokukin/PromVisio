@@ -15,7 +15,7 @@
     }
   }
 
-  .newsContainer {
+  &-wrapper {
     display: grid;
     max-width: $max-content;
     height: max-content;
@@ -35,46 +35,6 @@
       grid-template-columns: minmax(0, 1fr);
     }
 
-    .readArcticHistoryContainer {
-      display: flex;
-      max-width: 640px;
-      max-height: 640px;
-      align-items: center;
-      justify-content: center;
-      padding: 0 20px;
-      border: 1px solid $gray-div;
-      border-radius: 50%;
-      aspect-ratio: 1 / 1;
-
-      .readArcticHistoryInnerContainer {
-        display: flex;
-        max-width: 400px;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 15px;
-
-        @include mobile {
-          gap: 10px;
-        }
-
-        img {
-          width: 45px;
-
-          @include mobile {
-            width: 30px;
-          }
-        }
-
-        h2 {
-          @include font-desktop-h2;
-
-          @include mobile {
-            @include font-adapt-h3;
-          }
-        }
-      }
-    }
-
     hr {
       height: 2px;
       border: none;
@@ -86,5 +46,45 @@
         margin: 24px 0;
       }
     }
+  }
+}
+
+.circle {
+  display: flex;
+  max-width: 400px;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+
+  @include mobile {
+    gap: 10px;
+  }
+
+  img {
+    width: 45px;
+
+    @include mobile {
+      width: 30px;
+    }
+  }
+
+  h2 {
+    @include font-desktop-h2;
+
+    @include mobile {
+      @include font-adapt-h3;
+    }
+  }
+
+  &-wrapper {
+    display: flex;
+    max-width: 640px;
+    max-height: 640px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    border: 1px solid $gray-div;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
   }
 }

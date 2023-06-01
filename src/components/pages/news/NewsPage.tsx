@@ -96,12 +96,12 @@ const NewsPage = () => {
       <section className={styles.news}>
         <h1>Вестник</h1>
 
-        <div className={styles.newsContainer}>
-          {news.map(function (newsItem, index) {
-            return [
-              index == 3 ? (
-                <div className={styles.readArcticHistoryContainer}>
-                  <div className={styles.readArcticHistoryInnerContainer}>
+        <div className={styles.newsWrapper}>
+          {news.map((newsItem, index) => (
+            <>
+              {index === 3 ? (
+                <div className={styles.circleWrapper}>
+                  <div className={styles.circle}>
                     <img src={newsArrow} alt='arrow' />
                     <h2>Почитать историю проекта в Арктике</h2>
                   </div>
@@ -116,11 +116,13 @@ const NewsPage = () => {
                   linkToGazprom={newsItem.linkToGazprom}
                   linkToNewsItem={newsItem.id.toString()}
                 />
-              ),
-              index % 2 !== 0 || index == news.length - 1 || isMobile ? <hr /> : []
-            ]
-          })}
+              )}
+
+              {index % 2 !== 0 || index == news.length - 1 || isMobile ? <hr /> : null}
+            </>
+          ))}
         </div>
+
         <NewsPagination />
       </section>
     </Page>

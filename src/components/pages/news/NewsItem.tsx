@@ -16,13 +16,15 @@ const NewsItem = ({title, description, imgLink, date, linkToGazprom, linkToNewsI
   const {isDesktop} = useMedia()
 
   return (
-    <LinkComponent className={styles.container} link={linkToNewsItem}>
+    <LinkComponent className={styles.wrapper} link={linkToNewsItem}>
       <img className={styles.image} src={imgLink} alt='ship' />
-      <div className={styles.textContainer}>
+
+      <div className={styles.info}>
         <h2>{title}</h2>
 
         <p>{description}</p>
-        <div className={styles.dateAndLink}>
+
+        <div className={styles.infoBottom}>
           <time>{linkToGazprom && isDesktop ? date.toString() + ' •' : date}</time>
           {linkToGazprom && <GazpromLink linkToGazprom={linkToGazprom} />}
         </div>
