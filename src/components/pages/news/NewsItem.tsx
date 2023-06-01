@@ -1,6 +1,7 @@
 import LinkComponent from '../../common/link-component/LinkComponent'
 import styles from './NewsItem.module.scss'
-import globeSvg from '../../../../public/icons/globe.svg'
+import GazpromLink from '../../common/gazpromLink/GazpromLink'
+import useMedia from '../../utils/useMedia'
 
 interface NewsItem {
   title: string
@@ -12,25 +13,18 @@ interface NewsItem {
 }
 
 const NewsItem = ({title, description, imgLink, date, linkToGazprom, linkToNewsItem}: NewsItem) => {
+  const {isDesktop} = useMedia()
+
   return (
     <LinkComponent className={styles.container} link={linkToNewsItem}>
       <img className={styles.image} src={imgLink} alt='ship' />
       <div className={styles.textContainer}>
         <h2>{title}</h2>
 
-        <h3>{description}</h3>
+        <p>{description}</p>
         <div className={styles.dateAndLink}>
-          <time>
-            {date} {linkToGazprom && '•'}
-          </time>
-          {linkToGazprom && (
-            <object>
-              <img className={styles.globeSvg} src={globeSvg} alt='globe' />
-              <LinkComponent className={styles.linkToGazprom} link={linkToGazprom} linkExternal={true}>
-                Новость на сайте Газпрома
-              </LinkComponent>
-            </object>
-          )}
+          <time>{linkToGazprom && isDesktop ? date.toString() + ' •' : date}</time>
+          {linkToGazprom && <GazpromLink linkToGazprom={linkToGazprom} />}
         </div>
       </div>
     </LinkComponent>

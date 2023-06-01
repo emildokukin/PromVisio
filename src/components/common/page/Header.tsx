@@ -15,7 +15,7 @@ const Links = () => (
         <LinkComponent link='/gallery'>Галерея</LinkComponent>
       </li>
       <li>
-        <LinkComponent link='#'>Вестник</LinkComponent>
+        <LinkComponent link='/news'>Вестник</LinkComponent>
       </li>
       <li>
         <LinkComponent link='#'>История одного проекта</LinkComponent>

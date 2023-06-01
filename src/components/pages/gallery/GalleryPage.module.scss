@@ -48,7 +48,7 @@
 
 .gallery {
   display: grid;
-  max-width: 1312px;
+  max-width: $max-content;
   margin-top: 80px;
   gap: 32px;
   grid-template-columns: repeat(3, minmax(0, 1fr));

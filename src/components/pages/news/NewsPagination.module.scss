@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 $padding-x;
+
+  .middleDotsContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+
+    .dot {
+      @include font-desktop-txt-bold;
+
+      display: flex;
+      width: 64px;
+      height: 64px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: $general-accent;
+      color: $black;
+
+      @include mobile {
+        @include font-desktop-txt-regular;
+
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+      }
+    }
+
+    .activeDot {
+      border: 2px solid $gray;
+      background-color: transparent;
+      color: $white;
+    }
+  }
+
+  .arrowDisabled {
+    color: $gray-div;
+  }
+
+  .arrowLeft {
+    svg {
+      max-width: 53px;
+      transform: scale(-1, 1);
+    }
+  }
+
+  .arrowRight {
+    color: $general-accent;
+
+    svg {
+      max-width: 53px;
+    }
+  }
+
+  @include mobile {
+    justify-content: center;
+  }
+}
