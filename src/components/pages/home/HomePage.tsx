@@ -113,6 +113,17 @@ const HomePage = () => {
       </Helmet>
 
       <section className={styles.banner}>
+        <video
+          className={styles.video}
+          src='/media/home/video.mp4'
+          width='100%'
+          height='100%'
+          itemType='video/mp4'
+          autoPlay
+          playsInline
+          loop
+          muted
+        />
         <img className={styles.image} src='/media/home/banner.png' alt='helicopter flying near ship' />
 
         <div className={styles.content}>
