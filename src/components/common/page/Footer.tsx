@@ -28,7 +28,7 @@ export const Phone = () => (
       <PhoneSVG />
     </div>
 
-    <h2>+7 (903) 968 9048</h2>
+    <h2>+7 (903) 968_90_48</h2>
   </LinkComponent>
 )
 
