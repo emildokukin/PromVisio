@@ -1,7 +1,8 @@
 .dots {
   display: flex;
+  max-width: $max-content;
   justify-content: space-between;
-  padding: 0 $padding-x;
+  margin-inline: auto;
 
   &-middle {
     display: flex;

@@ -5,6 +5,7 @@ import NewsItem from './NewsItem'
 import NewsPagination from './NewsPagination'
 import newsArrow from '../../../icons/news-arrow.svg'
 import useMedia from '../../utils/useMedia'
+import {Fragment} from 'react'
 
 interface News {
   id: number
@@ -98,7 +99,7 @@ const NewsPage = () => {
 
         <div className={styles.newsWrapper}>
           {news.map((newsItem, index) => (
-            <>
+            <Fragment key={index}>
               {index === 3 ? (
                 <div className={styles.circleWrapper}>
                   <div className={styles.circle}>
@@ -119,7 +120,7 @@ const NewsPage = () => {
               )}
 
               {index % 2 !== 0 || index == news.length - 1 || isMobile ? <hr /> : null}
-            </>
+            </Fragment>
           ))}
         </div>
 
