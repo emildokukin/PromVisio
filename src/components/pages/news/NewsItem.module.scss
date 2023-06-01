@@ -1,8 +1,11 @@
 .container {
+  $gradient-z: 1;
+
+  position: relative;
   display: block;
   height: fit-content;
 
-  .image {
+  @mixin image-position {
     height: 480px;
 
     @include mobile {
@@ -10,7 +13,27 @@
     }
   }
 
+  &::before {
+    position: absolute;
+    z-index: $gradient-z;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(0deg, $general-bg 0%, rgb(24 24 24 / 0%) 100%);
+    content: '';
+    opacity: 0.8;
+
+    @include image-position;
+  }
+
+  .image {
+    @include image-position;
+  }
+
   .textContainer {
+    position: relative;
+    z-index: calc(#{$gradient-z} + 1);
     padding: 0 80px;
     margin-top: -72px;
 
