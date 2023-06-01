@@ -142,6 +142,10 @@
   height: auto;
   max-height: 160px;
   object-fit: contain;
+
+  &-shifted {
+    bottom: 25%;
+  }
 }
 
 .company {

@@ -33,7 +33,7 @@ const Phone = () => (
       <PhoneSVG />
     </div>
 
-    <p>+7 (903) 968_90–48</p>
+    <p>+7 (903) 968_90_48</p>
   </LinkComponent>
 )
 

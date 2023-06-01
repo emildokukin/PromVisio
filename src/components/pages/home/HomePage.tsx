@@ -113,6 +113,17 @@ const HomePage = () => {
       </Helmet>
 
       <section className={styles.banner}>
+        <video
+          className={styles.video}
+          src='/media/home/video.mp4'
+          width='100%'
+          height='100%'
+          itemType='video/mp4'
+          autoPlay
+          playsInline
+          loop
+          muted
+        />
         <img className={styles.image} src='/media/home/banner.png' alt='helicopter flying near ship' />
 
         <div className={styles.content}>
@@ -141,9 +152,9 @@ const HomePage = () => {
           <h1>Нас привлекают</h1>
 
           <h3>
-            На сегодняшний день основными заказчиками ПРОМВИЗИО являются компании нефтегазового сектора, ведущие
-            деятельность на континентальном шельфе Российской федерации, а также организации, выполняющие
-            вспомогательные функции при таких работах.
+            На сегодняшний день основными заказчиками ПРОМВИЗИО являются компании нефтегазового сектора, а контент,
+            произведённый нашей компанией,демонстрировался на тематических мероприятиях высшего уровня: ПМЭФ, ВЭФ,
+            Арктический форум, Транспортная неделя, заседания Русского географического общества.
             <img src='/icons/fire.svg' alt='fire lit' />
           </h3>
 
@@ -203,7 +214,7 @@ const HomePage = () => {
         >
           {[1, 2, 3, 4, 1, 2, 3, 4].map((slide, index) => (
             <SwiperSlide className={styles.slide} key={index}>
-              <img src={`/media/home/slide-${slide}.png`} alt='team picture' />
+              <img src={`/media/home/slide-${slide}.jpg`} alt='team picture' />
             </SwiperSlide>
           ))}
         </Swiper>
