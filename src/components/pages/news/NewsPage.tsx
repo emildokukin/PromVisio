@@ -24,10 +24,10 @@ const news: News[] = [
     date: '12.05.2023',
     linkToGazprom: 'google.com',
     mediaLinks: [
-      'https://media.istockphoto.com/id/1461832048/photo/long-exposure-sunset-reflections-on-lake.jpg?b=1&s=170667a&w=0&k=20&c=s_aZy_7QK79mtA20QL1Dc5Of4Be48vt-tEVnKdssUdg=',
-      'https://cdn.boatinternational.com/convert/files/2020/12/7a18d620-3bcb-11eb-957a-6996e21593a4-top-25-nord-credit-Tom-Van-Oossanen.jpg/r%5Bwidth%5D=1920/7a18d620-3bcb-11eb-957a-6996e21593a4-top-25-nord-credit-Tom-Van-Oossanen.webp',
-      'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=765&q=80',
-      'https://assets.entrepreneur.com/content/3x2/2000/20180703190744-rollsafe-meme.jpeg'
+      '/media/gallery/photo1.png',
+      '/media/gallery/photo2.png',
+      '/media/gallery/photo3.png',
+      '/media/gallery/photo4.png'
     ]
   },
   {
@@ -36,10 +36,10 @@ const news: News[] = [
     description: 'Компания Промвизио успешно завершила.',
     date: '10.03.2023',
     mediaLinks: [
-      'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=765&q=80',
-      'https://cdn.boatinternational.com/convert/files/2020/12/7a18d620-3bcb-11eb-957a-6996e21593a4-top-25-nord-credit-Tom-Van-Oossanen.jpg/r%5Bwidth%5D=1920/7a18d620-3bcb-11eb-957a-6996e21593a4-top-25-nord-credit-Tom-Van-Oossanen.webp',
-      'https://media.istockphoto.com/id/1461832048/photo/long-exposure-sunset-reflections-on-lake.jpg?b=1&s=170667a&w=0&k=20&c=s_aZy_7QK79mtA20QL1Dc5Of4Be48vt-tEVnKdssUdg=',
-      'https://assets.entrepreneur.com/content/3x2/2000/20180703190744-rollsafe-meme.jpeg'
+      '/media/gallery/photo2.png',
+      '/media/gallery/photo1.png',
+      '/media/gallery/photo3.png',
+      '/media/gallery/photo4.png'
     ]
   },
   {
@@ -48,10 +48,10 @@ const news: News[] = [
     description: 'Компания Промвизио успешно завершила.',
     date: '10.03.2023',
     mediaLinks: [
-      'https://cdn.boatinternational.com/convert/files/2020/12/7a18d620-3bcb-11eb-957a-6996e21593a4-top-25-nord-credit-Tom-Van-Oossanen.jpg/r%5Bwidth%5D=1920/7a18d620-3bcb-11eb-957a-6996e21593a4-top-25-nord-credit-Tom-Van-Oossanen.webp',
-      'https://media.istockphoto.com/id/1461832048/photo/long-exposure-sunset-reflections-on-lake.jpg?b=1&s=170667a&w=0&k=20&c=s_aZy_7QK79mtA20QL1Dc5Of4Be48vt-tEVnKdssUdg=',
-      'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=765&q=80',
-      'https://assets.entrepreneur.com/content/3x2/2000/20180703190744-rollsafe-meme.jpeg'
+      '/media/gallery/photo3.png',
+      '/media/gallery/photo1.png',
+      '/media/gallery/photo2.png',
+      '/media/gallery/photo4.png'
     ]
   },
   {
@@ -62,10 +62,10 @@ const news: News[] = [
     date: '01.12.2020',
     linkToGazprom: 'google.com',
     mediaLinks: [
-      'https://assets.entrepreneur.com/content/3x2/2000/20180703190744-rollsafe-meme.jpeg',
-      'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=765&q=80',
-      'https://cdn.boatinternational.com/convert/files/2020/12/7a18d620-3bcb-11eb-957a-6996e21593a4-top-25-nord-credit-Tom-Van-Oossanen.jpg/r%5Bwidth%5D=1920/7a18d620-3bcb-11eb-957a-6996e21593a4-top-25-nord-credit-Tom-Van-Oossanen.webp',
-      'https://media.istockphoto.com/id/1461832048/photo/long-exposure-sunset-reflections-on-lake.jpg?b=1&s=170667a&w=0&k=20&c=s_aZy_7QK79mtA20QL1Dc5Of4Be48vt-tEVnKdssUdg='
+      '/media/gallery/photo4.png',
+      '/media/gallery/photo1.png',
+      '/media/gallery/photo2.png',
+      '/media/gallery/photo3.png'
     ]
   },
   {
@@ -76,10 +76,10 @@ const news: News[] = [
     date: '01.12.2020',
     linkToGazprom: 'google.com',
     mediaLinks: [
-      'https://media.istockphoto.com/id/1461832048/photo/long-exposure-sunset-reflections-on-lake.jpg?b=1&s=170667a&w=0&k=20&c=s_aZy_7QK79mtA20QL1Dc5Of4Be48vt-tEVnKdssUdg=',
-      'https://assets.entrepreneur.com/content/3x2/2000/20180703190744-rollsafe-meme.jpeg',
-      'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=765&q=80',
-      'https://cdn.boatinternational.com/convert/files/2020/12/7a18d620-3bcb-11eb-957a-6996e21593a4-top-25-nord-credit-Tom-Van-Oossanen.jpg/r%5Bwidth%5D=1920/7a18d620-3bcb-11eb-957a-6996e21593a4-top-25-nord-credit-Tom-Van-Oossanen.webp'
+      '/media/gallery/photo1.png',
+      '/media/gallery/photo2.png',
+      '/media/gallery/photo3.png',
+      '/media/gallery/photo4.png'
     ]
   }
 ]
@@ -99,7 +99,7 @@ const NewsPage = () => {
         <div className={styles.newsContainer}>
           {news.map(function (newsItem, index) {
             return [
-              index == 2 ? (
+              index == 3 ? (
                 <div className={styles.readArcticHistoryContainer}>
                   <div className={styles.readArcticHistoryInnerContainer}>
                     <img src={newsArrow} alt='arrow' />
