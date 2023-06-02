@@ -5,6 +5,7 @@
   padding-bottom: 133px;
 
   @include mobile {
+    overflow: hidden;
     padding: $padding-x $padding-mx 0 $padding-mx;
     padding-top: 73px;
     padding-bottom: 36px;
