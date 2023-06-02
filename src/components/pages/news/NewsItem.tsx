@@ -1,9 +1,9 @@
 import LinkComponent from '../../common/link-component/LinkComponent'
 import styles from './NewsItem.module.scss'
-import GazpromLink from '../../common/gazpromLink/GazpromLink'
+import GazpromLink from '../../common/gazprom-link/GazpromLink'
 import useMedia from '../../utils/useMedia'
 
-interface NewsItem {
+export interface NewsItemProps {
   title: string
   description: string
   imgLink: string
@@ -12,7 +12,7 @@ interface NewsItem {
   linkToNewsItem: string
 }
 
-const NewsItem = ({title, description, imgLink, date, linkToGazprom, linkToNewsItem}: NewsItem) => {
+const NewsItem = ({title, description, imgLink, date, linkToGazprom, linkToNewsItem}: NewsItemProps) => {
   const {isDesktop} = useMedia()
 
   return (

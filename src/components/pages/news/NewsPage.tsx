@@ -3,11 +3,12 @@ import Page from '../../common/page/Page'
 import {Helmet} from 'react-helmet-async'
 import NewsItem from './NewsItem'
 import NewsPagination from './NewsPagination'
-import newsArrow from '../../../icons/news-arrow.svg'
+import arrowSVG from '../../../icons/arrow-circleless.svg'
 import useMedia from '../../utils/useMedia'
 import {Fragment} from 'react'
+import clsx from 'clsx'
 
-interface News {
+export interface News {
   id: number
   title: string
   description: string
@@ -16,7 +17,11 @@ interface News {
   mediaLinks: string[]
 }
 
-const news: News[] = [
+export interface Line {
+  className?: string
+}
+
+export const news: News[] = [
   {
     id: 0,
     title: 'Арктические учения 2020 1',
@@ -85,6 +90,8 @@ const news: News[] = [
   }
 ]
 
+export const Line = ({className}: Line) => <hr className={clsx(styles.line, className)} />
+
 const NewsPage = () => {
   const {isMobile} = useMedia()
 
@@ -103,7 +110,7 @@ const NewsPage = () => {
               {index === 3 ? (
                 <div className={styles.circleWrapper}>
                   <div className={styles.circle}>
-                    <img src={newsArrow} alt='arrow' />
+                    <img src={arrowSVG} alt='arrow' />
                     <h2>Почитать историю проекта в Арктике</h2>
                   </div>
                 </div>
@@ -119,7 +126,7 @@ const NewsPage = () => {
                 />
               )}
 
-              {index % 2 !== 0 || index == news.length - 1 || isMobile ? <hr /> : null}
+              {index % 2 !== 0 || index == news.length - 1 || isMobile ? <Line /> : null}
             </Fragment>
           ))}
         </div>
