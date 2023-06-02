@@ -3,7 +3,7 @@ import Page from '../../common/page/Page'
 import {Helmet} from 'react-helmet-async'
 import useMedia from '../../utils/useMedia'
 import {Line, News, news} from '../news/NewsPage'
-import GazpromLink from '../../common/gazprom-link/GazpromLink'
+import NewsInnerLink from '../../common/news-inner-link/NewsInnerLink'
 import {useParams} from 'react-router-dom'
 import LinkComponent from '../../common/link-component/LinkComponent'
 import {GalleryItem} from '../gallery/GalleryItem'
@@ -18,9 +18,9 @@ const parseNewsData = (item: News): NewsItemProps => ({
   title: item.title,
   description: item.description,
   imgLink: item.mediaLinks[0],
-  linkToGazprom: item.linkToGazprom,
-  date: item.date,
-  linkToNewsItem: '/news/' + item.id
+  link: '/news/' + item.id,
+  innerLink: item.innerLink,
+  date: item.date
 })
 
 const ArticlePage = () => {
@@ -39,9 +39,9 @@ const ArticlePage = () => {
   const currentNews = news.filter((news) => news.id === parseInt(id || '0'))[0]
 
   return (
-    <Page className={styles.page} floatingHireButton>
+    <Page className={styles.page}>
       <Helmet>
-        <title>Конкретная новость</title>
+        <title>{currentNews.title || 'Новость'}</title>
       </Helmet>
 
       {isDesktop && <Line />}
@@ -78,9 +78,8 @@ const ArticlePage = () => {
             <time>{currentNews.date}</time>
             <Line className={styles.line} />
             <p>{currentNews.description}</p>
-            {currentNews.linkToGazprom ? (
-              <GazpromLink className={styles.link} linkToGazprom={currentNews.linkToGazprom} />
-            ) : null}
+
+            {currentNews.innerLink ? <NewsInnerLink className={styles.link} link={currentNews.innerLink} /> : null}
           </div>
 
           {isDesktop && (

@@ -3,14 +3,14 @@ object {
   align-items: center;
   gap: 8px;
 
-  .globeSvg {
+  .globe {
     display: inline;
     max-width: 16px;
     max-height: 16px;
     align-items: center;
   }
 
-  .linkToGazprom {
+  .link {
     color: $general-accent;
   }
 }
