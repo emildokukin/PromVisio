@@ -53,16 +53,15 @@ const Gallery = () => {
           </li>
         </ul>
 
-        <ul
+        <div
           className={clsx(styles.gallery, {
-            [styles.photo]: section === SECTION.PHOTO,
             [styles.video]: section === SECTION.VIDEO
           })}
         >
           {section === SECTION.PHOTO && PHOTOS.map((photo) => <GalleryItem thumbnail={photo.src} key={photo.src} />)}
           {section === SECTION.VIDEO &&
             VIDEOS.map((video) => <GalleryItem thumbnail={video.src} type={GALLERY_ITEM_TYPE.VIDEO} key={video.src} />)}
-        </ul>
+        </div>
       </section>
     </Page>
   )

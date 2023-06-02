@@ -16,7 +16,7 @@ interface GalleryItemProps {
 }
 
 export const GalleryItem = ({thumbnail, type = GALLERY_ITEM_TYPE.PHOTO, onClick, className}: GalleryItemProps) => (
-  <li
+  <div
     className={clsx(
       styles.item,
       {
@@ -32,5 +32,5 @@ export const GalleryItem = ({thumbnail, type = GALLERY_ITEM_TYPE.PHOTO, onClick,
       {type === GALLERY_ITEM_TYPE.PHOTO && <PlusSVG />}
       {type === GALLERY_ITEM_TYPE.VIDEO && <VideoPlaySVG />}
     </div>
-  </li>
+  </div>
 )
