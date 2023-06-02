@@ -15,12 +15,16 @@ interface GalleryItemProps {
   onClick?: () => void
 }
 
-export const GalleryItem = ({thumbnail, type = GALLERY_ITEM_TYPE.PHOTO, onClick}: GalleryItemProps) => (
+export const GalleryItem = ({thumbnail, type = GALLERY_ITEM_TYPE.PHOTO, onClick, className}: GalleryItemProps) => (
   <li
-    className={clsx(styles.item, {
-      [styles.photo]: type === GALLERY_ITEM_TYPE.PHOTO,
-      [styles.video]: type === GALLERY_ITEM_TYPE.VIDEO
-    })}
+    className={clsx(
+      styles.item,
+      {
+        [styles.photo]: type === GALLERY_ITEM_TYPE.PHOTO,
+        [styles.video]: type === GALLERY_ITEM_TYPE.VIDEO
+      },
+      className
+    )}
     onClick={onClick}
   >
     <img src={thumbnail} alt='gallery video thumbnail' />
