@@ -65,12 +65,14 @@ const ArticlePage = () => {
           )}
 
           <div className={styles.left}>
-            <div className={styles.breadCrumbs}>
-              <LinkComponent link='/' className={styles.mainPageLink}>
-                Вестник
-              </LinkComponent>
-              <span className={styles.currentPageLink}> • {currentNews.title}</span>
-            </div>
+            {isDesktop && (
+              <div className={styles.breadCrumbs}>
+                <LinkComponent link='/' className={styles.mainPageLink}>
+                  Вестник
+                </LinkComponent>
+                <span className={styles.currentPageLink}> • {currentNews.title}</span>
+              </div>
+            )}
 
             <h2>{currentNews.title}</h2>
             <time>{currentNews.date}</time>
@@ -120,7 +122,19 @@ const ArticlePage = () => {
             </>
           )}
 
-          {isMobile && news.map((newsItem, index) => <NewsItem key={index} {...parseNewsData(newsItem)} />)}
+          {isMobile && (
+            <>
+              <h1>Похожие новости</h1>
+              <div className={styles.newsMobile}>
+                {news.map((newsItem, index) => (
+                  <>
+                    <NewsItem key={index} {...parseNewsData(newsItem)} />
+                    {index !== news.length - 1 ? <Line className={styles.line} /> : null}
+                  </>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </Page>

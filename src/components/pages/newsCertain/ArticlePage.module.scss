@@ -7,6 +7,7 @@
   @include mobile {
     padding: $padding-x $padding-mx 0 $padding-mx;
     padding-top: 73px;
+    padding-bottom: 36px;
   }
 }
 
@@ -68,6 +69,12 @@
         @include font-desktop-h2;
 
         margin-top: 36px;
+
+        @include mobile {
+          @include font-adapt-h3;
+
+          margin: 0;
+        }
       }
 
       time {
@@ -76,20 +83,39 @@
         display: block;
         margin-top: 24px;
         color: $gray;
+
+        @include mobile {
+          margin-top: 16px;
+          font-size: 16px;
+        }
       }
 
       .line {
         margin-top: 32px;
+
+        @include mobile {
+          margin-top: 20px;
+        }
       }
 
       p {
         @include font-desktop-h3;
 
         margin-top: 40px;
+
+        @include mobile {
+          margin-top: 20px;
+          color: $light-gray;
+          font-size: 14px;
+        }
       }
 
       .link {
         margin-top: 36px;
+
+        @include mobile {
+          margin-top: 20px;
+        }
       }
     }
 
@@ -111,8 +137,28 @@
 }
 
 .recommended {
+  h1 {
+    @include font-adapt-h1;
+
+    text-align: center;
+  }
+
+  .newsMobile {
+    display: flex;
+    flex-direction: column;
+    margin-top: 32px;
+
+    .line {
+      margin: 24px 0;
+    }
+  }
+
   & > .line {
     margin: 80px 0;
+
+    @include mobile {
+      margin: 30px 0;
+    }
   }
 
   .navigation {
