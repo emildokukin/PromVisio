@@ -31,7 +31,7 @@
     @include mobile {
       padding: 0 $padding-mx;
       margin-top: 32px;
-      gap: 24px;
+      gap: 30px;
       grid-template-columns: minmax(0, 1fr);
     }
 
@@ -40,7 +40,7 @@
       grid-column: -1 / 1;
 
       @include mobile {
-        margin: 24px 0;
+        margin: 0;
       }
     }
   }

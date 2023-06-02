@@ -5,7 +5,7 @@ import ScrollToHashElement from './utils/scrollToHashElement'
 import ScrollToTop from './utils/scrollToTop'
 import GalleryPage from './pages/gallery/GalleryPage'
 import NewsPage from './pages/news/NewsPage'
-import ArticlePage from './pages/article-page/ArticlePage'
+import ArticlePage from './pages/article/ArticlePage'
 
 const App = () => (
   <HelmetProvider>

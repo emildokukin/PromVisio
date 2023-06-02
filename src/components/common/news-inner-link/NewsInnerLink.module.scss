@@ -3,6 +3,10 @@ object {
   align-items: center;
   gap: 8px;
 
+  @include mobile {
+    font-size: 14px;
+  }
+
   .globe {
     display: inline;
     max-width: 16px;
