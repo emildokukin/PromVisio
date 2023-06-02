@@ -3,6 +3,10 @@
 
   @include mobile {
     padding: 73px 0 0;
+
+    .dots {
+      margin-top: 30px;
+    }
   }
 
   h1 {
@@ -23,8 +27,6 @@
     padding: 0 $padding-x;
     margin: 0 auto;
     margin-top: 80px;
-
-    // grid-template-rows: 730px;
     gap: 0 32px;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
 

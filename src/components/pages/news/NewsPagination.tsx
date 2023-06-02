@@ -11,11 +11,15 @@ import SliderButton from '../../common/slider/SliderButton'
 
 const totalCircles = 6
 
-const NewsPagination = () => {
+interface NewsPaginationProps {
+  className?: string
+}
+
+const NewsPagination = ({className}: NewsPaginationProps) => {
   const {isDesktop} = useMedia()
 
   return (
-    <div className={styles.dots}>
+    <div className={clsx(styles.dots, className)}>
       {isDesktop && <SliderButton className={styles.arrowPrev} disabled />}
 
       <ul className={styles.dotsMiddle}>

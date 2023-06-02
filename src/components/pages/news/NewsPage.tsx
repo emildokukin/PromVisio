@@ -131,7 +131,7 @@ const NewsPage = () => {
           ))}
         </div>
 
-        <NewsPagination />
+        <NewsPagination className={styles.dots} />
       </section>
     </Page>
   )
