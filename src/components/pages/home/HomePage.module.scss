@@ -211,7 +211,7 @@
 }
 
 .team {
-  margin-top: 132px;
+  margin-top: $padding-top-1;
 
   @include mobile {
     margin-top: 32px;
