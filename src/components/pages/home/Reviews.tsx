@@ -76,15 +76,8 @@ const Slider = ({items}: {items: Review[]}) => {
 
       {isDesktop && (
         <>
-          <SliderButton
-            onClick={() => swiper?.slidePrev()}
-            className={clsx(styles.arrow, {[styles.disabled]: isBeginning})}
-          />
-          <SliderButton
-            onClick={() => swiper?.slideNext()}
-            next
-            className={clsx(styles.arrow, styles.arrowNext, {[styles.disabled]: isEnd})}
-          />
+          <SliderButton onClick={() => swiper?.slidePrev()} disabled={isBeginning} className={styles.arrowPrev} />
+          <SliderButton onClick={() => swiper?.slideNext()} next disabled={isEnd} className={styles.arrowNext} />
           <p className={styles.index}>
             {index} <span>/</span> {swiper?.slides?.length}
           </p>

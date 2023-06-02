@@ -1,7 +1,9 @@
 .dots {
+  position: relative;
   display: flex;
+  width: 100%;
   max-width: $max-content;
-  justify-content: space-between;
+  justify-content: center;
   margin-inline: auto;
 
   &-middle {
@@ -39,21 +41,14 @@
   }
 
   .arrow {
-    &-disabled {
-      color: $gray-div;
+    &-prev {
+      top: 0;
+      left: 0;
     }
 
-    &-left svg {
-      max-width: 53px;
-      transform: scale(-1, 1);
-    }
-
-    &-right {
-      color: $general-accent;
-
-      svg {
-        max-width: 53px;
-      }
+    &-next {
+      top: 0;
+      right: 0;
     }
   }
 

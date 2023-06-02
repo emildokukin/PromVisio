@@ -194,17 +194,14 @@
 }
 
 .arrow {
-  top: 64px;
-  left: 0;
-  color: $general-accent;
-  transition: color 0.15s linear;
-
-  &.disabled {
-    color: $gray-div;
+  &-prev {
+    top: 64px;
+    left: 0;
   }
 
   &-next {
     top: 0;
+    left: 0;
   }
 }
 

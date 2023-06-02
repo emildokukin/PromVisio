@@ -3,13 +3,17 @@ import styles from './SliderButton.module.scss'
 import {ReactComponent as SliderArrow} from '../../../icons/slider-arrow.svg'
 
 interface SliderButtonProps {
-  onClick: () => void
+  onClick?: () => void
   next?: boolean
+  disabled?: boolean
   className?: string
 }
 
-const SliderButton = ({onClick, next = false, className}: SliderButtonProps) => (
-  <button className={clsx({[styles.prev]: !next, [styles.next]: next}, className)} onClick={onClick}>
+const SliderButton = ({onClick, next = false, disabled = false, className}: SliderButtonProps) => (
+  <button
+    className={clsx(styles.arrow, {[styles.prev]: !next, [styles.next]: next, [styles.disabled]: disabled}, className)}
+    onClick={onClick}
+  >
     <SliderArrow />
   </button>
 )

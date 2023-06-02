@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import styles from './NewsPagination.module.scss'
-import {ReactComponent as ArrowSVG} from '../../../icons/slider-arrow.svg'
 import useMedia from '../../utils/useMedia'
+import SliderButton from '../../common/slider/SliderButton'
 
 // TODO: use to determine dots count
 // interface newsPagination {
@@ -16,11 +16,7 @@ const NewsPagination = () => {
 
   return (
     <div className={styles.dots}>
-      {isDesktop && (
-        <div className={clsx(styles.arrowLeft, styles.arrowDisabled)}>
-          <ArrowSVG />
-        </div>
-      )}
+      {isDesktop && <SliderButton className={styles.arrowPrev} disabled />}
 
       <ul className={styles.dotsMiddle}>
         <li className={clsx(styles.dot, styles.dotActive)}>1</li>
@@ -35,11 +31,7 @@ const NewsPagination = () => {
         <li className={styles.dot}>999</li>
       </ul>
 
-      {isDesktop && (
-        <div className={styles.arrowRight}>
-          <ArrowSVG />
-        </div>
-      )}
+      {isDesktop && <SliderButton className={styles.arrowNext} next />}
     </div>
   )
 }
