@@ -27,7 +27,7 @@ export const GalleryItem = ({thumbnail, type = GALLERY_ITEM_TYPE.PHOTO, onClick,
     )}
     onClick={onClick}
   >
-    <img src={thumbnail} alt='gallery video thumbnail' />
+    <img src={thumbnail} alt='gallery item thumbnail' />
     <div className={styles.decor}>
       {type === GALLERY_ITEM_TYPE.PHOTO && <PlusSVG />}
       {type === GALLERY_ITEM_TYPE.VIDEO && <VideoPlaySVG />}

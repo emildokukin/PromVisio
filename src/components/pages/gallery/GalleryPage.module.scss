@@ -19,6 +19,12 @@
     cursor: pointer;
     transition: all 0.25s ease-in;
 
+    &:not(.section-current) {
+      @include hover {
+        background-color: $general-bg;
+      }
+    }
+
     &-current {
       background-color: $white;
       color: $gray-div;
