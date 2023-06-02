@@ -5,6 +5,7 @@
   padding-bottom: 133px;
 
   @include mobile {
+    padding: $padding-x $padding-mx 0 $padding-mx;
     padding-top: 73px;
   }
 }
@@ -34,6 +35,15 @@
 
     @include mobile {
       display: block;
+    }
+
+    .swiper {
+      overflow: visible;
+      margin-top: 24px;
+
+      .mediaItem {
+        max-height: 216px;
+      }
     }
 
     .breadCrumbs {
