@@ -70,6 +70,12 @@
       margin-top: 24px;
       gap: 5px;
 
+      object {
+        @include mobile {
+          font-size: 14px;
+        }
+      }
+
       time {
         @include font-adapt-txt-regular;
 
