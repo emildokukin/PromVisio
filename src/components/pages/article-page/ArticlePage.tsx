@@ -41,7 +41,7 @@ const ArticlePage = () => {
   return (
     <Page className={styles.page}>
       <Helmet>
-        <title>Конкретная новость</title>
+        <title>{currentNews.title || 'Новость'}</title>
       </Helmet>
 
       {isDesktop && <Line />}
