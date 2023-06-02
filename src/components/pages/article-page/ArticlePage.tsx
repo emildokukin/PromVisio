@@ -54,7 +54,7 @@ const ArticlePage = () => {
                 <img src={arrowSVG} alt='arrow' /> <span>Обратно в вестник</span>
               </div>
 
-              <Swiper className={styles.swiper} slidesPerView={1} spaceBetween={32}>
+              <Swiper className={styles.swiper} slidesPerView={1} spaceBetween={8}>
                 {currentNews.mediaLinks.map((media, index) => (
                   <SwiperSlide key={index}>
                     <GalleryItem thumbnail={media} className={styles.mediaItem} />
