@@ -30,7 +30,12 @@ export const GalleryItem = ({thumbnail, type = GALLERY_ITEM_TYPE.PHOTO, onClick,
     <img src={thumbnail} alt='gallery item thumbnail' />
     <div className={styles.decor}>
       {type === GALLERY_ITEM_TYPE.PHOTO && <PlusSVG />}
-      {type === GALLERY_ITEM_TYPE.VIDEO && <VideoPlaySVG />}
+      {type === GALLERY_ITEM_TYPE.VIDEO && (
+        <>
+          <div className={styles.circle}></div>
+          <VideoPlaySVG />
+        </>
+      )}
     </div>
   </div>
 )
