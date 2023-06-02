@@ -92,15 +92,18 @@ $submit-button-width-mob: 108px;
 }
 
 .cross {
+  $background: #1e1e1e;
+
   position: absolute;
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 2px solid $background;
   border-radius: 100%;
-  background-color: #1e1e1e;
+  background-color: $background;
   cursor: pointer;
-  transition: all 0.1s linear;
+  transition: all 0.2s linear;
 
   @include desktop {
     top: 40px;
@@ -118,12 +121,19 @@ $submit-button-width-mob: 108px;
   }
 
   @include hover {
-    background-color: $gray;
+    border-color: $general-accent;
+    background-color: $white;
+
+    svg {
+      color: $deep-gray;
+      transform: rotate(-180deg);
+    }
   }
 
   svg {
     width: 20px;
     color: $general-accent;
+    transition: color 0.15s ease-in-out, transform 0.4s ease;
   }
 }
 
