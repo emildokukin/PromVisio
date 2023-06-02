@@ -76,19 +76,33 @@
 }
 
 .format {
+  position: relative;
   display: flex;
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  border-radius: 100%;
-  background-color: $general-accent;
   color: $black;
+
+  &::after {
+    position: absolute;
+    z-index: -1;
+    width: 64px;
+    height: 64px;
+    box-sizing: border-box;
+    border: 2px solid $general-accent;
+    border-radius: 100%;
+    margin: auto;
+    background-color: $general-accent;
+    content: '';
+    inset: 0;
+    transition: all 0.25s ease-in-out;
+  }
 
   @include desktop {
     @include font-desktop-txt-bold;
 
-    width: 64px;
-    height: 64px;
+    width: 72px;
+    height: 72px;
   }
 
   @include mobile {
@@ -96,6 +110,13 @@
 
     width: 48px;
     height: 48px;
+  }
+
+  @include hover {
+    &::after {
+      background-color: $white;
+      transform: scale(1.12);
+    }
   }
 }
 

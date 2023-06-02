@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: none;
+  border: 2px solid $general-accent;
   background-color: $general-accent;
   cursor: pointer;
   outline: none;
@@ -26,7 +26,7 @@
   }
 
   @include hover {
-    background-color: $general-accent-hover;
+    background-color: $white;
   }
 
   span {
