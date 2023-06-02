@@ -3,8 +3,7 @@ import styles from './GalleryPage.module.scss'
 import Page from '../../common/page/Page'
 import {Helmet} from 'react-helmet-async'
 import clsx from 'clsx'
-import {ReactComponent as PlusSVG} from '../../../icons/plus.svg'
-import {ReactComponent as VideoPlaySVG} from '../../../icons/video-play.svg'
+import {GALLERY_ITEM_TYPE, GalleryItem} from './GalleryItem'
 
 enum SECTION {
   PHOTO,
@@ -60,25 +59,9 @@ const Gallery = () => {
             [styles.video]: section === SECTION.VIDEO
           })}
         >
-          {section === SECTION.PHOTO &&
-            PHOTOS.map((photo) => (
-              <li className={styles.item} key={photo.src}>
-                <img src={photo.src} alt='gallery photo' />
-                <div className={styles.decor}>
-                  <PlusSVG />
-                </div>
-              </li>
-            ))}
-
+          {section === SECTION.PHOTO && PHOTOS.map((photo) => <GalleryItem thumbnail={photo.src} key={photo.src} />)}
           {section === SECTION.VIDEO &&
-            VIDEOS.map((video) => (
-              <li className={styles.item} key={video.src}>
-                <img src={video.src} alt='gallery video thumbnail' />
-                <div className={styles.decor}>
-                  <VideoPlaySVG />
-                </div>
-              </li>
-            ))}
+            VIDEOS.map((video) => <GalleryItem thumbnail={video.src} type={GALLERY_ITEM_TYPE.VIDEO} key={video.src} />)}
         </ul>
       </section>
     </Page>
