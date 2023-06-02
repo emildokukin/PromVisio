@@ -1,6 +1,6 @@
 import LinkComponent from '../../common/link-component/LinkComponent'
 import styles from './NewsItem.module.scss'
-import GazpromLink from '../../common/gazprom-link/GazpromLink'
+import NewsInnerLink from '../../common/news-inner-link/NewsInnerLink'
 import useMedia from '../../utils/useMedia'
 
 export interface NewsItemProps {
@@ -8,15 +8,15 @@ export interface NewsItemProps {
   description: string
   imgLink: string
   date: string
-  linkToGazprom?: string
-  linkToNewsItem: string
+  innerLink?: string
+  link: string
 }
 
-const NewsItem = ({title, description, imgLink, date, linkToGazprom, linkToNewsItem}: NewsItemProps) => {
+const NewsItem = ({title, description, imgLink, date, innerLink, link}: NewsItemProps) => {
   const {isDesktop} = useMedia()
 
   return (
-    <LinkComponent className={styles.wrapper} link={linkToNewsItem}>
+    <LinkComponent className={styles.wrapper} link={link}>
       <img className={styles.image} src={imgLink} alt='ship' />
 
       <div className={styles.info}>
@@ -25,8 +25,8 @@ const NewsItem = ({title, description, imgLink, date, linkToGazprom, linkToNewsI
         <p>{description}</p>
 
         <div className={styles.infoBottom}>
-          <time>{linkToGazprom && isDesktop ? date.toString() + ' •' : date}</time>
-          {linkToGazprom && <GazpromLink linkToGazprom={linkToGazprom} />}
+          <time>{innerLink && isDesktop ? date.toString() + ' •' : date}</time>
+          {innerLink && <NewsInnerLink link={innerLink} />}
         </div>
       </div>
     </LinkComponent>

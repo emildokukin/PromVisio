@@ -13,7 +13,7 @@ export interface News {
   title: string
   description: string
   date: string
-  linkToGazprom?: string
+  innerLink?: string
   mediaLinks: string[]
 }
 
@@ -28,7 +28,7 @@ export const news: News[] = [
     description:
       'Компания "Промвизио" успешно завершила первый проект по фото- и видеосъёмке учений аварийно-спасательных формирований в Карском море.',
     date: '12.05.2023',
-    linkToGazprom: 'google.com',
+    innerLink: 'google.com',
     mediaLinks: [
       '/media/gallery/photo1.png',
       '/media/gallery/photo2.png',
@@ -66,7 +66,7 @@ export const news: News[] = [
     description:
       'Компания Промвизио успешно завершила первый проект по фото- и видеосъёмке учений аварийно-спасательных формирований в Карском море.',
     date: '01.12.2020',
-    linkToGazprom: 'google.com',
+    innerLink: 'google.com',
     mediaLinks: [
       '/media/gallery/photo4.png',
       '/media/gallery/photo1.png',
@@ -80,7 +80,7 @@ export const news: News[] = [
     description:
       'Компания Промвизио успешно завершила первый проект по фото- и видеосъёмке учений аварийно-спасательных формирований в Карском море.',
     date: '01.12.2020',
-    linkToGazprom: 'google.com',
+    innerLink: 'google.com',
     mediaLinks: [
       '/media/gallery/photo1.png',
       '/media/gallery/photo2.png',
@@ -98,7 +98,7 @@ const NewsPage = () => {
   return (
     <Page floatingHireButton>
       <Helmet>
-        <title>Новости</title>
+        <title>Вестник</title>
       </Helmet>
 
       <section className={styles.news}>
@@ -121,8 +121,8 @@ const NewsPage = () => {
                   description={newsItem.description}
                   imgLink={newsItem.mediaLinks[0]}
                   date={newsItem.date}
-                  linkToGazprom={newsItem.linkToGazprom}
-                  linkToNewsItem={newsItem.id.toString()}
+                  link={newsItem.id.toString()}
+                  innerLink={newsItem.innerLink}
                 />
               )}
 
