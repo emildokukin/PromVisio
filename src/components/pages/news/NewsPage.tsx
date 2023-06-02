@@ -96,7 +96,7 @@ const NewsPage = () => {
   const {isMobile} = useMedia()
 
   return (
-    <Page floatingHireButton>
+    <Page>
       <Helmet>
         <title>Вестник</title>
       </Helmet>

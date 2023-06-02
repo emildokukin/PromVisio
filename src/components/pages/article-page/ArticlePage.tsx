@@ -39,7 +39,7 @@ const ArticlePage = () => {
   const currentNews = news.filter((news) => news.id === parseInt(id || '0'))[0]
 
   return (
-    <Page className={styles.page} floatingHireButton>
+    <Page className={styles.page}>
       <Helmet>
         <title>Конкретная новость</title>
       </Helmet>

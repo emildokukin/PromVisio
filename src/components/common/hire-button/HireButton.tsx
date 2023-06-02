@@ -6,11 +6,7 @@ import {Input} from '../input/Input'
 import {Textarea} from '../input/Textarea'
 import {getPhoneNumber} from '../../utils/getPhoneNumber'
 
-interface HireButtonProps {
-  floating?: boolean
-}
-
-const HireButton = ({floating}: HireButtonProps) => {
+const HireButton = () => {
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   const toggleModalVisibility = useCallback(() => setIsModalVisible((prev) => !prev), [])
@@ -21,7 +17,7 @@ const HireButton = ({floating}: HireButtonProps) => {
 
   return (
     <>
-      <button className={clsx(styles.button, {[styles.floating]: floating})} onClick={toggleModalVisibility}>
+      <button className={clsx(styles.button, styles.floating)} onClick={toggleModalVisibility}>
         <span>Нанять нас</span> <img src='/icons/phone.svg' alt='phone' />
       </button>
 

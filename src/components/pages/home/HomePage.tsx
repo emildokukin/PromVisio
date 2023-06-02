@@ -107,7 +107,7 @@ const HomePage = () => {
   const {isMobile, isDesktop} = useMedia()
 
   return (
-    <Page floatingHireButton>
+    <Page>
       <Helmet>
         <title>Главная</title>
       </Helmet>

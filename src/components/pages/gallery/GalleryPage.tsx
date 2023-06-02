@@ -32,7 +32,7 @@ const Gallery = () => {
   const [section, setSection] = useState(SECTION.PHOTO)
 
   return (
-    <Page floatingHireButton>
+    <Page>
       <Helmet>
         <title>Галерея</title>
       </Helmet>

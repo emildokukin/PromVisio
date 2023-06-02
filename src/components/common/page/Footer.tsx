@@ -1,14 +1,9 @@
-import HireButton from '../hire-button/HireButton'
 import LinkComponent from '../link-component/LinkComponent'
 import styles from './Footer.module.scss'
 import {ReactComponent as PhoneSVG} from '../../../icons/phone-small.svg'
 import {ReactComponent as Envelope} from '../../../icons/envelope.svg'
 import useMedia from '../../utils/useMedia'
 import clsx from 'clsx'
-
-interface FooterProps {
-  showHireButton?: boolean
-}
 
 export const Email = ({isMobile}: {isMobile?: boolean}) => (
   <LinkComponent link='emailto:info@promvisio.ru' className={styles.email}>
@@ -40,7 +35,7 @@ export const Copyright = ({isShort}: {isShort?: boolean}) => (
   </>
 )
 
-const Footer = ({showHireButton}: FooterProps) => {
+const Footer = () => {
   const {isDesktop, isMobile} = useMedia()
 
   return (
@@ -67,8 +62,6 @@ const Footer = ({showHireButton}: FooterProps) => {
         <Phone />
 
         {isMobile && <Email isMobile />}
-
-        {showHireButton && <HireButton />}
       </div>
 
       {isMobile && <Copyright isShort />}

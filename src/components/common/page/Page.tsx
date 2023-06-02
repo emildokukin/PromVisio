@@ -8,18 +8,17 @@ import HireButton from '../hire-button/HireButton'
 interface PageProps {
   children: ReactNode
   className?: string
-  floatingHireButton?: boolean
 }
 
-const Page = ({children, className, floatingHireButton}: PageProps) => (
+const Page = ({children, className}: PageProps) => (
   <>
     <Header />
 
     <main className={clsx(styles.content, className)}>{children}</main>
 
-    {floatingHireButton && <HireButton floating />}
+    <HireButton />
 
-    <Footer showHireButton={!floatingHireButton} />
+    <Footer />
   </>
 )
 
