@@ -5,6 +5,7 @@ import clsx from 'clsx'
 import Footer from './Footer'
 import HireButton from '../hire-button/HireButton'
 import Cookies from '../cookie/Cookies'
+import ScrollButton from '../scrollButton/ScrollButton'
 
 interface PageProps {
   children: ReactNode
@@ -20,6 +21,8 @@ const Page = ({children, className}: PageProps) => (
     <HireButton />
 
     <Cookies />
+
+    <ScrollButton />
 
     <Footer />
   </>

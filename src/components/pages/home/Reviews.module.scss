@@ -176,12 +176,12 @@
 .arrow {
   &-prev {
     top: 64px;
-    left: 0;
+    left: -10px;
   }
 
   &-next {
     top: 0;
-    left: 0;
+    left: -10px;
   }
 }
 
@@ -190,7 +190,7 @@
 
   position: absolute;
   top: 145px;
-  left: 0;
+  left: -10px;
   width: 64px;
   color: $white;
   text-align: center;

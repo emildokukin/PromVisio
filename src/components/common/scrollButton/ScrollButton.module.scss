@@ -1,0 +1,36 @@
+.button {
+  position: fixed;
+  z-index: $cookies-z;
+  bottom: $padding-x;
+  left: $padding-x;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  background: $general-bg;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  visibility: hidden;
+
+  @include mobile {
+    bottom: $padding-mx;
+    left: $padding-mx;
+  }
+
+  &.visible {
+    cursor: pointer;
+    opacity: 1;
+    pointer-events: all;
+    visibility: visible;
+  }
+}
+
+.arrow {
+  width: 47px;
+  height: 47px;
+  padding: 0;
+  transform: rotate(-90deg) !important;
+}
