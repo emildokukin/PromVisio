@@ -42,6 +42,30 @@
 
     position: relative;
 
+    @include desktop {
+      &:not(.border) {
+        &::after {
+          position: absolute;
+          right: 0;
+          bottom: -11px;
+          left: 0;
+          display: flex;
+          width: 0;
+          height: 1px;
+          background-color: $gray;
+          content: '';
+          margin-inline: auto;
+          transition: width 0.25s ease-in-out;
+        }
+
+        @include hover {
+          &::after {
+            width: 100%;
+          }
+        }
+      }
+    }
+
     @include mobile {
       &:not(:last-child) {
         padding-bottom: 24px;
@@ -51,28 +75,6 @@
 
     @include hover {
       cursor: pointer;
-    }
-
-    &:not(.border) {
-      &::after {
-        position: absolute;
-        right: 0;
-        bottom: -11px;
-        left: 0;
-        display: flex;
-        width: 0;
-        height: 1px;
-        background-color: $gray;
-        content: '';
-        margin-inline: auto;
-        transition: width 0.25s ease-in-out;
-      }
-
-      @include hover {
-        &::after {
-          width: 100%;
-        }
-      }
     }
   }
 }
@@ -110,11 +112,11 @@
     height: 45px;
     padding: 10px 16px 12px;
     border: 2px solid $general-accent;
-  }
 
-  @include hover {
-    background-color: $white;
-    color: $gray-div;
+    @include hover {
+      background-color: $white;
+      color: $gray-div;
+    }
   }
 
   @include mobile {

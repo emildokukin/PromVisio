@@ -16,6 +16,10 @@
   list-style-type: none;
   margin-inline: auto;
 
+  @include mobile {
+    width: 100%;
+  }
+
   .section {
     @include font-desktop-h2;
 
@@ -24,6 +28,14 @@
     color: $white;
     cursor: pointer;
     transition: all 0.25s ease-in;
+
+    @include mobile {
+      @include font-desktop-h3;
+
+      width: 100%;
+      padding: 6px 10px;
+      text-align: center;
+    }
 
     &:not(.section-current) {
       @include hover {
@@ -43,11 +55,24 @@
   max-width: $max-content;
   margin-top: 80px;
   gap: 32px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: 1fr;
   margin-inline: auto;
 
-  &.video {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  @include desktop {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: 1fr;
+
+    &.video {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @include mobile {
+    margin-top: 24px;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 1fr;
+
+    & > div {
+      max-height: 60vh;
+    }
   }
 }
