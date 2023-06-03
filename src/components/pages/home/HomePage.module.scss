@@ -48,6 +48,9 @@
 
     @include mobile {
       @include font-adapt-h2;
+
+      font-size: 8vw;
+      line-height: 9vw;
     }
 
     img {
@@ -55,8 +58,8 @@
       height: 73px;
 
       @include mobile {
-        width: 32px;
-        height: 18px;
+        width: 6vw;
+        height: 6vw;
         margin: 0 4px;
       }
     }
@@ -70,6 +73,9 @@
     h2 {
       @include mobile {
         @include font-adapt-txt-regular;
+
+        font-size: min(4vw, 30px);
+        line-height: min(5.4vw, 34px);
       }
     }
 
