@@ -1,24 +1,31 @@
 .page {
-  max-width: $max-content;
-  padding: $padding-x $padding-x 0 $padding-x;
-  padding-top: $padding-top;
-  padding-bottom: 133px;
-
   @include mobile {
-    padding: $padding-x $padding-mx 0 $padding-mx;
     padding-top: 73px;
     padding-bottom: 36px;
   }
 
   .wrapper {
+    max-width: $max-content;
+    margin: 0 auto;
+
     h1 {
       @include font-desktop-h1;
 
       text-align: center;
 
+      @include mobile {
+        @include font-adapt-h1;
+      }
+
       img {
         max-width: 93px;
         vertical-align: bottom;
+
+        @include mobile {
+          @include font-adapt-h1;
+
+          max-width: 26px;
+        }
       }
     }
 
@@ -29,10 +36,23 @@
       margin-top: 160px;
       text-align: center;
 
+      @include mobile {
+        padding-bottom: 24px;
+        border: none;
+        margin-top: 95px;
+        background-color: $general-accent;
+      }
+
       img {
         max-width: 640px;
         max-height: 280px;
         margin-top: -80px;
+
+        @include mobile {
+          max-height: 130px;
+          padding: 0 $padding-mx;
+          margin-top: -70px;
+        }
       }
 
       h2 {
@@ -46,15 +66,32 @@
         line-height: 104px;
         text-align: center;
         text-transform: uppercase;
+
+        @include mobile {
+          margin-top: 20px;
+          color: $deep-gray;
+          font-size: 28px;
+          font-weight: 800;
+          letter-spacing: 0.5em;
+          line-height: 36px;
+        }
       }
 
       p {
         @include font-desktop-h3;
 
         max-width: 640px;
+        padding: 0 $padding-mx;
         margin: 0 auto;
         margin-top: 32px;
         text-align: center;
+
+        @include mobile {
+          @include font-adapt-txt-regular;
+
+          margin-top: 12px;
+          color: $deep-gray;
+        }
       }
 
       .globe {
@@ -64,19 +101,33 @@
         left: 0;
         margin: 0 auto;
 
+        @include mobile {
+          bottom: -52px;
+        }
+
         &-svg {
           max-width: 64px;
           border-right: 5px solid #181818;
           border-left: 5px solid #181818;
           background-color: #181818;
           color: $gray;
+
+          @include mobile {
+            max-width: 36px;
+          }
         }
       }
     }
 
     .shipPicture {
+      display: block;
       max-height: 634px;
       margin-top: 80px;
+
+      @include mobile {
+        max-height: 200px;
+        margin-top: 72px;
+      }
     }
 
     .underShipWrapper {
@@ -84,6 +135,11 @@
         display: flex;
         justify-content: start;
         margin-top: 56px;
+
+        @include mobile {
+          flex-direction: column-reverse;
+          margin: 0;
+        }
 
         p {
           @include font-desktop-txt-regular;
@@ -97,6 +153,12 @@
           max-height: 400px;
           margin-top: -100px;
           margin-left: 43px;
+
+          @include mobile {
+            max-width: 100%;
+            max-height: 200px;
+            margin: 0;
+          }
         }
       }
 
@@ -104,6 +166,10 @@
         display: flex;
         justify-content: start;
         margin-top: -120px;
+
+        @include mobile {
+          margin-top: 24px;
+        }
 
         img {
           max-width: 304px;
@@ -116,7 +182,303 @@
           @include font-desktop-h2;
 
           max-width: 672px;
+          padding: 0 $padding-mx;
           margin-left: 152px;
+
+          @include mobile {
+            @include font-adapt-txt-regular;
+
+            margin: 0;
+          }
+        }
+      }
+    }
+
+    .weProud {
+      display: flex;
+      margin-top: 128px;
+
+      @include mobile {
+        display: block;
+        padding: 0 $padding-mx;
+        margin-top: 24px;
+      }
+
+      .left {
+        margin-left: 80px;
+
+        @include mobile {
+          margin-left: 0;
+        }
+
+        .globe {
+          max-width: 48px;
+          color: $gray;
+
+          @include mobile {
+            max-width: 20px;
+          }
+        }
+
+        p {
+          @include font-desktop-txt-regular;
+
+          max-width: 213px;
+          margin-top: 26px;
+
+          @include mobile {
+            max-width: 100%;
+            margin-top: 14px;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+
+            /* or 117% */
+
+            letter-spacing: 0.04em;
+            line-height: 14px;
+          }
+        }
+      }
+
+      .right {
+        margin-left: 267px;
+
+        @include mobile {
+          margin-top: 24px;
+          margin-left: 0;
+        }
+
+        p {
+          @include font-desktop-h2;
+
+          max-width: 672px;
+
+          @include mobile {
+            @include font-adapt-txt-regular;
+          }
+        }
+      }
+    }
+
+    .whereWeWere {
+      margin-top: 128px;
+
+      @include mobile {
+        margin-top: 24px;
+      }
+
+      .shipImage {
+        display: block;
+        max-height: 590px;
+
+        @include mobile {
+          height: 200px;
+        }
+      }
+
+      .weDrove {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: -45px;
+        gap: 108px;
+
+        @include mobile {
+          flex-direction: column;
+          margin-top: 0;
+          gap: 24px;
+        }
+
+        .viewFromShipImg {
+          max-width: 640px;
+          max-height: 408px;
+
+          @include mobile {
+            display: block;
+            max-width: 100%;
+            height: 200px;
+          }
+        }
+
+        .miles {
+          display: flex;
+          max-width: 400px;
+          flex-direction: column;
+          gap: 24px;
+
+          @include mobile {
+            max-width: 100%;
+            flex-direction: column;
+            padding: 0 $padding-mx;
+            gap: 24px;
+          }
+
+          span {
+            max-width: 371px;
+            color: $white;
+            font-size: 80px;
+            font-style: normal;
+            font-weight: 800;
+            letter-spacing: 0.25em;
+            line-height: 104px;
+            text-align: center;
+            text-transform: uppercase;
+            text-wrap: nowrap;
+
+            @include mobile {
+              font-size: 48px;
+              letter-spacing: 0.24em;
+              line-height: 56px;
+            }
+
+            &::before,
+            &::after {
+              display: block;
+              width: 100%;
+              height: 4px;
+              background-color: $gray;
+              content: '';
+
+              @include mobile {
+                display: none;
+              }
+            }
+
+            &::before {
+              margin-bottom: 8px;
+            }
+
+            &::after {
+              margin-top: 8px;
+            }
+          }
+
+          p {
+            @include font-desktop-txt-regular;
+
+            text-align: center;
+
+            @include mobile {
+              &::after {
+                display: block;
+                width: 100%;
+                height: 4px;
+                margin-top: 26px;
+                background-color: $gray;
+                content: '';
+              }
+            }
+
+            @include mobile {
+              @include font-adapt-txt-regular;
+            }
+          }
+        }
+      }
+
+      .textAfterDrove {
+        @include font-desktop-h2;
+
+        padding: 0 80px;
+        margin-top: 128px;
+        font-size: 40px;
+        text-align: center;
+
+        @include mobile {
+          @include font-adapt-txt-regular;
+
+          padding: 0;
+          padding: 0 $padding-mx;
+          margin-top: 24px;
+          text-align: left;
+        }
+      }
+
+      .lastImg {
+        max-height: 738px;
+        margin-top: 128px;
+
+        @include mobile {
+          height: 200px;
+          margin-top: 24px;
+        }
+      }
+    }
+  }
+
+  .wrapperSwiper {
+    margin-top: 128px;
+
+    @include mobile {
+      padding: 0 $padding-mx;
+      margin-top: 24px;
+    }
+
+    .swiper {
+      overflow: visible;
+      max-width: 1312px;
+      max-height: 730px;
+
+      @include mobile {
+        max-height: 200px;
+      }
+
+      .slide {
+        max-height: 730px;
+
+        @include mobile {
+          max-height: 200px;
+        }
+
+        &::before {
+          position: absolute;
+          top: 0;
+          right: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(0deg, $general-bg 0%, rgb(24 24 24 / 0%) 100%);
+          content: '';
+          opacity: 0.8;
+        }
+
+        .text {
+          $gradient-z: 1;
+
+          position: absolute;
+          bottom: 60px;
+          left: 80px;
+
+          h3 {
+            @include font-desktop-h3;
+          }
+
+          p {
+            @include font-desktop-txt-regular;
+
+            max-width: 408px;
+            margin-top: 16px;
+          }
+        }
+
+        img {
+          max-height: 730px;
+
+          @include mobile {
+            height: 200px;
+          }
+        }
+      }
+
+      .navigation {
+        position: absolute;
+        right: 85px;
+        bottom: 65px;
+        width: 128px;
+
+        button {
+          position: relative;
         }
       }
     }
