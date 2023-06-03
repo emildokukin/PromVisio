@@ -32,34 +32,55 @@
 }
 
 .email {
-  display: block;
+  &-wrapper {
+    display: block;
 
-  @include desktop {
-    margin-left: 117px;
-  }
+    @include desktop {
+      margin-left: 117px;
+    }
 
-  @include mobile {
-    display: flex;
-    align-items: center;
-    margin-top: 14px;
-    gap: 8px;
+    @include mobile {
+      display: flex;
+      align-items: center;
+      margin-top: 14px;
+      gap: 8px;
+    }
   }
 }
 
 .phone {
-  display: flex;
-  gap: 22px;
+  &-wrapper {
+    display: flex;
+    gap: 22px;
 
-  @include mobile {
-    align-items: center;
-    gap: 8px;
+    @include mobile {
+      align-items: center;
+      gap: 8px;
+    }
   }
 }
 
-.email h2,
-.phone h2 {
+.email,
+.phone {
   @include mobile {
-    @include font-desktop-txt-regular;
+    display: flex;
+    width: 20px;
+    height: 20px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    background-color: $general-accent;
+
+    svg {
+      width: 10px;
+      color: $gray-div;
+    }
+  }
+
+  &-wrapper h2 {
+    @include mobile {
+      @include font-desktop-txt-regular;
+    }
   }
 }
 
@@ -109,12 +130,23 @@
   border-radius: 100%;
   background-color: $gray-div;
   color: $general-accent;
+  transition: all 0.2s ease-in;
+
+  @include desktop {
+    border: 2px solid $gray-div;
+
+    @include hover {
+      border-color: $general-accent;
+      background-color: $white;
+      color: $deep-gray;
+    }
+  }
 
   @include mobile {
     width: 20px;
     height: 20px;
     background-color: $general-accent;
-    color: $gray;
+    color: $general-accent;
   }
 
   &:not(:first-child) {
@@ -125,14 +157,12 @@
     }
   }
 
-  img,
   svg {
     width: 22px;
     height: auto;
-    object-fit: contain;
 
     @include mobile {
-      width: 11px;
+      width: 20px;
     }
   }
 }
