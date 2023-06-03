@@ -107,7 +107,7 @@ const HomePage = () => {
   const {isMobile, isDesktop} = useMedia()
 
   return (
-    <Page scrollButton className={styles.page}>
+    <Page scrollButton={isDesktop} className={styles.page}>
       <Helmet>
         <title>Главная</title>
       </Helmet>

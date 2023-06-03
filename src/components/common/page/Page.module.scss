@@ -3,11 +3,13 @@
   width: 100%;
   max-width: 100vw;
   min-height: calc(100vh - 100px);
-  padding: $padding-top $padding-x $padding-bottom $padding-x;
+  padding-top: $padding-top;
+  padding-bottom: $padding-bottom;
   margin: auto;
   background: $general-bg;
 
   @include mobile {
-    padding: $padding-top-m $padding-mx $padding-bottom-m;
+    padding-top: $padding-top-m;
+    padding-bottom: $padding-bottom-m;
   }
 }
