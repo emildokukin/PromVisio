@@ -14,4 +14,46 @@
       }
     }
   }
+
+  @content;
+}
+
+@mixin hover-white-background($width, $width-mobile) {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: $black;
+
+  &::after {
+    position: absolute;
+    z-index: -1;
+    width: $width;
+    height: $width;
+    box-sizing: border-box;
+    border: 2px solid $general-accent;
+    border-radius: 100%;
+    margin: auto;
+    background-color: $general-accent;
+    content: '';
+    inset: 0;
+    transition: all 0.25s ease-in-out;
+
+    @include mobile {
+      width: $width-mobile;
+      height: $width-mobile;
+    }
+  }
+
+  @include hover {
+    cursor: pointer;
+
+    &::after {
+      background-color: $white;
+      transform: scale(1.12);
+    }
+  }
+
+  @content;
 }

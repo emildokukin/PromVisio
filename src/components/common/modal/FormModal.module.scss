@@ -176,24 +176,14 @@ $submit-button-width-mob: 108px;
 }
 
 .button {
-  display: flex;
-  width: $submit-button-width;
-  height: $submit-button-width;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  border-radius: 100%;
-  background-color: $general-accent;
-  cursor: pointer;
-  transition: background-color 0.15s linear;
+  all: unset;
+  z-index: 1;
 
   @include desktop {
     @include font-desktop-txt-bold;
 
-    position: absolute;
-    bottom: calc(-#{$submit-button-width} / 2);
-    left: 32px;
+    width: $submit-button-width;
+    height: $submit-button-width;
   }
 
   @include mobile {
@@ -203,7 +193,11 @@ $submit-button-width-mob: 108px;
     height: $submit-button-width-mob;
   }
 
-  @include hover {
-    background-color: $general-accent-hover;
+  @include hover-white-background($width: $submit-button-width, $width-mobile: $submit-button-width-mob) {
+    @include desktop {
+      position: absolute;
+      bottom: calc(-#{$submit-button-width} / 2);
+      left: 32px;
+    }
   }
 }
