@@ -57,3 +57,23 @@
 
   @content;
 }
+
+@mixin button-small {
+  @include desktop {
+    @include font-desktop-txt-bold;
+
+    width: 72px;
+    height: 72px;
+  }
+
+  @include mobile {
+    @include font-adapt-txt-regular;
+
+    width: 48px;
+    height: 48px;
+  }
+
+  @include hover-white-background($width: 64px, $width-mobile: 48px) {
+    @content;
+  }
+}
