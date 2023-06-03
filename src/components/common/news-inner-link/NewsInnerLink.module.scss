@@ -9,9 +9,10 @@ object {
 
   .globe {
     display: inline;
-    max-width: 16px;
+    width: 16px;
     max-height: 16px;
     align-items: center;
+    color: $general-accent;
   }
 
   .link {
