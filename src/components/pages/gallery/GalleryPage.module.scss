@@ -1,3 +1,13 @@
+.content {
+  padding-right: $padding-x;
+  padding-left: $padding-x;
+
+  @include mobile {
+    padding-right: $padding-mx;
+    padding-left: $padding-mx;
+  }
+}
+
 .sections {
   display: flex;
   width: fit-content;
