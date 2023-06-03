@@ -62,7 +62,7 @@
 
 .email,
 .phone {
-  @include mobile {
+  &.border {
     display: flex;
     width: 20px;
     height: 20px;

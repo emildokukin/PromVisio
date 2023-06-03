@@ -92,23 +92,9 @@
 
 .phone {
   display: flex;
+  gap: 8px !important;
 
-  .social {
-    display: flex;
-    width: 20px;
-    height: 20px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 100%;
-    background-color: $general-accent;
-    color: $gray-1;
-
-    svg {
-      width: 10px;
-    }
-  }
-
-  p {
+  h2 {
     @include font-desktop-menu;
 
     margin-left: 8px;

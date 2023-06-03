@@ -1,7 +1,6 @@
 import LinkComponent from '../link-component/LinkComponent'
 import styles from './Header.module.scss'
 import {useCallback, useState} from 'react'
-import {ReactComponent as PhoneSVG} from '../../../icons/phone-small.svg'
 import useMedia from '../../utils/useMedia'
 import clsx from 'clsx'
 import {Copyright as FooterCopyright, Email as FooterEmail, Phone as FooterPhone} from './Footer'
@@ -25,23 +24,13 @@ const Links = () => (
   </nav>
 )
 
-const Phone = () => (
-  <LinkComponent link='tel:+79039689048' className={styles.phone}>
-    <div className={styles.social}>
-      <PhoneSVG />
-    </div>
-
-    <p>+7 (903) 968_90_48</p>
-  </LinkComponent>
-)
-
 const Menu = ({isVisible}: {isVisible?: boolean}) => (
   <div className={clsx(styles.menu, {[styles.visible]: isVisible})}>
     <Links />
 
     <div className={styles.bottom}>
-      <FooterPhone />
-      <FooterEmail isMobile />
+      <FooterPhone borderYellow />
+      <FooterEmail isMobile border />
       <FooterCopyright />
     </div>
   </div>
@@ -72,7 +61,7 @@ const Header = () => {
 
         {isDesktop && <Links />}
 
-        {isDesktop && <Phone />}
+        {isDesktop && <FooterPhone borderYellow className={styles.phone} />}
 
         {isMobile && <Hamburger isTriggered={isOpened} onClick={triggerMenuState} />}
       </header>

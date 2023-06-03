@@ -7,10 +7,10 @@ import {ReactComponent as YoutubeSVG} from '../../../icons/youtube.svg'
 import useMedia from '../../utils/useMedia'
 import clsx from 'clsx'
 
-export const Email = ({isMobile}: {isMobile?: boolean}) => (
+export const Email = ({isMobile, border}: {isMobile?: boolean; border?: boolean}) => (
   <LinkComponent link='emailto:info@promvisio.ru' className={styles.emailWrapper}>
     {isMobile && (
-      <div className={styles.email}>
+      <div className={clsx(styles.email, {[styles.border]: border})}>
         <EnvelopeSVG />
       </div>
     )}
@@ -19,9 +19,17 @@ export const Email = ({isMobile}: {isMobile?: boolean}) => (
   </LinkComponent>
 )
 
-export const Phone = ({isDesktop}: {isDesktop?: boolean}) => (
-  <LinkComponent link='tel:+79039689048' className={styles.phoneWrapper}>
-    <div className={clsx(styles.phone, {[styles.social]: isDesktop})}>
+export const Phone = ({
+  borderGray,
+  borderYellow,
+  className
+}: {
+  borderGray?: boolean
+  borderYellow?: boolean
+  className?: string
+}) => (
+  <LinkComponent link='tel:+79039689048' className={clsx(styles.phoneWrapper, className)}>
+    <div className={clsx(styles.phone, {[styles.social]: borderGray, [styles.border]: borderYellow})}>
       <PhoneSVG />
     </div>
 
@@ -61,9 +69,9 @@ const Footer = () => {
       </div>
 
       <div className={styles.action}>
-        <Phone isDesktop={isDesktop} />
+        <Phone borderGray={isDesktop} borderYellow={isMobile} />
 
-        {isMobile && <Email isMobile />}
+        {isMobile && <Email isMobile border={isMobile} />}
       </div>
 
       {isMobile && <Copyright isShort />}
