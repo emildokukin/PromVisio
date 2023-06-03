@@ -11,7 +11,7 @@ export default defineConfig({
     },
     preprocessorOptions: {
       scss: {
-        additionalData: `@import "./src/variables"; @import "./src/breakpoints"; @import "./src/typography";`
+        additionalData: `@import "./src/variables"; @import "./src/breakpoints"; @import "./src/typography"; @import "./src/mixins";`
       }
     }
   },

@@ -10,21 +10,7 @@ body {
   color: $white;
   font-family: $font-manrope;
 
-  &::-webkit-scrollbar {
-    width: 20px;
-
-    &-thumb {
-      border: 8px solid transparent;
-      border-radius: 60px;
-      background-clip: content-box;
-      background-color: $general-accent;
-      transition: all 0.2s ease;
-
-      &:hover {
-        background-color: $white;
-      }
-    }
-  }
+  @include scrollbar;
 }
 
 p,

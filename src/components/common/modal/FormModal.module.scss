@@ -86,6 +86,8 @@ $submit-button-width-mob: 108px;
   overflow: auto;
   margin-top: 32px;
 
+  @include scrollbar;
+
   @include mobile {
     margin-top: 24px;
   }
