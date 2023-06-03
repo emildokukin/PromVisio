@@ -1,5 +1,6 @@
 .item {
   position: relative;
+  display: flex;
 
   @include hover {
     cursor: pointer;
@@ -7,6 +8,10 @@
     .decor {
       opacity: 1;
     }
+  }
+
+  img {
+    height: auto;
   }
 }
 
@@ -60,6 +65,11 @@
     inset: 0;
     transition: all 0.25s ease;
 
+    @include mobile {
+      width: 48px;
+      height: 48px;
+    }
+
     @include hover {
       transform: scale(1.1);
 
@@ -74,5 +84,10 @@
     z-index: calc(#{$circle-index} + 1);
     pointer-events: none;
     transform: translateX(5px);
+
+    @include mobile {
+      width: 14px;
+      transform: translateX(2px);
+    }
   }
 }
