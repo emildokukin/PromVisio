@@ -167,7 +167,45 @@
   }
 }
 
-.cross,
 .hamburger {
+  position: relative;
   width: 32px;
+  height: 32px;
+
+  &::before,
+  &::after {
+    position: absolute;
+    width: 32px;
+    height: 2px;
+    margin: auto;
+    background-color: $general-accent;
+    content: '';
+    inset: 50% 0;
+    transition: all 0.5s ease;
+    will-change: transform;
+  }
+
+  &::before {
+    transform: translateY(-4px);
+  }
+
+  &::after {
+    transform: translateY(4px);
+  }
+
+  &.cross {
+    &::before,
+    &::after {
+      width: 19px;
+      border-radius: 2px;
+    }
+
+    &::before {
+      transform: translateY(0) rotate(45deg);
+    }
+
+    &::after {
+      transform: translateY(0) rotate(-45deg);
+    }
+  }
 }

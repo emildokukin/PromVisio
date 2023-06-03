@@ -2,8 +2,6 @@ import LinkComponent from '../link-component/LinkComponent'
 import styles from './Header.module.scss'
 import {useCallback, useState} from 'react'
 import {ReactComponent as PhoneSVG} from '../../../icons/phone-small.svg'
-import {ReactComponent as HamburgerSVG} from '../../../icons/hamburger.svg'
-import {ReactComponent as CrossSVG} from '../../../icons/cross.svg'
 import useMedia from '../../utils/useMedia'
 import clsx from 'clsx'
 import {Copyright as FooterCopyright, Email as FooterEmail, Phone as FooterPhone} from './Footer'
@@ -49,13 +47,9 @@ const Menu = ({isVisible}: {isVisible?: boolean}) => (
   </div>
 )
 
-const Hamburger = (props: {isTriggered: boolean; onClick: () => void}) => {
-  return props.isTriggered ? (
-    <CrossSVG className={styles.cross} onClick={props.onClick} />
-  ) : (
-    <HamburgerSVG className={styles.hamburger} onClick={props.onClick} />
-  )
-}
+const Hamburger = ({isTriggered, onClick}: {isTriggered: boolean; onClick: () => void}) => (
+  <div className={clsx(styles.hamburger, {[styles.cross]: isTriggered})} onClick={onClick}></div>
+)
 
 const Header = () => {
   const [isOpened, setIsOpened] = useState(false)
