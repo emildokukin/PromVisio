@@ -1,0 +1,58 @@
+.cookies {
+  display: flex;
+  align-items: center;
+  padding: 26px 32px;
+  background: $deep-gray;
+  gap: 32px;
+
+  @include mobile {
+    justify-content: center;
+    padding: 16px;
+
+    br {
+      display: none;
+    }
+  }
+
+  &-wrapper {
+    position: fixed;
+    z-index: $cookies-z;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease-in-out;
+    visibility: hidden;
+
+    @include desktop {
+      width: fit-content;
+      max-width: 626px;
+    }
+
+    @include mobile {
+      left: 0;
+      width: 100%;
+    }
+
+    &.visible {
+      opacity: 1;
+      pointer-events: all;
+      visibility: visible;
+    }
+  }
+}
+
+.text {
+  color: $white;
+
+  @include mobile {
+    @include font-adapt-txt-regular;
+  }
+}
+
+.button {
+  all: unset;
+  z-index: 0;
+
+  @include button-small;
+}
