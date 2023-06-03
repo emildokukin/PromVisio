@@ -24,6 +24,7 @@
 
   &.disabled {
     color: $gray-div;
+    pointer-events: none;
   }
 }
 

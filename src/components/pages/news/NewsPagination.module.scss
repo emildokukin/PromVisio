@@ -20,9 +20,20 @@
       height: 64px;
       align-items: center;
       justify-content: center;
+      border: 2px solid $general-accent;
       border-radius: 50%;
       background-color: $general-accent;
       color: $black;
+      transition: background-color 0.25s ease-in-out;
+
+      &:not(&-active) {
+        border-color: $general-accent;
+
+        @include hover {
+          background-color: $white;
+          cursor: pointer;
+        }
+      }
 
       @include mobile {
         @include font-desktop-txt-regular;
@@ -33,9 +44,10 @@
       }
 
       &-active {
-        border: 2px solid $gray;
+        border-color: $gray;
         background-color: transparent;
         color: $white;
+        pointer-events: none;
       }
     }
   }
