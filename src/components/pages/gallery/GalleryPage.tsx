@@ -37,7 +37,7 @@ const Gallery = () => {
         <title>Галерея</title>
       </Helmet>
 
-      <section className={styles.content}>
+      <section>
         <ul className={styles.sections}>
           <li
             className={clsx(styles.section, {[styles.sectionCurrent]: section === SECTION.PHOTO})}

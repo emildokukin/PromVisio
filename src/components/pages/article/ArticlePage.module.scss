@@ -1,14 +1,12 @@
 .page {
   overflow: visible;
-  padding: $padding-x $padding-x 0 $padding-x;
-  padding-top: $padding-top-1;
-  padding-bottom: 133px;
+
+  @include desktop {
+    padding: $padding-top-1 $padding-x $padding-bottom;
+  }
 
   @include mobile {
     overflow: hidden;
-    padding: $padding-x $padding-mx 0 $padding-mx;
-    padding-top: 73px;
-    padding-bottom: 36px;
   }
 }
 
