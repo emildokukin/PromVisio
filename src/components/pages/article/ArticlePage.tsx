@@ -39,7 +39,7 @@ const ArticlePage = () => {
   const currentNews = news.filter((news) => news.id === parseInt(id || '0'))[0]
 
   return (
-    <Page className={styles.page}>
+    <Page className={styles.page} scrollButton={isDesktop}>
       <Helmet>
         <title>{currentNews.title || 'Новость'}</title>
       </Helmet>

@@ -10,9 +10,10 @@ import ScrollButton from '../scrollButton/ScrollButton'
 interface PageProps {
   children: ReactNode
   className?: string
+  scrollButton?: boolean
 }
 
-const Page = ({children, className}: PageProps) => (
+const Page = ({children, className, scrollButton}: PageProps) => (
   <>
     <Header />
 
@@ -22,7 +23,7 @@ const Page = ({children, className}: PageProps) => (
 
     <Cookies />
 
-    <ScrollButton />
+    {scrollButton && <ScrollButton />}
 
     <Footer />
   </>
