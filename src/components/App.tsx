@@ -6,6 +6,7 @@ import ScrollToTop from './utils/scrollToTop'
 import GalleryPage from './pages/gallery/GalleryPage'
 import NewsPage from './pages/news/NewsPage'
 import ArticlePage from './pages/article/ArticlePage'
+import ProjectPage from './pages/project/ProjectPage'
 
 const App = () => (
   <HelmetProvider>
@@ -20,6 +21,7 @@ const App = () => (
         <Route path='/gallery' element={<GalleryPage />} />
         <Route path='/news' element={<NewsPage />} />
         <Route path='/news/:id' element={<ArticlePage />} />
+        <Route path='/project' element={<ProjectPage />} />
 
         <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
