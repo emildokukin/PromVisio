@@ -6,15 +6,16 @@ import useMedia from '../../utils/useMedia'
 
 const isLowerThanFooter = (isMobile: boolean) => {
   const footer = document.querySelector('#footer')
-  const offset = isMobile ? 16 : 48
+  const offset = isMobile ? 36 : 128
+  const bottom = isMobile ? 16 : 48
 
   if (footer) {
-    if (footer?.getBoundingClientRect().top < window.innerHeight) {
+    if (footer?.getBoundingClientRect().top - offset + bottom < window.innerHeight) {
       return window.innerHeight - footer.getBoundingClientRect().top + offset
     }
   }
 
-  return offset
+  return bottom
 }
 
 const ScrollButton = () => {
