@@ -16,6 +16,12 @@
     color: inherit;
   }
 
+  &:not(.disabled) {
+    @include hover {
+      color: $white;
+    }
+  }
+
   &.disabled {
     color: $gray-div;
   }
