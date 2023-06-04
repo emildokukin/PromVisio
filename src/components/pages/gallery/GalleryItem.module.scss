@@ -1,6 +1,7 @@
 .item {
   position: relative;
   display: flex;
+  user-select: none;
 
   @include hover {
     cursor: pointer;

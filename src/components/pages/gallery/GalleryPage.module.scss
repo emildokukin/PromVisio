@@ -15,6 +15,7 @@
   background-color: $gray-div;
   list-style-type: none;
   margin-inline: auto;
+  user-select: none;
 
   @include mobile {
     width: 100%;
