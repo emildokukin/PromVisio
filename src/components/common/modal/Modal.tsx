@@ -5,7 +5,7 @@ import styles from './Modal.module.scss'
 export interface ModalBasedProps {
   active: boolean
   toggle: () => void
-  children: ReactNode
+  children?: ReactNode
 }
 
 interface ModalProps extends ModalBasedProps {

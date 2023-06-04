@@ -18,9 +18,14 @@ import {Slider} from '../home/HomePage'
 import {Gallery} from '../gallery/GalleryPage'
 import NewsPagination from '../news/NewsPagination'
 import useMedia from '../../utils/useMedia'
+import {useCallback, useState} from 'react'
+import FormModal from '../../common/modal/FormModal'
 
 const PotentialPage = () => {
   const {isMobile, isDesktop} = useMedia()
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
+  const toggleModalVisibility = useCallback(() => setIsModalVisible((prev) => !prev), [])
 
   return (
     <Page className={styles.page} scrollButton={isDesktop}>
@@ -102,7 +107,7 @@ const PotentialPage = () => {
               </li>
             </ul>
 
-            <button className={styles.button}>
+            <button className={styles.button} onClick={toggleModalVisibility}>
               Участвовать <br /> в проекте
             </button>
           </div>
@@ -112,6 +117,14 @@ const PotentialPage = () => {
 
         <NewsPagination className={styles.pagination} />
       </section>
+
+      <FormModal
+        active={isModalVisible}
+        toggle={toggleModalVisibility}
+        title='Участие в проекте'
+        image='/media/potential/potential.png'
+        className={styles.modal}
+      />
     </Page>
   )
 }

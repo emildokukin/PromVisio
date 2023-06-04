@@ -302,4 +302,11 @@
       }
     }
   }
+
+  .modal {
+    & > div > img {
+      height: 25px;
+      transform: translate(-27px, 27px) rotate(-90deg);
+    }
+  }
 }
