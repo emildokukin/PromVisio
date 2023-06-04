@@ -8,26 +8,29 @@ import NewsPage from './pages/news/NewsPage'
 import ArticlePage from './pages/article/ArticlePage'
 import ProjectPage from './pages/project/ProjectPage'
 import PotentialPage from './pages/potential/PotentialPage'
+import {GalleryModalProvider} from './common/modal/GalleryModalContext'
 
 const App = () => (
   <HelmetProvider>
-    <Router>
-      <ScrollToTop />
-      <ScrollToHashElement />
+    <GalleryModalProvider>
+      <Router>
+        <ScrollToTop />
+        <ScrollToHashElement />
 
-      <Helmet titleTemplate={`%s | ПРОМВИЗИО`} defaultTitle={'ПРОМВИЗИО'} />
+        <Helmet titleTemplate={`%s | ПРОМВИЗИО`} defaultTitle={'ПРОМВИЗИО'} />
 
-      <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/gallery' element={<GalleryPage />} />
-        <Route path='/news' element={<NewsPage />} />
-        <Route path='/news/:id' element={<ArticlePage />} />
-        <Route path='/project' element={<ProjectPage />} />
-        <Route path='/potential' element={<PotentialPage />} />
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/gallery' element={<GalleryPage />} />
+          <Route path='/news' element={<NewsPage />} />
+          <Route path='/news/:id' element={<ArticlePage />} />
+          <Route path='/project' element={<ProjectPage />} />
+          <Route path='/potential' element={<PotentialPage />} />
 
-        <Route path='*' element={<Navigate to='/' replace />} />
-      </Routes>
-    </Router>
+          <Route path='*' element={<Navigate to='/' replace />} />
+        </Routes>
+      </Router>
+    </GalleryModalProvider>
   </HelmetProvider>
 )
 

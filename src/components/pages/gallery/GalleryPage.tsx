@@ -1,9 +1,10 @@
-import {useState} from 'react'
+import {useCallback, useContext, useState} from 'react'
 import styles from './GalleryPage.module.scss'
 import Page from '../../common/page/Page'
 import {Helmet} from 'react-helmet-async'
 import clsx from 'clsx'
 import {GALLERY_ITEM_TYPE, GalleryItem} from './GalleryItem'
+import {GalleryModalContext} from '../../common/modal/GalleryModalContext'
 
 enum SECTION {
   PHOTO,
@@ -34,6 +35,13 @@ interface GalleryProps {
 
 export const Gallery = ({className}: GalleryProps) => {
   const [section, setSection] = useState(SECTION.PHOTO)
+  const {toggle, updateItems, updateIndex} = useContext(GalleryModalContext)
+
+  const toggleModalVisibility = useCallback((items: string[], index: number) => {
+    updateItems(items)
+    updateIndex(index)
+    toggle()
+  }, [])
 
   return (
     <section className={clsx(styles.content, className)}>
@@ -57,9 +65,33 @@ export const Gallery = ({className}: GalleryProps) => {
           [styles.video]: section === SECTION.VIDEO
         })}
       >
-        {section === SECTION.PHOTO && PHOTOS.map((photo) => <GalleryItem thumbnail={photo.src} key={photo.src} />)}
+        {section === SECTION.PHOTO &&
+          PHOTOS.map((photo, index) => (
+            <GalleryItem
+              thumbnail={photo.src}
+              key={photo.src}
+              onClick={() =>
+                toggleModalVisibility(
+                  PHOTOS.map((photo) => photo.src),
+                  index
+                )
+              }
+            />
+          ))}
         {section === SECTION.VIDEO &&
-          VIDEOS.map((video) => <GalleryItem thumbnail={video.src} type={GALLERY_ITEM_TYPE.VIDEO} key={video.src} />)}
+          VIDEOS.map((video, index) => (
+            <GalleryItem
+              thumbnail={video.src}
+              type={GALLERY_ITEM_TYPE.VIDEO}
+              key={video.src}
+              onClick={() =>
+                toggleModalVisibility(
+                  VIDEOS.map((photo) => photo.src),
+                  index
+                )
+              }
+            />
+          ))}
       </div>
     </section>
   )
