@@ -260,11 +260,13 @@
         button {
           @include font-desktop-txt-bold;
 
-          all: unset;
           z-index: 0;
-          width: 100%;
+          width: 156px;
           height: 156px;
-          margin-top: 96px;
+          border: none;
+          margin: 96px auto 0;
+          background-color: transparent;
+          outline: none;
           text-align: center;
           text-transform: uppercase;
 
