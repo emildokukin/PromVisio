@@ -3,7 +3,7 @@ import styles from './Page.module.scss'
 import clsx from 'clsx'
 import Footer from './Footer'
 import HireButton from '../hire-button/HireButton'
-import Cookies from '../cookie/Cookies'
+
 import ScrollButton from '../scroll-button/ScrollButton'
 import GalleryModal from '../modal/GalleryModal'
 
@@ -22,8 +22,6 @@ const Page = ({children, className, scrollButton}: PageProps) => (
     <HireButton />
 
     <GalleryModal />
-
-    <Cookies />
 
     <Footer />
   </>

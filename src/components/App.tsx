@@ -10,6 +10,7 @@ import ProjectPage from './pages/project/ProjectPage'
 import PotentialPage from './pages/potential/PotentialPage'
 import {GalleryModalProvider} from './common/modal/GalleryModalContext'
 import Header from './common/page/Header'
+import Cookies from './common/cookie/Cookies'
 
 const App = () => (
   <HelmetProvider>
@@ -32,6 +33,8 @@ const App = () => (
 
           <Route path='*' element={<Navigate to='/' replace />} />
         </Routes>
+
+        <Cookies />
       </Router>
     </GalleryModalProvider>
   </HelmetProvider>
