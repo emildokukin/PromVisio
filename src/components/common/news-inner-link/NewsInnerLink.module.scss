@@ -7,6 +7,19 @@ object {
     font-size: 14px;
   }
 
+  @include hover {
+    .globe,
+    .link {
+      color: $white;
+      text-decoration: underline;
+    }
+  }
+
+  .globe,
+  .link {
+    transition: all 0.15s linear;
+  }
+
   .globe {
     display: inline;
     width: 16px;
@@ -16,6 +29,7 @@ object {
   }
 
   .link {
+    display: inline;
     color: $general-accent;
   }
 }
