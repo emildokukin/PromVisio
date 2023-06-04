@@ -7,6 +7,7 @@ import arrowSVG from '../../../icons/arrow-circleless.svg'
 import useMedia from '../../utils/useMedia'
 import {Fragment} from 'react'
 import clsx from 'clsx'
+import LinkComponent from '../../common/link-component/LinkComponent'
 
 export interface News {
   id: number
@@ -108,12 +109,12 @@ const NewsPage = () => {
           {news.map((newsItem, index) => (
             <Fragment key={index}>
               {index === 3 ? (
-                <div className={styles.circleWrapper}>
+                <LinkComponent link='/project' className={styles.circleWrapper}>
                   <div className={styles.circle}>
                     <img src={arrowSVG} alt='arrow' />
                     <h2>Почитать историю проекта в Арктике</h2>
                   </div>
-                </div>
+                </LinkComponent>
               ) : (
                 <NewsItem
                   key={newsItem.id}

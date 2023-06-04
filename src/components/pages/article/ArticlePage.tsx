@@ -50,9 +50,9 @@ const ArticlePage = () => {
         <div className={styles.article}>
           {isMobile && (
             <>
-              <div className={styles.back}>
+              <LinkComponent link='/news' className={styles.back}>
                 <img src={arrowSVG} alt='arrow' /> <span>Обратно в вестник</span>
-              </div>
+              </LinkComponent>
 
               <Swiper className={styles.swiper} slidesPerView={1} spaceBetween={8}>
                 {currentNews.mediaLinks.map((media, index) => (
