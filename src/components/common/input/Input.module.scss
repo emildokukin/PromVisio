@@ -40,6 +40,7 @@
   background-color: $deep-gray;
   color: $white;
   outline: none;
+  transition: all 0.15s linear;
 
   @include desktop {
     @include font-desktop-h3;
@@ -49,6 +50,14 @@
     @include font-adapt-txt-regular;
 
     padding: 12px;
+  }
+
+  @include hover {
+    border-color: $gray;
+  }
+
+  &:focus {
+    border-color: $gray;
   }
 
   &::placeholder {
