@@ -1,6 +1,5 @@
 import {ReactNode} from 'react'
 import styles from './Page.module.scss'
-import Header from './Header'
 import clsx from 'clsx'
 import Footer from './Footer'
 import HireButton from '../hire-button/HireButton'
@@ -16,8 +15,6 @@ interface PageProps {
 
 const Page = ({children, className, scrollButton}: PageProps) => (
   <>
-    <Header />
-
     <main className={clsx(styles.content, className)}>{children}</main>
 
     {scrollButton && <ScrollButton />}

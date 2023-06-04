@@ -9,6 +9,7 @@ import ArticlePage from './pages/article/ArticlePage'
 import ProjectPage from './pages/project/ProjectPage'
 import PotentialPage from './pages/potential/PotentialPage'
 import {GalleryModalProvider} from './common/modal/GalleryModalContext'
+import Header from './common/page/Header'
 
 const App = () => (
   <HelmetProvider>
@@ -18,6 +19,8 @@ const App = () => (
         <ScrollToHashElement />
 
         <Helmet titleTemplate={`%s | ПРОМВИЗИО`} defaultTitle={'ПРОМВИЗИО'} />
+
+        <Header />
 
         <Routes>
           <Route path='/' element={<HomePage />} />
