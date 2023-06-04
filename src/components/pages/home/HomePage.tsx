@@ -6,6 +6,7 @@ import Reviews, {Review} from './Reviews'
 import {Swiper, SwiperSlide} from 'swiper/react'
 import {Autoplay} from 'swiper'
 import useMedia from '../../utils/useMedia'
+import clsx from 'clsx'
 
 const HELP_ITEMS: HelpItem[] = [
   {
@@ -103,8 +104,34 @@ const REVIEWS: Review[] = [
   }
 ]
 
+interface Slide {
+  className?: string
+}
+
+export const Slider = ({className}: Slide) => {
+  const {isMobile} = useMedia()
+
+  return (
+    <Swiper
+      className={clsx(styles.swiper, className)}
+      modules={[Autoplay]}
+      slidesPerView={isMobile ? 1.15 : 3.5}
+      grabCursor
+      loop
+      speed={600}
+      autoplay={{delay: 2500, disableOnInteraction: false}}
+    >
+      {[1, 2, 3, 4, 1, 2, 3, 4].map((slide, index) => (
+        <SwiperSlide className={styles.slide} key={index}>
+          <img src={`/media/home/slide-${slide}.jpg`} alt='team picture' />
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  )
+}
+
 const HomePage = () => {
-  const {isMobile, isDesktop} = useMedia()
+  const {isDesktop} = useMedia()
 
   return (
     <Page scrollButton={isDesktop} className={styles.page}>
@@ -203,21 +230,7 @@ const HomePage = () => {
           )}
         </h2>
 
-        <Swiper
-          className={styles.swiper}
-          modules={[Autoplay]}
-          slidesPerView={isMobile ? 1.15 : 3.5}
-          grabCursor
-          loop
-          speed={600}
-          autoplay={{delay: 2500, disableOnInteraction: false}}
-        >
-          {[1, 2, 3, 4, 1, 2, 3, 4].map((slide, index) => (
-            <SwiperSlide className={styles.slide} key={index}>
-              <img src={`/media/home/slide-${slide}.jpg`} alt='team picture' />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <Slider />
 
         <h3>
           Все сотрудники, задействованные в съёмочном процессе на производственных объектах, снабжены персональными СИЗ,
