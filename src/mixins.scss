@@ -1,9 +1,9 @@
 @mixin scrollbar {
   &::-webkit-scrollbar {
-    width: 20px;
+    width: 4px;
 
     &-thumb {
-      border: 8px solid transparent;
+      border: 1px solid transparent;
       border-radius: 60px;
       background-clip: content-box;
       background-color: $general-accent;
