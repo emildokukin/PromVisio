@@ -105,7 +105,6 @@ const ProjectPage = () => {
         <>
           <Swiper
             className={styles.swiper}
-            // modules={[Autoplay]}
             slidesPerView={isMobile ? 'auto' : 1}
             speed={600}
             onSwiper={(swiper: SetStateAction<SwiperType | undefined>) => setSwiper(swiper)}
