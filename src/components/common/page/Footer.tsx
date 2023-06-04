@@ -41,7 +41,7 @@ export const Copyright = ({isShort}: {isShort?: boolean}) => (
   <>
     <hr className={clsx(styles.line, {[styles.lineShort]: isShort})} />
 
-    <p className={styles.copyright}>© 2023 «ПРОМВИЗИО»</p>
+    <p className={styles.copyright}>© {new Date().getFullYear()} «ПРОМВИЗИО»</p>
   </>
 )
 
