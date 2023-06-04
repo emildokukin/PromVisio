@@ -4,25 +4,30 @@ import {useCallback, useState} from 'react'
 import useMedia from '../../utils/useMedia'
 import clsx from 'clsx'
 import {Copyright as FooterCopyright, Email as FooterEmail, Phone as FooterPhone} from './Footer'
+import {useLocation} from 'react-router-dom'
 
-const Links = () => (
-  <nav className={styles.links}>
-    <ul>
-      <li>
-        <LinkComponent link='/gallery'>Галерея</LinkComponent>
-      </li>
-      <li>
-        <LinkComponent link='/news'>Вестник</LinkComponent>
-      </li>
-      <li>
-        <LinkComponent link='/project'>История одного проекта</LinkComponent>
-      </li>
-      <li className={styles.border}>
-        <LinkComponent link='/potential'>Потенциал ПРО</LinkComponent>
-      </li>
-    </ul>
-  </nav>
-)
+const Links = () => {
+  const location = useLocation().pathname
+
+  return (
+    <nav className={styles.links}>
+      <ul>
+        <li className={clsx({[styles.current]: location === '/gallery'})}>
+          <LinkComponent link='/gallery'>Галерея</LinkComponent>
+        </li>
+        <li className={clsx({[styles.current]: location === '/news'})}>
+          <LinkComponent link='/news'>Вестник</LinkComponent>
+        </li>
+        <li className={clsx({[styles.current]: location === '/project'})}>
+          <LinkComponent link='/project'>История одного проекта</LinkComponent>
+        </li>
+        <li className={clsx(styles.border, {[styles.current]: location === '/potential'})}>
+          <LinkComponent link='/potential'>Потенциал ПРО</LinkComponent>
+        </li>
+      </ul>
+    </nav>
+  )
+}
 
 const Menu = ({isVisible}: {isVisible?: boolean}) => (
   <div className={clsx(styles.menu, {[styles.visible]: isVisible})}>
