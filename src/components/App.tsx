@@ -7,6 +7,7 @@ import GalleryPage from './pages/gallery/GalleryPage'
 import NewsPage from './pages/news/NewsPage'
 import ArticlePage from './pages/article/ArticlePage'
 import ProjectPage from './pages/project/ProjectPage'
+import PotentialPage from './pages/potential/PotentialPage'
 
 const App = () => (
   <HelmetProvider>
@@ -22,6 +23,7 @@ const App = () => (
         <Route path='/news' element={<NewsPage />} />
         <Route path='/news/:id' element={<ArticlePage />} />
         <Route path='/project' element={<ProjectPage />} />
+        <Route path='/potential' element={<PotentialPage />} />
 
         <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>

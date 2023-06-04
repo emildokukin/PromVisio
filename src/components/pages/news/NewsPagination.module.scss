@@ -3,11 +3,16 @@
   display: flex;
   width: 100%;
   max-width: $max-content;
-  justify-content: center;
+  justify-content: space-between;
   margin-inline: auto;
+
+  > * {
+    position: relative;
+  }
 
   &-middle {
     display: flex;
+    max-width: 424px;
     justify-content: space-between;
     gap: 8px;
     list-style-type: none;
@@ -49,18 +54,6 @@
         color: $white;
         pointer-events: none;
       }
-    }
-  }
-
-  .arrow {
-    &-prev {
-      top: 0;
-      left: 0;
-    }
-
-    &-next {
-      top: 0;
-      right: 0;
     }
   }
 
