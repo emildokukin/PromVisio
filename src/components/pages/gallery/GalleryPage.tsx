@@ -28,11 +28,15 @@ const VIDEOS = [
   {src: '/media/gallery/photo6.png'}
 ]
 
-export const Gallery = () => {
+interface GalleryProps {
+  className?: string
+}
+
+export const Gallery = ({className}: GalleryProps) => {
   const [section, setSection] = useState(SECTION.PHOTO)
 
   return (
-    <section className={styles.content}>
+    <section className={clsx(styles.content, className)}>
       <ul className={styles.sections}>
         <li
           className={clsx(styles.section, {[styles.sectionCurrent]: section === SECTION.PHOTO})}
