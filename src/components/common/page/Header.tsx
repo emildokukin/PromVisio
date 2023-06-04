@@ -18,7 +18,7 @@ const Links = () => (
         <LinkComponent link='/project'>История одного проекта</LinkComponent>
       </li>
       <li className={styles.border}>
-        <LinkComponent link='#'>Потенциал ПРО</LinkComponent>
+        <LinkComponent link='/potential'>Потенциал ПРО</LinkComponent>
       </li>
     </ul>
   </nav>
