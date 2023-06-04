@@ -1,35 +1,7 @@
 $submit-button-width: 128px;
 $submit-button-width-mob: 108px;
 
-.modal {
-  position: fixed;
-  z-index: $modal-z;
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba($gray-div, 0.95);
-  inset: 0;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.5s ease-out;
-
-  &-active {
-    opacity: 1;
-    pointer-events: all;
-  }
-}
-
 .content {
-  position: relative;
-  display: flex;
-  height: 100%;
-  align-items: stretch;
-  pointer-events: none;
-  transform: scale(0.5);
-  transition: all 0.4s ease-out;
-
   @include desktop {
     width: 752px;
     max-height: calc(100vh - 100px);
@@ -38,11 +10,6 @@ $submit-button-width-mob: 108px;
 
   @include mobile {
     width: 100%;
-  }
-
-  &-active {
-    pointer-events: all;
-    transform: scale(1);
   }
 }
 

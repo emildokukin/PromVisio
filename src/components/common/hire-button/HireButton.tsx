@@ -1,6 +1,6 @@
 import {ChangeEvent, useCallback, useState} from 'react'
 import styles from './HireButton.module.scss'
-import Modal from '../modal/FormModal'
+import FormModal from '../modal/FormModal'
 import clsx from 'clsx'
 import {Input} from '../input/Input'
 import {Textarea} from '../input/Textarea'
@@ -21,7 +21,7 @@ const HireButton = () => {
         <span>Нанять нас</span> <img src='/icons/phone.svg' alt='phone' />
       </button>
 
-      <Modal active={isModalVisible} toggle={toggleModalVisibility} title='Нанять нас' image='/icons/logo.svg'>
+      <FormModal active={isModalVisible} toggle={toggleModalVisibility} title='Нанять нас' image='/icons/logo.svg'>
         <Input label='Тема' name='theme' type='text' required />
         <Textarea label='Текст сообщения' name='message' />
         <Input
@@ -33,7 +33,7 @@ const HireButton = () => {
           onChange={handlePhoneChange}
         />
         <Input label='Email' name='email' type='email' required />
-      </Modal>
+      </FormModal>
     </>
   )
 }
