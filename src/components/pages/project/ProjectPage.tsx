@@ -2,15 +2,13 @@ import styles from './ProjectPage.module.scss'
 import compassSVG from '../../../icons/compass.svg'
 import {ReactComponent as GlobeSVG} from '../../../icons/globe.svg'
 import {ReactComponent as GlobeArcticSVG} from '../../../icons/globe-arctic.svg'
-import shipIMG from '/media/arctic/ship.jpg'
-import Ship2IMG from '/media/arctic/ship-2.jpg'
-import Ship3IMG from '/media/arctic/ship-3.jpg'
+import shipIMG1 from '/media/arctic/ship.jpg'
+import shipIMG2 from '/media/arctic/ship-2.jpg'
+import shipIMG3 from '/media/arctic/ship-3.jpg'
 import shipBuildingIMG from '/media/arctic/ship-building.jpg'
 import arcticIMG from '/media/arctic/arctic.jpg'
 import viewFromShipIMG from '/media/arctic/view-from-ship.jpg'
-
 import bearIMG from '/media/arctic/bear.jpg'
-
 import Page from '../../common/page/Page'
 import {Helmet} from 'react-helmet-async'
 import {Swiper, SwiperSlide} from 'swiper/react'
@@ -19,11 +17,31 @@ import useMedia from '../../utils/useMedia'
 import {SetStateAction, useState} from 'react'
 import SliderButton from '../../common/slider/SliderButton'
 
-interface Slides {
+interface Slide {
   title: string
   description: string
   image: string
 }
+
+const slides: Slide[] = [
+  {
+    title: 'В объективах наших камер',
+    description: 'Сложнейшие работы по изменению траектории дрейфа опасных ледовых объектов',
+    image: '/media/arctic/slider-1.jpg'
+  },
+  {
+    title: 'В объективах наших камер 2',
+    description:
+      'Сложнейшие работы по изменению траектории дрейфа опасных ледовых объектов по изменению траектории дрейфа опасных ледовых объектов',
+    image: '/media/arctic/slider-2.jpg'
+  },
+  {
+    title: 'В объективах наших камер 3',
+    description:
+      'Сложнейшие работы по изменению траектории дрейфа опасных ледовых объектов по изменению траектории дрейфа опасных ледовых объектов по изменению траектории дрейфа опасных ледовых объектов',
+    image: '/media/arctic/slider-1.jpg'
+  }
+]
 
 const ProjectPage = () => {
   const {isMobile, isDesktop} = useMedia()
@@ -37,33 +55,13 @@ const ProjectPage = () => {
     setIsEnd(swiper.isEnd)
   }
 
-  const slides: Slides[] = [
-    {
-      title: 'В объективах наших камер',
-      description: 'Сложнейшие работы по изменению траектории дрейфа опасных ледовых объектов',
-      image: '/media/arctic/slider-1.jpg'
-    },
-    {
-      title: 'В объективах наших камер 2',
-      description:
-        'Сложнейшие работы по изменению траектории дрейфа опасных ледовых объектов по изменению траектории дрейфа опасных ледовых объектов',
-      image: '/media/arctic/slider-2.jpg'
-    },
-    {
-      title: 'В объективах наших камер 3',
-      description:
-        'Сложнейшие работы по изменению траектории дрейфа опасных ледовых объектов по изменению траектории дрейфа опасных ледовых объектов по изменению траектории дрейфа опасных ледовых объектов',
-      image: '/media/arctic/slider-1.jpg'
-    }
-  ]
-
   return (
     <Page className={styles.page}>
       <Helmet>
         <title>История одного проекта</title>
       </Helmet>
 
-      <div className={styles.wrapper}>
+      <section className={styles.wrapper}>
         <h1>
           История <br /> одного <img src={compassSVG} alt='compass' /> проекта
         </h1>
@@ -82,9 +80,9 @@ const ProjectPage = () => {
           </div>
         </div>
 
-        <img className={styles.shipPicture} src={shipIMG} alt='ship' />
+        <img className={styles.ship} src={shipIMG1} alt='ship' />
 
-        <section className={styles.underShipWrapper}>
+        <div className={styles.shipInfo}>
           <div className={styles.top}>
             {isDesktop && <p>Мы снимали, жили, ели и спали на 4 плавучих буровых установках</p>}
             <img src={shipBuildingIMG} alt='ship building' />
@@ -98,10 +96,10 @@ const ProjectPage = () => {
               операции, как буксировка айсбергов.
             </p>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
 
-      <section className={styles.wrapperSwiper}>
+      <section className={styles.swiperWrapper}>
         <>
           <Swiper
             className={styles.swiper}
@@ -136,8 +134,8 @@ const ProjectPage = () => {
         </>
       </section>
 
-      <div className={styles.wrapper}>
-        <section className={styles.weProud}>
+      <section className={styles.wrapper}>
+        <div className={styles.proud}>
           <div className={styles.left}>
             <GlobeSVG className={styles.globe} />
             <p>Любим и умеем снимать сложные работы в удалённых местах</p>
@@ -146,13 +144,13 @@ const ProjectPage = () => {
           <div className={styles.right}>
             <p>Мы гордимся нашим эксклюзивным опытом работы в Арктике и готовы к новым вызовам.</p>
           </div>
-        </section>
+        </div>
 
-        <section className={styles.whereWeWere}>
-          <img className={styles.shipImage} src={Ship2IMG} alt='ship' />
+        <div className={styles.visited}>
+          <img className={styles.ship} src={shipIMG2} alt='ship' />
 
-          <div className={styles.weDrove}>
-            <img className={styles.viewFromShipImg} src={viewFromShipIMG} alt='view from ship' />
+          <div className={styles.drove}>
+            <img className={styles.view} src={viewFromShipIMG} alt='view from ship' />
 
             <div className={styles.miles}>
               <span>45 000</span>
@@ -162,14 +160,14 @@ const ProjectPage = () => {
             </div>
           </div>
 
-          <p className={styles.textAfterDrove}>
+          <p className={styles.text}>
             В рамках проектов мы побывали на трёх архипелагах российской Арктики: Новая Земля, Северная Земля и Земля
             Франца-Иосифа.
           </p>
 
-          <img className={styles.lastImg} src={Ship3IMG} alt='ship' />
-        </section>
-      </div>
+          <img className={styles.image} src={shipIMG3} alt='ship' />
+        </div>
+      </section>
     </Page>
   )
 }

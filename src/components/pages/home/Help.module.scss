@@ -1,6 +1,6 @@
 .help {
   padding: 0 $padding-x;
-  margin-top: 128px;
+  margin-top: $padding-bottom;
 
   @include mobile {
     padding: 0 $padding-mx;

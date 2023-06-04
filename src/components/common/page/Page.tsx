@@ -5,7 +5,7 @@ import clsx from 'clsx'
 import Footer from './Footer'
 import HireButton from '../hire-button/HireButton'
 import Cookies from '../cookie/Cookies'
-import ScrollButton from '../scrollButton/ScrollButton'
+import ScrollButton from '../scroll-button/ScrollButton'
 
 interface PageProps {
   children: ReactNode

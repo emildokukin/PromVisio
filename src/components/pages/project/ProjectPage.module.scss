@@ -1,7 +1,7 @@
 .page {
   @include mobile {
-    padding-top: 73px;
-    padding-bottom: 36px;
+    padding-top: $padding-top-m;
+    padding-bottom: $padding-bottom-m;
   }
 
   .wrapper {
@@ -25,13 +25,14 @@
           @include font-adapt-h1;
 
           max-width: 26px;
+          margin: 5px 0;
         }
       }
     }
 
     .arctic {
       position: relative;
-      padding-bottom: 128px;
+      padding-bottom: $padding-bottom;
       border: 3px solid $general-accent;
       margin-top: 160px;
       text-align: center;
@@ -107,9 +108,9 @@
 
         &-svg {
           max-width: 64px;
-          border-right: 5px solid #181818;
-          border-left: 5px solid #181818;
-          background-color: #181818;
+          border-right: 5px solid $general-bg;
+          border-left: 5px solid $general-bg;
+          background-color: $general-bg;
           color: $gray;
 
           @include mobile {
@@ -119,7 +120,7 @@
       }
     }
 
-    .shipPicture {
+    .ship {
       display: block;
       max-height: 634px;
       margin-top: 80px;
@@ -128,75 +129,75 @@
         max-height: 200px;
         margin-top: 72px;
       }
-    }
 
-    .underShipWrapper {
-      .top {
-        display: flex;
-        justify-content: start;
-        margin-top: 56px;
-
-        @include mobile {
-          flex-direction: column-reverse;
-          margin: 0;
-        }
-
-        p {
-          @include font-desktop-txt-regular;
-
-          max-width: 213px;
-          margin-left: 80px;
-        }
-
-        img {
-          max-width: 640px;
-          max-height: 400px;
-          margin-top: -100px;
-          margin-left: 43px;
+      &-info {
+        .top {
+          display: flex;
+          justify-content: start;
+          margin-top: 56px;
 
           @include mobile {
-            max-width: 100%;
-            max-height: 200px;
+            flex-direction: column-reverse;
             margin: 0;
+          }
+
+          p {
+            @include font-desktop-txt-regular;
+
+            max-width: 213px;
+            margin-left: 80px;
+          }
+
+          img {
+            max-width: 640px;
+            max-height: 400px;
+            margin-top: -100px;
+            margin-left: 43px;
+
+            @include mobile {
+              max-width: 100%;
+              max-height: 200px;
+              margin: 0;
+            }
+          }
+        }
+
+        .bottom {
+          display: flex;
+          justify-content: start;
+          margin-top: -120px;
+
+          @include mobile {
+            margin-top: 24px;
+          }
+
+          img {
+            max-width: 304px;
+            max-height: 304px;
+            border-radius: 50%;
+            margin-left: 103px;
+          }
+
+          p {
+            @include font-desktop-h2;
+
+            max-width: 672px;
+            padding: 0 $padding-mx;
+            margin-left: 152px;
+
+            @include mobile {
+              @include font-adapt-txt-regular;
+
+              margin: 0;
+            }
           }
         }
       }
-
-      .bottom {
-        display: flex;
-        justify-content: start;
-        margin-top: -120px;
-
-        @include mobile {
-          margin-top: 24px;
-        }
-
-        img {
-          max-width: 304px;
-          max-height: 304px;
-          border-radius: 50%;
-          margin-left: 103px;
-        }
-
-        p {
-          @include font-desktop-h2;
-
-          max-width: 672px;
-          padding: 0 $padding-mx;
-          margin-left: 152px;
-
-          @include mobile {
-            @include font-adapt-txt-regular;
-
-            margin: 0;
-          }
-        }
-      }
     }
 
-    .weProud {
+    .proud {
       display: flex;
-      margin-top: 128px;
+      margin-top: $padding-bottom;
 
       @include mobile {
         display: block;
@@ -261,14 +262,14 @@
       }
     }
 
-    .whereWeWere {
-      margin-top: 128px;
+    .visited {
+      margin-top: $padding-bottom;
 
       @include mobile {
         margin-top: 24px;
       }
 
-      .shipImage {
+      .ship {
         display: block;
         max-height: 590px;
 
@@ -277,7 +278,7 @@
         }
       }
 
-      .weDrove {
+      .drove {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -290,7 +291,7 @@
           gap: 24px;
         }
 
-        .viewFromShipImg {
+        .view {
           max-width: 640px;
           max-height: 408px;
 
@@ -377,11 +378,11 @@
         }
       }
 
-      .textAfterDrove {
+      .text {
         @include font-desktop-h2;
 
         padding: 0 80px;
-        margin-top: 128px;
+        margin-top: $padding-bottom;
         font-size: 40px;
         text-align: center;
 
@@ -395,9 +396,9 @@
         }
       }
 
-      .lastImg {
+      .image {
         max-height: 738px;
-        margin-top: 128px;
+        margin-top: $padding-bottom;
 
         @include mobile {
           height: 200px;
@@ -407,79 +408,79 @@
     }
   }
 
-  .wrapperSwiper {
-    margin-top: 128px;
+  .swiper {
+    overflow: visible;
+    max-width: $max-content;
+    max-height: 730px;
 
     @include mobile {
-      padding: 0 $padding-mx;
-      margin-top: 24px;
+      max-height: 200px;
     }
 
-    .swiper {
-      overflow: visible;
-      max-width: 1312px;
+    &-wrapper {
+      margin-top: $padding-bottom;
+
+      @include mobile {
+        padding: 0 $padding-mx;
+        margin-top: 24px;
+      }
+    }
+
+    .slide {
       max-height: 730px;
 
       @include mobile {
         max-height: 200px;
       }
 
-      .slide {
-        max-height: 730px;
+      &::before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(0deg, $general-bg 0%, rgb(24 24 24 / 0%) 100%);
+        content: '';
+        opacity: 0.8;
+      }
 
-        @include mobile {
-          max-height: 200px;
+      .text {
+        $gradient-z: 1;
+
+        position: absolute;
+        bottom: 60px;
+        left: 80px;
+
+        h3 {
+          @include font-desktop-h3;
         }
 
-        &::before {
-          position: absolute;
-          top: 0;
-          right: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(0deg, $general-bg 0%, rgb(24 24 24 / 0%) 100%);
-          content: '';
-          opacity: 0.8;
-        }
+        p {
+          @include font-desktop-txt-regular;
 
-        .text {
-          $gradient-z: 1;
-
-          position: absolute;
-          bottom: 60px;
-          left: 80px;
-
-          h3 {
-            @include font-desktop-h3;
-          }
-
-          p {
-            @include font-desktop-txt-regular;
-
-            max-width: 408px;
-            margin-top: 16px;
-          }
-        }
-
-        img {
-          max-height: 730px;
-
-          @include mobile {
-            height: 200px;
-          }
+          max-width: 408px;
+          margin-top: 16px;
         }
       }
 
-      .navigation {
-        position: absolute;
-        right: 85px;
-        bottom: 65px;
-        width: 128px;
+      img {
+        max-height: 730px;
 
-        button {
-          position: relative;
+        @include mobile {
+          height: 200px;
         }
+      }
+    }
+
+    .navigation {
+      position: absolute;
+      right: 85px;
+      bottom: 65px;
+      width: 128px;
+
+      button {
+        position: relative;
       }
     }
   }
