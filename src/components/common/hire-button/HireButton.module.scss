@@ -45,8 +45,8 @@
 .floating {
   position: fixed;
   z-index: $floating-button-z;
-  right: $padding-x;
   bottom: $padding-x;
+  left: calc(100vw - 416px - #{$padding-x});
 
   @include mobile {
     z-index: calc(#{$header-menu-z} - 1);
@@ -55,5 +55,6 @@
   @include mobile {
     right: $padding-mx;
     bottom: $padding-mx;
+    left: unset;
   }
 }

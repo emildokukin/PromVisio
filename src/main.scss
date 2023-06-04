@@ -11,6 +11,11 @@ body {
   font-family: $font-manrope;
 
   @include scrollbar;
+
+  @include desktop {
+    width: 100vw;
+    overflow-x: hidden !important;
+  }
 }
 
 p,
