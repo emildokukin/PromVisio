@@ -1,0 +1,78 @@
+.content {
+  width: 100%;
+}
+
+.swiper {
+  max-width: 80vw;
+  height: 100%;
+  user-select: none;
+}
+
+.arrow {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #1e1e1e;
+  border-radius: 100%;
+  background-color: #1e1e1e;
+  color: $general-accent;
+  cursor: pointer;
+  margin-block: auto;
+  transition: all 0.15s linear;
+
+  &-next {
+    right: 28px;
+  }
+
+  &:not(&-next) {
+    left: 28px;
+    transform: rotate(180deg);
+  }
+
+  &:not(.disabled) {
+    @include hover {
+      border-color: $general-accent;
+      background-color: $white;
+      color: $deep-gray;
+    }
+  }
+
+  &.disabled {
+    color: $gray-div;
+    pointer-events: none;
+  }
+}
+
+.index {
+  @include font-desktop-txt-regular;
+
+  position: absolute;
+  z-index: 2;
+  right: 0;
+  bottom: 24px;
+  left: 0;
+  width: fit-content;
+  min-width: 70px;
+  padding: 4px 17px;
+  border-radius: 40px;
+  background: $gray-div;
+  color: $white;
+  cursor: pointer;
+  margin-inline: auto;
+  text-align: center;
+  user-select: none;
+
+  span {
+    color: $gray;
+  }
+}
+
+.close {
+  top: 28px;
+}
