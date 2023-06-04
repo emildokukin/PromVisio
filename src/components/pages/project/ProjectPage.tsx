@@ -23,6 +23,26 @@ interface Slide {
   image: string
 }
 
+const slides: Slide[] = [
+  {
+    title: 'В объективах наших камер',
+    description: 'Сложнейшие работы по изменению траектории дрейфа опасных ледовых объектов',
+    image: '/media/arctic/slider-1.jpg'
+  },
+  {
+    title: 'В объективах наших камер 2',
+    description:
+      'Сложнейшие работы по изменению траектории дрейфа опасных ледовых объектов по изменению траектории дрейфа опасных ледовых объектов',
+    image: '/media/arctic/slider-2.jpg'
+  },
+  {
+    title: 'В объективах наших камер 3',
+    description:
+      'Сложнейшие работы по изменению траектории дрейфа опасных ледовых объектов по изменению траектории дрейфа опасных ледовых объектов по изменению траектории дрейфа опасных ледовых объектов',
+    image: '/media/arctic/slider-1.jpg'
+  }
+]
+
 const ProjectPage = () => {
   const {isMobile, isDesktop} = useMedia()
   const [swiper, setSwiper] = useState<SwiperType>()
@@ -34,26 +54,6 @@ const ProjectPage = () => {
     setIsBeginning(swiper.isBeginning)
     setIsEnd(swiper.isEnd)
   }
-
-  const slides: Slide[] = [
-    {
-      title: 'В объективах наших камер',
-      description: 'Сложнейшие работы по изменению траектории дрейфа опасных ледовых объектов',
-      image: '/media/arctic/slider-1.jpg'
-    },
-    {
-      title: 'В объективах наших камер 2',
-      description:
-        'Сложнейшие работы по изменению траектории дрейфа опасных ледовых объектов по изменению траектории дрейфа опасных ледовых объектов',
-      image: '/media/arctic/slider-2.jpg'
-    },
-    {
-      title: 'В объективах наших камер 3',
-      description:
-        'Сложнейшие работы по изменению траектории дрейфа опасных ледовых объектов по изменению траектории дрейфа опасных ледовых объектов по изменению траектории дрейфа опасных ледовых объектов',
-      image: '/media/arctic/slider-1.jpg'
-    }
-  ]
 
   return (
     <Page className={styles.page}>
