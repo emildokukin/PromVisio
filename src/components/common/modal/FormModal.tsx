@@ -1,5 +1,5 @@
+import {CloseButton} from './CloseButton'
 import styles from './FormModal.module.scss'
-import {ReactComponent as Cross} from '../../../icons/cross.svg'
 import Modal, {ModalBasedProps} from './Modal'
 
 interface FormModalProps extends ModalBasedProps {
@@ -30,9 +30,7 @@ const FormModal = ({active, toggle, children, title, image, onSubmit}: FormModal
       </div>
     </form>
 
-    <div className={styles.cross} onClick={toggle}>
-      <Cross />
-    </div>
+    <CloseButton onClick={toggle} />
   </Modal>
 )
 

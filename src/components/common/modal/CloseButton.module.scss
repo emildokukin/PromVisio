@@ -1,0 +1,46 @@
+.cross {
+  $background: #1e1e1e;
+
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid $background;
+  border-radius: 100%;
+  background-color: $background;
+  cursor: pointer;
+  transition: all 0.2s linear;
+
+  @include desktop {
+    top: 40px;
+    right: 28px;
+    width: 40px;
+    height: 40px;
+  }
+
+  @include mobile {
+    top: 24px;
+    right: $padding-mx;
+    width: 24px;
+    height: 24px;
+    border-color: transparent;
+    background-color: transparent;
+  }
+
+  @include hover {
+    border-color: $general-accent;
+    background-color: $white;
+
+    svg {
+      color: $deep-gray;
+      transform: rotate(-180deg);
+    }
+  }
+
+  svg {
+    width: 20px;
+    color: $general-accent;
+    transition: color 0.15s ease-in-out, transform 0.4s ease;
+  }
+}
