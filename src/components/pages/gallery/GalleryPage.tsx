@@ -28,43 +28,49 @@ const VIDEOS = [
   {src: '/media/gallery/photo6.png'}
 ]
 
-const Gallery = () => {
+export const Gallery = () => {
   const [section, setSection] = useState(SECTION.PHOTO)
 
+  return (
+    <section className={styles.content}>
+      <ul className={styles.sections}>
+        <li
+          className={clsx(styles.section, {[styles.sectionCurrent]: section === SECTION.PHOTO})}
+          onClick={() => setSection(SECTION.PHOTO)}
+        >
+          Фото
+        </li>
+        <li
+          className={clsx(styles.section, {[styles.sectionCurrent]: section === SECTION.VIDEO})}
+          onClick={() => setSection(SECTION.VIDEO)}
+        >
+          Видео
+        </li>
+      </ul>
+
+      <div
+        className={clsx(styles.gallery, {
+          [styles.video]: section === SECTION.VIDEO
+        })}
+      >
+        {section === SECTION.PHOTO && PHOTOS.map((photo) => <GalleryItem thumbnail={photo.src} key={photo.src} />)}
+        {section === SECTION.VIDEO &&
+          VIDEOS.map((video) => <GalleryItem thumbnail={video.src} type={GALLERY_ITEM_TYPE.VIDEO} key={video.src} />)}
+      </div>
+    </section>
+  )
+}
+
+const GalleryPage = () => {
   return (
     <Page>
       <Helmet>
         <title>Галерея</title>
       </Helmet>
 
-      <section className={styles.content}>
-        <ul className={styles.sections}>
-          <li
-            className={clsx(styles.section, {[styles.sectionCurrent]: section === SECTION.PHOTO})}
-            onClick={() => setSection(SECTION.PHOTO)}
-          >
-            Фото
-          </li>
-          <li
-            className={clsx(styles.section, {[styles.sectionCurrent]: section === SECTION.VIDEO})}
-            onClick={() => setSection(SECTION.VIDEO)}
-          >
-            Видео
-          </li>
-        </ul>
-
-        <div
-          className={clsx(styles.gallery, {
-            [styles.video]: section === SECTION.VIDEO
-          })}
-        >
-          {section === SECTION.PHOTO && PHOTOS.map((photo) => <GalleryItem thumbnail={photo.src} key={photo.src} />)}
-          {section === SECTION.VIDEO &&
-            VIDEOS.map((video) => <GalleryItem thumbnail={video.src} type={GALLERY_ITEM_TYPE.VIDEO} key={video.src} />)}
-        </div>
-      </section>
+      <Gallery />
     </Page>
   )
 }
 
-export default Gallery
+export default GalleryPage
