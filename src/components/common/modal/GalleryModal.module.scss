@@ -1,11 +1,31 @@
+.modal {
+  background-color: $deep-gray;
+}
+
 .content {
   width: 100%;
+
+  @include mobile {
+    align-items: center;
+  }
 }
 
 .swiper {
   max-width: 80vw;
   height: 100%;
   user-select: none;
+
+  :global .swiper-slide img {
+    @include mobile {
+      object-fit: contain;
+    }
+  }
+
+  @include mobile {
+    width: 100%;
+    max-width: none;
+    max-height: 80vh;
+  }
 }
 
 .arrow {
@@ -25,6 +45,10 @@
   cursor: pointer;
   margin-block: auto;
   transition: all 0.15s linear;
+
+  @include mobile {
+    display: none;
+  }
 
   &-next {
     right: 28px;
@@ -74,5 +98,7 @@
 }
 
 .close {
-  top: 28px;
+  @include desktop {
+    top: 28px;
+  }
 }

@@ -6,9 +6,11 @@ import {GalleryModalContext} from './GalleryModalContext'
 import {ReactComponent as GalleryArrow} from '../../../icons/gallery-arrow.svg'
 import clsx from 'clsx'
 import {Swiper, SwiperRef, SwiperSlide} from 'swiper/react'
-import {EffectFade} from 'swiper'
+import {Swiper as SwiperType, EffectFade} from 'swiper'
+import useMedia from '../../utils/useMedia'
 
 const GalleryModal = () => {
+  const {isMobile} = useMedia()
   const {active, items, index, updateIndex, toggle} = useContext(GalleryModalContext)
 
   const swiperRef = useRef<SwiperRef>(null)
@@ -18,8 +20,17 @@ const GalleryModal = () => {
   }, [index])
 
   return (
-    <Modal active={active} toggle={toggle} contentClassName={styles.content}>
-      <Swiper className={styles.swiper} ref={swiperRef} effect={'fade'} modules={[EffectFade]} allowTouchMove={false}>
+    <Modal active={active} toggle={toggle} modalClassName={styles.modal} contentClassName={styles.content}>
+      <Swiper
+        className={styles.swiper}
+        ref={swiperRef}
+        effect={isMobile ? 'slide' : 'fade'}
+        modules={[EffectFade]}
+        initialSlide={index}
+        onSlideChange={(swiper: SwiperType) => updateIndex(swiper.activeIndex)}
+        spaceBetween={isMobile ? 80 : 0}
+        allowTouchMove={isMobile}
+      >
         {items.map((item, index) => (
           <SwiperSlide key={index}>
             <img src={item} alt='gallery image or video' />
