@@ -54,7 +54,7 @@ const HelpItem = ({title, text, isToggled, updatePointerPosition, onClick}: Help
 }
 
 const Help = ({items}: {items: HelpItem[]}) => {
-  const [pointerTop, setPointerTop] = useState(0)
+  const [pointerTop, setPointerTop] = useState(40)
   const [currentIndex, setCurrentIndex] = useState<number | null>(null)
 
   const updatePointerPosition = useCallback((top: number) => setPointerTop(top), [])
