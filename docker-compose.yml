@@ -25,7 +25,7 @@ services:
       - "${DJANGO_MEDIA_VOLUME:-./backend/mediafiles}:/app/mediafiles"
       - "${DJANGO_STATIC_VOLUME:-./backend/staticfiles}:/app/staticfiles"
     depends_on:
-      - db
+      - postgres
 
   postgres:
     image: postgres:13
