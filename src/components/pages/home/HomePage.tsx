@@ -124,7 +124,7 @@ export const Slider = ({className}: Slide) => {
       speed={600}
       autoplay={{delay: 2500, disableOnInteraction: false}}
     >
-      {[1, 2, 3, 4, 1, 2, 3, 4].map((slide, index) => (
+      {[1, 2, 3, 4, 5, 6, 7, 8].map((slide, index) => (
         <SwiperSlide className={styles.slide} key={index}>
           <img src={`/media/home/slide-${slide}.jpg`} alt='team picture' />
         </SwiperSlide>
