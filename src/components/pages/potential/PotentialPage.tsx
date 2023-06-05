@@ -35,7 +35,7 @@ const PotentialPage = () => {
 
       <div className={styles.wrapper}>
         <h1>
-          Потенциал <HumanSVG /> про
+          ПРО <HumanSVG /> Потенциал
         </h1>
       </div>
 

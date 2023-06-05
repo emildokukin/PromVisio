@@ -19,7 +19,7 @@ const Links = ({location}: {location?: string}) => (
         <LinkComponent link='/project'>История одного проекта</LinkComponent>
       </li>
       <li className={clsx(styles.border, {[styles.current]: location === '/potential'})}>
-        <LinkComponent link='/potential'>Потенциал ПРО</LinkComponent>
+        <LinkComponent link='/potential'>ПРО Потенциал</LinkComponent>
       </li>
     </ul>
   </nav>
