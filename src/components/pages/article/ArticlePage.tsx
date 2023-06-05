@@ -11,7 +11,7 @@ import {Autoplay, Swiper as SwiperType} from 'swiper'
 import {Swiper, SwiperSlide} from 'swiper/react'
 import NewsItem, {NewsItemProps} from '../news/NewsItem'
 import SliderButton from '../../common/slider/SliderButton'
-import {SetStateAction, useState} from 'react'
+import {Fragment, SetStateAction, useState} from 'react'
 import arrowSVG from '../../../icons/arrow-circleless.svg'
 
 const parseNewsData = (item: News): NewsItemProps => ({
@@ -126,10 +126,10 @@ const ArticlePage = () => {
               <h1>Похожие новости</h1>
               <div className={styles.newsMobile}>
                 {news.map((newsItem, index) => (
-                  <>
+                  <Fragment key={index}>
                     <NewsItem key={index} {...parseNewsData(newsItem)} />
                     {index !== news.length - 1 ? <Line className={styles.line} /> : null}
-                  </>
+                  </Fragment>
                 ))}
               </div>
             </>
