@@ -50,10 +50,26 @@ up_prod:
   tags:
     - production
 
-migrate_db:
+migrate_db_dev:
   stage: up
   script: docker compose exec backend python manage.py migrate
   when: manual
   rules:
     - changes:
       - backend/core/migrations/*
+  only:
+    - dev
+  tags:
+    - development
+
+migrate_db_prod:
+  stage: up
+  script: docker compose exec backend python manage.py migrate
+  when: manual
+  rules:
+    - changes:
+      - backend/core/migrations/*
+  only:
+    - master
+  tags:
+    - production
