@@ -1,0 +1,17 @@
+.wrapper {
+  position: relative;
+}
+
+.text {
+  display: flex;
+  margin: -2px;
+  font-weight: 500;
+}
+
+.symbol {
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+  inset: 0;
+}

@@ -7,6 +7,7 @@ import {Swiper, SwiperSlide} from 'swiper/react'
 import {Autoplay} from 'swiper'
 import useMedia from '../../utils/useMedia'
 import clsx from 'clsx'
+import CurvedText from '../../common/curved-text/CurvedText'
 
 const HELP_ITEMS: HelpItem[] = [
   {
@@ -232,11 +233,30 @@ const HomePage = () => {
 
         <Slider />
 
-        <h3>
-          Все сотрудники, задействованные в съёмочном процессе на производственных объектах, снабжены персональными СИЗ,
-          имеют актуальные удостоверения по охране труда, а также действующие сертификаты BOSIET/FOET. При необходимости
-          наши специалисты могут пройти необходимое специализированное дополнительное обучение.
-        </h3>
+        <div className={styles.members}>
+          <h3>
+            Все сотрудники, задействованные в съёмочном процессе на производственных объектах, снабжены персональными
+            СИЗ, имеют актуальные удостоверения по охране труда, а также действующие сертификаты BOSIET/FOET. При
+            необходимости наши специалисты могут пройти необходимое специализированное дополнительное обучение.
+          </h3>
+
+          {isDesktop ? (
+            <CurvedText
+              size={160}
+              radius={52}
+              text='ХОЧУ В КОМАНДУ —  ХОЧУ В КОМАНДУ —  '
+              textFontSize={16}
+              textFontWeight={700}
+              speed={0.3}
+              symbol={<img src='/icons/circle-plus.svg' />}
+              className={styles.participate}
+            />
+          ) : (
+            <p className={styles.participate}>
+              <img src='/icons/circle-plus-mobile.svg' /> Хочу в команду
+            </p>
+          )}
+        </div>
       </section>
     </Page>
   )

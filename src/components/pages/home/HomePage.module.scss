@@ -227,6 +227,48 @@
     margin-top: 32px;
   }
 
+  .members {
+    display: flex;
+    gap: 24px 64px;
+
+    @include desktop {
+      margin-top: 64px;
+    }
+
+    @include mobile {
+      flex-direction: column;
+      margin-top: 24px;
+    }
+
+    .participate {
+      user-select: none;
+
+      @include desktop {
+        @include hover-white-background(160px, 160px);
+
+        z-index: 0;
+      }
+
+      @include mobile {
+        display: flex;
+        width: fit-content;
+        align-items: center;
+        padding: 10px 14px;
+        border: 2px solid $general-accent;
+        margin-left: $padding-mx;
+        gap: 10px;
+
+        p {
+          @include font-adapt-txt-regular;
+        }
+
+        img {
+          width: 16px;
+        }
+      }
+    }
+  }
+
   h1,
   h2,
   h3 {
@@ -254,6 +296,16 @@
     }
   }
 
+  h3 {
+    @include desktop {
+      max-width: 60%;
+    }
+
+    @include mobile {
+      @include font-adapt-txt-regular;
+    }
+  }
+
   .icons {
     position: absolute;
     top: 0;
@@ -278,19 +330,6 @@
 
     :global .swiper-wrapper {
       transition-timing-function: ease-in-out;
-    }
-  }
-
-  h3 {
-    @include desktop {
-      max-width: 60%;
-      margin-top: 64px;
-    }
-
-    @include mobile {
-      @include font-adapt-txt-regular;
-
-      margin-top: 24px;
     }
   }
 }
