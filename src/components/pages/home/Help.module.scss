@@ -16,8 +16,21 @@
 }
 
 .items {
-  margin-top: 88px;
+  position: relative;
+  margin-top: 48px;
   list-style-type: none;
+
+  .pointer {
+    @include desktop {
+      position: absolute;
+      left: 0;
+      display: block;
+      width: 48px;
+      height: 48px;
+      background-image: url('../../../icons/arrow-circleless.svg');
+      transition: all 0.35s ease;
+    }
+  }
 
   @include mobile {
     margin-top: 24px;
@@ -25,36 +38,33 @@
 }
 
 .item {
+  padding-top: 40px;
   cursor: pointer;
 
-  &:first-child {
+  @include mobile {
+    padding-top: 24px;
+  }
+
+  &:first-of-type {
     @include mobile {
       padding-top: 24px;
       border-top: solid 2px #202020;
     }
   }
 
-  &:last-child {
+  &:last-of-type {
     @include mobile {
       padding-bottom: 24px;
       border-bottom: solid 2px #202020;
     }
   }
 
-  &:not(:last-child) {
+  &:not(:last-of-type) {
     padding-bottom: 48px;
     border-bottom: solid 2px #202020;
 
     @include mobile {
       padding-bottom: 28px;
-    }
-  }
-
-  &:not(:first-child) {
-    padding-top: 40px;
-
-    @include mobile {
-      padding-top: 24px;
     }
   }
 
@@ -71,23 +81,33 @@
   }
 
   h3 {
-    display: none;
+    display: block;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
     user-select: none;
 
     @include desktop {
       max-width: 80%;
-      margin-top: 24px;
     }
 
     @include mobile {
       @include font-adapt-txt-regular;
 
-      margin-top: 16px;
       color: $light-gray;
     }
 
+    &:not(.toggled) {
+      height: 0 !important;
+    }
+
     &.toggled {
-      display: block;
+      @include desktop {
+        margin-top: 24px;
+      }
+
+      @include mobile {
+        margin-top: 16px;
+      }
     }
   }
 
@@ -98,6 +118,7 @@
     width: 32px;
     height: 32px;
     transform: rotate(180deg);
+    transition: transform 0.3s ease;
 
     @include mobile {
       top: 6px;
