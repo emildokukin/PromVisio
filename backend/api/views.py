@@ -4,16 +4,10 @@ from django.urls import path
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from drf_spectacular.utils import extend_schema, OpenApiParameter
-from rest_framework import generics
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from wagtail.api.v2.views import PagesAPIViewSet
 from wagtail_headless_preview.models import PagePreview
-
-from api import serializers
-from api.pagination import ArticlesPagination, CasesPagination, MediaPagination
-from core import models
 
 
 class CustomPagesAPIViewSet(PagesAPIViewSet):

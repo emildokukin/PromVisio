@@ -3,30 +3,14 @@ from django.http import HttpResponse
 from django.urls import include, path
 from django.contrib import admin
 from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
-from haystack.query import SearchQuerySet
 
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
-from wagtail.models import Page
-from wagtail.search.query import Phrase
 
 from core.views import AdminPagePreview
 
-def my_search(request):
-    query = request.GET.get("q", "")
-    search_results = SearchQuerySet().filter(content=query)
-    highlighted = search_results.highlight()
-
-    for result in search_results:
-        print(result)
-        print(result.search_description)
-
-    return HttpResponse("ok")
-
 urlpatterns = [
-    path("search/", my_search),
-    path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("api/", include("api.urls")),
