@@ -5,8 +5,13 @@ services:
     build: .
     image: registry.gitlab.com/labab-dev/promvisio/frontend:${TAG:-latest}
     restart: unless-stopped
+    volumes:
+      - "${DJANGO_MEDIA_VOLUME:-./backend/mediafiles}:/var/www/mediafiles:ro"
+      - "${DJANGO_STATIC_VOLUME:-./backend/staticfiles}:/var/www/staticfiles:ro"
     ports:
       - "127.0.0.1:8007:80"
+    depends_on:
+      - backend
 
   backend:
     build: ./backend
