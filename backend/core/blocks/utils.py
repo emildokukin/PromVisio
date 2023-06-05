@@ -1,14 +1,10 @@
-import logging
 import re
 from pathlib import Path
 
 import requests
 from django.conf import settings
-from pdf2image.exceptions import PDFPopplerTimeoutError, PDFSyntaxError
-from wagtail.documents.models import Document
 from wagtail.images import get_image_model
 from wagtail.models import Collection
-from pdf2image import convert_from_path
 
 YOUTUBE_RE_PATTERN = re.compile(
     r'(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})'
@@ -112,39 +108,3 @@ def make_iframe(url_or_iframe: str | None) -> str | None:
         return f'<iframe width="720" height="405" src="https://rutube.ru/play/embed/{rutube_id}" frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>'
 
     return None
-
-
-def get_document_thumbnail_name(document: Document) -> str:
-    return f"Иконка документа #{document.pk}"
-
-
-def document_cover(document: Document) -> Image | None:
-    if document.content_type != "application/pdf":
-        return None
-
-    try:
-        thumbnails = convert_from_path(document.file.path, last_page=1)
-    except (PDFPopplerTimeoutError, PDFSyntaxError) as err:
-        logging.error(
-            "Unable to generate thumbnail for document %d: %s", document.pk, err
-        )
-        return None
-
-    filepath = get_document_cover_folder() / f"{document.pk}.jpg"
-    thumbnails[0].save(filepath)
-
-    collection = get_collection("Превью документов")
-    image_title = get_document_thumbnail_name(document)
-    image = Image.objects.create(
-        title=image_title, file=norm_path(filepath), collection=collection
-    )
-
-    return image
-
-
-def document_thumbnail(document: Document):
-    thumbnail_name = get_document_thumbnail_name(document)
-    image = Image.objects.filter(title=thumbnail_name).first()
-    if not image:
-        image = document_cover(document)
-    return image

@@ -1,13 +1,10 @@
 from wagtail.admin.panels import FieldPanel
 from wagtail.api import APIField
 from wagtail.fields import StreamField
-from wagtail.images import get_image_model
 from wagtail.models import Page
 from wagtail_headless_preview.models import HeadlessMixin
 
 from core import blocks
-
-Image = get_image_model()
 
 
 class DefaultPage(HeadlessMixin, Page):
