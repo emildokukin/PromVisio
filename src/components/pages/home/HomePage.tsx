@@ -8,6 +8,8 @@ import {Autoplay} from 'swiper'
 import useMedia from '../../utils/useMedia'
 import clsx from 'clsx'
 import CurvedText from '../../common/curved-text/CurvedText'
+import {useContext} from 'react'
+import {HireFormModalContext} from '../../common/modal/FormModalContext'
 
 const HELP_ITEMS: HelpItem[] = [
   {
@@ -133,6 +135,7 @@ export const Slider = ({className}: Slide) => {
 
 const HomePage = () => {
   const {isDesktop} = useMedia()
+  const {toggle: formToggle} = useContext(HireFormModalContext)
 
   return (
     <Page scrollButton={isDesktop} className={styles.page}>
@@ -250,9 +253,10 @@ const HomePage = () => {
               speed={0.3}
               symbol={<img src='/icons/circle-plus.svg' />}
               className={styles.participate}
+              onClick={formToggle}
             />
           ) : (
-            <p className={styles.participate}>
+            <p className={styles.participate} onClick={formToggle}>
               <img src='/icons/circle-plus-mobile.svg' /> Хочу в команду
             </p>
           )}

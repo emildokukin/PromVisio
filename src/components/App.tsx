@@ -11,32 +11,35 @@ import PotentialPage from './pages/potential/PotentialPage'
 import {GalleryModalProvider} from './common/modal/GalleryModalContext'
 import Header from './common/page/Header'
 import Cookies from './common/cookie/Cookies'
+import {HireFormModalProvider} from './common/modal/FormModalContext'
 
 const App = () => (
   <HelmetProvider>
-    <GalleryModalProvider>
-      <Router>
-        <ScrollToTop />
-        <ScrollToHashElement />
+    <HireFormModalProvider>
+      <GalleryModalProvider>
+        <Router>
+          <ScrollToTop />
+          <ScrollToHashElement />
 
-        <Helmet titleTemplate={`%s | ПРОМВИЗИО`} defaultTitle={'ПРОМВИЗИО'} />
+          <Helmet titleTemplate={`%s | ПРОМВИЗИО`} defaultTitle={'ПРОМВИЗИО'} />
 
-        <Header />
+          <Header />
 
-        <Routes>
-          <Route path='/' element={<HomePage />} />
-          <Route path='/gallery' element={<GalleryPage />} />
-          <Route path='/news' element={<NewsPage />} />
-          <Route path='/news/:id' element={<ArticlePage />} />
-          <Route path='/project' element={<ProjectPage />} />
-          <Route path='/potential' element={<PotentialPage />} />
+          <Routes>
+            <Route path='/' element={<HomePage />} />
+            <Route path='/gallery' element={<GalleryPage />} />
+            <Route path='/news' element={<NewsPage />} />
+            <Route path='/news/:id' element={<ArticlePage />} />
+            <Route path='/project' element={<ProjectPage />} />
+            <Route path='/potential' element={<PotentialPage />} />
 
-          <Route path='*' element={<Navigate to='/' replace />} />
-        </Routes>
+            <Route path='*' element={<Navigate to='/' replace />} />
+          </Routes>
 
-        <Cookies />
-      </Router>
-    </GalleryModalProvider>
+          <Cookies />
+        </Router>
+      </GalleryModalProvider>
+    </HireFormModalProvider>
   </HelmetProvider>
 )
 

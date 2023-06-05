@@ -12,6 +12,7 @@ interface CurvedTextProps {
   size: number
   symbol: ReactNode
   className?: string
+  onClick?: () => void
 }
 
 const CurvedText = ({
@@ -22,7 +23,8 @@ const CurvedText = ({
   speed = 1,
   size = 90,
   symbol = null,
-  className
+  className,
+  onClick
 }: CurvedTextProps) => {
   const [shift, setShift] = useState(0)
 
@@ -40,6 +42,7 @@ const CurvedText = ({
         height: size + 'px',
         borderRadius: size
       }}
+      onClick={onClick}
     >
       <div
         className={styles.text}
