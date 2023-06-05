@@ -40,5 +40,3 @@ COPY --chown=wagtail:wagtail . .
 
 # Use user "wagtail" to run the build commands below and the server itself.
 USER wagtail
-
-ENTRYPOINT gunicorn config.wsgi:application -w ${DJANGO_WORKERS_COUNT:-1}

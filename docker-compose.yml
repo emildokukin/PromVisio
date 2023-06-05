@@ -26,6 +26,7 @@ services:
       DJANGO_ENABLE_SWAGGER: $DJANGO_ENABLE_SWAGGER
       DJANGO_ENABLE_SENTRY: $DJANGO_ENABLE_SENTRY
       DJANGO_SENTRY_DSN: $DJANGO_SENTRY_DSN
+    command: gunicorn config.wsgi:application -w ${DJANGO_WORKERS_COUNT:-1}
     volumes:
       - "${DJANGO_MEDIA_VOLUME:-./backend/mediafiles}:/app/mediafiles"
       - "${DJANGO_STATIC_VOLUME:-./backend/staticfiles}:/app/staticfiles"
