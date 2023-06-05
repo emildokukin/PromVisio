@@ -54,11 +54,11 @@ migrate_db_dev:
   stage: up
   script: docker compose exec backend python manage.py migrate
   when: manual
+  environment: dev
   rules:
     - changes:
       - backend/core/migrations/*
-  only:
-    - dev
+    - if: $CI_COMMIT_BRANCH == "dev"
   tags:
     - development
 
@@ -66,10 +66,11 @@ migrate_db_prod:
   stage: up
   script: docker compose exec backend python manage.py migrate
   when: manual
+  environment: dev
   rules:
     - changes:
       - backend/core/migrations/*
-  only:
-    - master
+    - if: $CI_COMMIT_BRANCH == "master"
   tags:
     - production
+
