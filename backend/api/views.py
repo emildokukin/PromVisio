@@ -4,10 +4,14 @@ from django.urls import path
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from drf_spectacular.utils import extend_schema, OpenApiParameter
+from rest_framework import generics
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from wagtail.api.v2.views import PagesAPIViewSet
 from wagtail_headless_preview.models import PagePreview
+
+from api import serializers
+from core import models
 
 
 class CustomPagesAPIViewSet(PagesAPIViewSet):
@@ -74,3 +78,13 @@ class PagePreviewAPIViewSet(PagesAPIViewSet):
             page.pk = 0
 
         return page
+
+
+class FeedbackCreateView(generics.CreateAPIView):
+    queryset = models.Feedback.objects.all()
+    serializer_class = serializers.FeedbackSerializer
+    authentication_classes = []  # костыль для исправления csrf ошибки для залогиненных
+
+    def perform_create(self, serializer):
+        origin_page = self.request.META.get("HTTP_REFERER")
+        serializer.save(origin_page=origin_page)

@@ -8,5 +8,6 @@ api_router.register_endpoint("pages", views.CustomPagesAPIViewSet)
 api_router.register_endpoint("preview", views.PagePreviewAPIViewSet)
 
 urlpatterns = [
+    path("feedback/", views.FeedbackCreateView.as_view()),
     path("", api_router.urls),
 ]
