@@ -3,7 +3,7 @@ import styles from './Footer.module.scss'
 import {ReactComponent as PhoneSVG} from '../../../icons/phone-small.svg'
 import {ReactComponent as EnvelopeSVG} from '../../../icons/envelope.svg'
 import {ReactComponent as DzenSVG} from '../../../icons/dzen.svg'
-import {ReactComponent as YoutubeSVG} from '../../../icons/youtube.svg'
+import {ReactComponent as RutubeSVG} from '../../../icons/rutube.svg'
 import useMedia from '../../utils/useMedia'
 import clsx from 'clsx'
 
@@ -52,12 +52,12 @@ const Footer = () => {
     <footer className={styles.footer} id='footer'>
       <div className={styles.info}>
         <div className={styles.socials}>
-          <LinkComponent link='#' linkExternal className={styles.social}>
+          <LinkComponent link='https://dzen.ru/promvisio' linkExternal className={styles.social}>
             <DzenSVG /> {isMobile && <span>Дзен</span>}
           </LinkComponent>
 
-          <LinkComponent link='#' linkExternal className={styles.social}>
-            <YoutubeSVG /> {isMobile && <span>YouTube</span>}
+          <LinkComponent link='https://rutube.ru/channel/31324384/' linkExternal className={styles.social}>
+            <RutubeSVG /> {isMobile && <span>RUTUBE</span>}
           </LinkComponent>
 
           {isDesktop && <Email />}
