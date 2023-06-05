@@ -2,13 +2,13 @@ import styles from './ProjectPage.module.scss'
 import compassSVG from '../../../icons/compass.svg'
 import {ReactComponent as GlobeSVG} from '../../../icons/globe.svg'
 import {ReactComponent as GlobeArcticSVG} from '../../../icons/globe-arctic.svg'
-import shipIMG1 from '/media/arctic/ship.jpg'
-import shipIMG2 from '/media/arctic/ship-2.jpg'
-import shipIMG3 from '/media/arctic/ship-3.jpg'
-import shipBuildingIMG from '/media/arctic/ship-building.jpg'
-import arcticIMG from '/media/arctic/arctic.jpg'
-import viewFromShipIMG from '/media/arctic/view-from-ship.jpg'
-import bearIMG from '/media/arctic/bear.jpg'
+import shipIMG1 from '/media/project/ship.jpg'
+import shipIMG2 from '/media/project/ship-2.jpg'
+import shipIMG3 from '/media/project/ship-3.jpg'
+import shipBuildingIMG from '/media/project/ship-building.jpg'
+import arcticIMG from '/media/project/arctic.jpg'
+import viewFromShipIMG from '/media/project/view-from-ship.jpg'
+import bearIMG from '/media/project/bear.jpg'
 import Page from '../../common/page/Page'
 import {Helmet} from 'react-helmet-async'
 import {Swiper, SwiperSlide} from 'swiper/react'
@@ -27,19 +27,19 @@ const slides: Slide[] = [
   {
     title: 'В объективах наших камер',
     description: 'Сложнейшие работы по изменению траектории дрейфа опасных ледовых объектов',
-    image: '/media/arctic/slider-1.jpg'
+    image: '/media/project/slider-1.jpg'
   },
   {
     title: 'В объективах наших камер 2',
     description:
       'Сложнейшие работы по изменению траектории дрейфа опасных ледовых объектов по изменению траектории дрейфа опасных ледовых объектов',
-    image: '/media/arctic/slider-2.jpg'
+    image: '/media/project/slider-2.jpg'
   },
   {
     title: 'В объективах наших камер 3',
     description:
       'Сложнейшие работы по изменению траектории дрейфа опасных ледовых объектов по изменению траектории дрейфа опасных ледовых объектов по изменению траектории дрейфа опасных ледовых объектов',
-    image: '/media/arctic/slider-1.jpg'
+    image: '/media/project/slider-1.jpg'
   }
 ]
 
