@@ -56,7 +56,7 @@ const ProjectPage = () => {
   }
 
   return (
-    <Page className={styles.page}>
+    <Page className={styles.page} scrollButton={isDesktop}>
       <Helmet>
         <title>История одного проекта</title>
       </Helmet>
