@@ -49,3 +49,11 @@ up_prod:
     - master
   tags:
     - production
+
+migrate_db:
+  stage: up
+  script: docker compose exec backend python manage.py migrate
+  when: manual
+  rules:
+    - changes:
+      - backend/core/migrations/*
