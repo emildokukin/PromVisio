@@ -1,3 +1,5 @@
-from . import core, technical
+from . import core
 
-HOMEPAGE_BLOCKS = []
+HOMEPAGE_BLOCKS = [
+    ("team", core.TeamBlock()),
+]
