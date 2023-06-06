@@ -34,3 +34,25 @@ class HomePage(DefaultPage):
     class Meta:
         verbose_name = "Главная"
         verbose_name_plural = "Главная"
+
+
+class GalleryPage(DefaultPage):
+    content = StreamField(
+        blocks.GALLERY_BLOCKS,
+        use_json_field=True,
+        verbose_name="Контент",
+        null=True,
+        blank=True,
+    )
+
+    content_panels = DefaultPage.content_panels + [
+        FieldPanel("content"),
+    ]
+
+    api_fields = [
+        APIField("content"),
+    ]
+
+    class Meta:
+        verbose_name = "Галерея"
+        verbose_name_plural = "Галерея"
