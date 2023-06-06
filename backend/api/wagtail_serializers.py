@@ -9,7 +9,7 @@ class PotentialPageVideoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PotentialPageVideo
-        fields = ["thumbnail", "url_or_iframe"]
+        fields = ["thumbnail", "iframe"]
 
 
 class PotentialPageSliderSerializer(fields.JSONField):
