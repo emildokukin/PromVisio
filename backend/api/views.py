@@ -12,6 +12,7 @@ from wagtail_headless_preview.models import PagePreview
 
 from api import serializers
 from core import models
+from core.services import notify_admin_about_feedback
 
 
 class CustomPagesAPIViewSet(PagesAPIViewSet):
@@ -88,3 +89,4 @@ class FeedbackCreateView(generics.CreateAPIView):
     def perform_create(self, serializer):
         origin_page = self.request.META.get("HTTP_REFERER")
         serializer.save(origin_page=origin_page)
+        notify_admin_about_feedback(serializer)
