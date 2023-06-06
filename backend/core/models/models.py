@@ -1,4 +1,21 @@
 from django.db import models
+from wagtail.admin.panels import FieldPanel
+from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
+
+
+@register_setting
+class SiteSettings(BaseSiteSetting):
+    feedback_email = models.EmailField(
+        verbose_name="Email для обратной связи", default="info@promvisio.ru"
+    )
+
+    panels = [
+        FieldPanel("feedback_email"),
+    ]
+
+    class Meta:
+        verbose_name = "Настройки сайта"
+        verbose_name_plural = "Настройки сайта"
 
 
 class Feedback(models.Model):
