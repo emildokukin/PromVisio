@@ -14,16 +14,16 @@ server {
 
     root /var/www/frontend;
 
-    location ~ ^/(assets|media|icons|favicon) {
-        access_log off;
-        expires 7d;
-        try_files $uri =404;
-    }
-
     location ~ /(mediafiles|staticfiles)/ {
         access_log off;
         expires 7d;
         root /var/www;
+    }
+
+    location ~ ^/(assets|media|icons|favicon) {
+        access_log off;
+        expires 7d;
+        try_files $uri =404;
     }
 
      location ~ /(admin|api) {
