@@ -38,20 +38,15 @@ class HomePage(DefaultPage):
 
 
 class GalleryPage(DefaultPage):
-    content = StreamField(
-        blocks.GALLERY_BLOCKS,
-        use_json_field=True,
-        verbose_name="Контент",
-        null=True,
-        blank=True,
-    )
-
     content_panels = DefaultPage.content_panels + [
-        FieldPanel("content"),
+        InlinePanel("images", label="Фото"),
+        InlinePanel("videos", label="Видео"),
     ]
 
     api_fields = [
-        APIField("content"),
+        APIField(
+            "gallery", serializer=serializers.PotentialPageGallerySerializer(source="*")
+        ),
     ]
 
     class Meta:
