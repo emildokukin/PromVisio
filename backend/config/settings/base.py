@@ -254,9 +254,10 @@ CORS_ALLOWED_ORIGINS = env.list("DJANGO_CORS_ALLOWED_ORIGINS",
                                 default=['http://localhost:3000'])
 CSRF_TRUSTED_ORIGINS = CORS_ALLOWED_ORIGINS
 
-EMAIL_HOST = env.str("DJANGO_EMAIL_HOST", "smtp.yandex.ru")
-EMAIL_PORT = env.int("DJANGO_EMAIL_PORT", 465)
-EMAIL_HOST_USER = env.str("DJANGO_EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = env.str("DJANGO_EMAIL_HOST_PASSWORD")
-EMAIL_USE_SSL = True
-DEFAULT_FROM_EMAIL = f"Email bot Promvisio <{EMAIL_HOST_USER}>"
+if env.str("DJANGO_ENABLE_EMAILS") in ("1", "true", "True"):
+    EMAIL_HOST = env.str("DJANGO_EMAIL_HOST", "smtp.yandex.ru")
+    EMAIL_PORT = env.int("DJANGO_EMAIL_PORT", 465)
+    EMAIL_HOST_USER = env.str("DJANGO_EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = env.str("DJANGO_EMAIL_HOST_PASSWORD")
+    EMAIL_USE_SSL = True
+    DEFAULT_FROM_EMAIL = f"Email bot Promvisio <{EMAIL_HOST_USER}>"
