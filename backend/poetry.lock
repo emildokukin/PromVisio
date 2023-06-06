@@ -310,6 +310,21 @@ files = [
 Django = ">=3.2"
 
 [[package]]
+name = "django-email-log"
+version = "1.4.0"
+description = "Django email backend that logs all emails"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-email-log-1.4.0.tar.gz", hash = "sha256:18c3354ebd8c41a249e9455a51bbc8edebb848dd828f4f3f6d5c96bcc2a44855"},
+    {file = "django_email_log-1.4.0-py3-none-any.whl", hash = "sha256:279160b1db586a2a76a197c68a8fda7f3e8657bcd25fc74892301cd27969fa12"},
+]
+
+[package.dependencies]
+Django = ">=2.2.0"
+
+[[package]]
 name = "django-environ"
 version = "0.10.0"
 description = "A package that allows you to utilize 12factor inspired environment variables to configure your Django application."
@@ -1272,4 +1287,4 @@ testing = ["Pillow (>=9.1.0,<11.0.0)", "Wand (>=0.6,<1.0)", "mock (>=3.0,<4.0)",
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "f754ef12129e900d9a1f941a355aa6e600a40bcbd050284aa29d755ba6085d0e"
+content-hash = "7e055332fb917b5ddcb438912ea1d978bc34042be913e9f3a8779d11a348b999"
