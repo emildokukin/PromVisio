@@ -80,3 +80,17 @@ a {
     text-decoration: none;
   }
 }
+
+.cookie-visible {
+  & ~ .floating {
+    bottom: 88px !important;
+  }
+
+  & ~ .scroll-button {
+    transform: translateY(-40px);
+
+    @include mobile {
+      transform: translateY(-50px);
+    }
+  }
+}

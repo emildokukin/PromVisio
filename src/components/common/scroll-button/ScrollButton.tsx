@@ -24,7 +24,7 @@ const ScrollButton = () => {
 
   return (
     <div
-      className={clsx(styles.button, {
+      className={clsx(styles.button, 'scroll-button', {
         [styles.visible]: scrollPosition > window.innerHeight
       })}
       onClick={() =>

@@ -25,6 +25,8 @@ const App = () => (
 
           <Header />
 
+          <Cookies />
+
           <Routes>
             <Route path='/' element={<HomePage />} />
             <Route path='/gallery' element={<GalleryPage />} />
@@ -35,8 +37,6 @@ const App = () => (
 
             <Route path='*' element={<Navigate to='/' replace />} />
           </Routes>
-
-          <Cookies />
         </Router>
       </GalleryModalProvider>
     </HireFormModalProvider>

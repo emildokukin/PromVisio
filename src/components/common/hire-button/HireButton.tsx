@@ -9,7 +9,7 @@ const HireButton = () => {
 
   return (
     <>
-      <button className={clsx(styles.button, styles.floating)} onClick={toggle}>
+      <button className={clsx(styles.button, styles.floating, 'floating')} onClick={toggle}>
         <span>Нанять нас</span> <img src='/icons/phone.svg' alt='phone' />
       </button>
 

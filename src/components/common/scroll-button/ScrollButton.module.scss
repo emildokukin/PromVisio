@@ -12,7 +12,7 @@
   background: $general-bg;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
+  transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.3s ease-in-out;
   visibility: hidden;
 
   @include mobile {

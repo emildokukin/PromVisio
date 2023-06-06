@@ -8,14 +8,13 @@ const cookiesName = 'cookies'
 const Cookies = () => {
   const [cookieState, setCookieState] = useState(true)
 
-  useEffect(() => setCookieState(!!cookies.get(cookiesName)), [])
+  useEffect(() => setCookieState(false), [])
 
   return (
-    <div className={clsx(styles.cookiesWrapper, {[styles.visible]: !cookieState})}>
+    <div className={clsx(styles.cookiesWrapper, {[styles.visible]: !cookieState, ['cookie-visible']: !cookieState})}>
       <div className={styles.cookies}>
         <h3 className={styles.text}>
-          Куки. Натуралистическая парадигма, согласно
-          <br /> традиционным представлениям, предсказуема.
+          Куки. Натуралистическая парадигма, согласно традиционным представлениям, предсказуема.
         </h3>
 
         <button
@@ -26,7 +25,7 @@ const Cookies = () => {
             setCookieState(true)
           }}
         >
-          ОК
+          Принимаю
         </button>
       </div>
     </div>

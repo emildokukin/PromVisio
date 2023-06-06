@@ -47,6 +47,7 @@
   z-index: $floating-button-z;
   bottom: $padding-x;
   left: calc(100vw - 416px - #{$padding-x});
+  transition: bottom 0.3s ease-in-out;
 
   @include mobile {
     z-index: calc(#{$header-menu-z} - 1);
