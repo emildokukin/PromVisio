@@ -25,9 +25,6 @@ build:
 up_dev:
   environment: development
   stage: up
-  variables:
-    GIT_STRATEGY: none
-    GIT_CHECKOUT: "false"
   script:
     - docker compose pull
     - docker compose up -d --no-build
@@ -39,9 +36,6 @@ up_dev:
 up_prod:
   environment: production
   stage: up
-  variables:
-    GIT_STRATEGY: none
-    GIT_CHECKOUT: "false"
   script:
     - docker compose pull
     - docker compose up -d --no-build
@@ -73,4 +67,3 @@ migrate_db_prod:
         - backend/core/migrations/*
   tags:
     - production
-
