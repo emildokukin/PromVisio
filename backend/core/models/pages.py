@@ -180,6 +180,7 @@ class ArticlePage(DefaultPage):
 class NewsPage(DefaultPage):
     subpage_types = ["core.ArticlePage"]
 
+    heading = models.CharField(default="Вестник", verbose_name="Большой текст")
     articles_count = models.PositiveIntegerField(
         default=6,
         verbose_name="Количество статей на странице",
@@ -187,10 +188,12 @@ class NewsPage(DefaultPage):
     )
 
     content_panels = DefaultPage.content_panels + [
+        FieldPanel("heading"),
         FieldPanel("articles_count"),
     ]
 
     api_fields = [
+        APIField("heading"),
         APIField(
             "articles", serializer=serializers.APIPreloadArticlesSerializer(source="*")
         ),
