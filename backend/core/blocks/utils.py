@@ -12,6 +12,7 @@ YOUTUBE_RE_PATTERN = re.compile(
 RUTUBE_RE_PATTERN = re.compile(r"rutube\.ru\/video\/([a-z0-9]+)")
 
 Image = get_image_model()
+COVER_MIMES = ["image/webp", "image/jpeg"]
 
 
 def norm_path(path: Path | str) -> str:
@@ -63,7 +64,7 @@ def download_youtube_cover(youtube_id) -> Image | None:
         response = requests.get(thumbnail_url)
         if (
             response.status_code == 200
-            and response.headers["Content-Type"] == "image/jpeg"
+            and response.headers["Content-Type"] in COVER_MIMES
         ):
             break
     else:
@@ -71,10 +72,29 @@ def download_youtube_cover(youtube_id) -> Image | None:
 
     filepath = get_cover_folder() / f"{youtube_id}.jpg"
     open(filepath, "wb").write(response.content)
-    collection = get_collection("youtube")
+    collection = get_collection("Video Covers")
 
     image = Image.objects.create(
         title=youtube_id, file=norm_path(filepath), collection=collection
+    )
+    return image
+
+
+def download_rutube_cover(rutube_id: str) -> Image | None:
+    url = f"https://rutube.ru/api/video/{rutube_id}/thumbnail/?redirect=1"
+    response = requests.get(url)
+    if (
+        response.status_code != 200
+        or response.headers["Content-Type"] not in COVER_MIMES
+    ):
+        return
+
+    filepath = get_cover_folder() / f"{rutube_id}.jpg"
+    open(filepath, "wb").write(response.content)
+    collection = get_collection("Video Covers")
+
+    image = Image.objects.create(
+        title=rutube_id, file=norm_path(filepath), collection=collection
     )
     return image
 
@@ -89,7 +109,22 @@ def youtube_cover(iframe_code: str) -> Image | None:
 
     image = Image.objects.filter(title=youtube_id).first()
     if not image:
-        image = download_youtube_cover(youtube_id)
+        image = download_rutube_cover(youtube_id)
+
+    return image
+
+
+def rutube_cover(iframe_code: str) -> Image | None:
+    if not iframe_code:
+        return None
+
+    rutube_id = get_rutube_id(iframe_code)
+    if not rutube_id:
+        return None
+
+    image = Image.objects.filter(title=rutube_id).first()
+    if not image:
+        image = download_rutube_cover(rutube_id)
 
     return image
 
@@ -108,3 +143,14 @@ def make_iframe(url_or_iframe: str | None) -> str | None:
         return f'<iframe width="720" height="405" src="https://rutube.ru/play/embed/{rutube_id}" frameBorder="0" allow="clipboard-write; autoplay" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>'
 
     return None
+
+
+def make_thumbnail(iframe: str | None) -> Image | None:
+    if not isinstance(iframe, str):
+        return
+
+    if "youtu" in iframe and "be" in iframe:
+        return youtube_cover(iframe)
+
+    if "rutube.ru" in iframe:
+        return rutube_cover(iframe)

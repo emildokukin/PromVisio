@@ -5,6 +5,7 @@ from wagtail.images import get_image_model
 from wagtail.models import Orderable
 
 from core.blocks import make_iframe
+from core.blocks.utils import make_thumbnail
 
 Image = get_image_model()
 
@@ -89,13 +90,28 @@ class PotentialPageVideo(Orderable):
         verbose_name="Iframe", max_length=255, blank=True, editable=False
     )
     thumbnail = models.ForeignKey(
-        Image, on_delete=models.PROTECT, related_name="+", verbose_name="Превью видео"
+        Image,
+        on_delete=models.PROTECT,
+        related_name="+",
+        blank=True,
+        verbose_name="Превью видео",
+        help_text="Оставьте это поле пустым для автоматической загрузки превью",
     )
+
+    def clean(self):
+        if self.thumbnail_id is not None:
+            return
+
+        thumbnail = make_thumbnail(self.url_or_iframe)
+        if thumbnail is None:
+            raise ValidationError("Не удалось автоматически загрузить превью видео")
 
     def save(
         self, force_insert=False, force_update=False, using=None, update_fields=None
     ):
         self.iframe = make_iframe(self.url_or_iframe)
+        if self.thumbnail_id is None:
+            self.thumbnail = make_thumbnail(self.url_or_iframe)
         super().save(force_insert, force_update, using, update_fields)
 
     class Meta:
