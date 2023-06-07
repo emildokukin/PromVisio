@@ -33,10 +33,20 @@ class GalleryVideo(Orderable):
         Image, on_delete=models.PROTECT, related_name="+", verbose_name="Превью видео"
     )
 
+    def clean(self):
+        if self.thumbnail_id is not None:
+            return
+
+        thumbnail = make_thumbnail(self.url_or_iframe)
+        if thumbnail is None:
+            raise ValidationError("Не удалось автоматически загрузить превью видео")
+
     def save(
         self, force_insert=False, force_update=False, using=None, update_fields=None
     ):
         self.iframe = make_iframe(self.url_or_iframe)
+        if self.thumbnail_id is None:
+            self.thumbnail = make_thumbnail(self.url_or_iframe)
         super().save(force_insert, force_update, using, update_fields)
 
     class Meta:
