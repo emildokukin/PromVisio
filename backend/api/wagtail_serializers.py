@@ -76,4 +76,5 @@ class ArticlePageSerializer(serializers.Serializer):
     url = serializers.CharField()
     datetime = serializers.DateTimeField()
     preview_text = serializers.CharField()
+    source = ArticleSourceSerializer(source="*")
     banner = CustomImageSerializer()
