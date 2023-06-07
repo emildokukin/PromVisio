@@ -7,13 +7,18 @@ from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework import generics
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from wagtail.api.v2.views import PagesAPIViewSet
 from wagtail.models import Page
 from wagtail_headless_preview.models import PagePreview
 
 from api import serializers
-from api.pagination import GalleryVideosPagination, GalleryPagination
-from api.wagtail_serializers import PotentialPageVideoSerializer
+from api.pagination import (
+    GalleryVideosPagination,
+    GalleryPagination,
+    ArticlesPagination,
+)
+from api.wagtail_serializers import PotentialPageVideoSerializer, ArticlePageSerializer
 from core import models
 from core.blocks import CustomImageSerializer
 from core.services import notify_admin_about_feedback
@@ -28,6 +33,7 @@ class CustomPagesAPIViewSet(PagesAPIViewSet):
             path("find/", cls.as_view({"get": "find_view"}), name="find"),
         ]
 
+    @cache_page(5)
     @extend_schema(
         parameters=[
             OpenApiParameter(name="html_path", description="Path", type=str),
@@ -124,6 +130,11 @@ class APIGalleryVideosView(generics.ListAPIView):
             self.paginator_obj = self.pagination_class(page_id=self.page().pk)
         return self.paginator_obj
 
+    @method_decorator(cache_page(10))
+    @extend_schema(parameters=[OpenApiParameter("page", type=int)])
+    def get(self, *args, **kwargs):
+        return super().get(*args, **kwargs)
+
 
 class APIGalleryImagesView(APIGalleryVideosView):
     serializer_class = CustomImageSerializer
@@ -131,3 +142,22 @@ class APIGalleryImagesView(APIGalleryVideosView):
 
     def get_queryset(self):
         return [slide.image for slide in self.page().images.select_related("image")]
+
+
+class APIArticlesView(APIView):
+    @method_decorator(cache_page(10))
+    @extend_schema(parameters=[OpenApiParameter("page", type=int)])
+    def get(self, request, news_page_id: int):
+        news_page = get_object_or_404(models.NewsPage, id=news_page_id)
+        queryset = news_page.articles
+
+        paginator = ArticlesPagination(page_id=news_page_id)
+        paginator.page_size = news_page.articles_count
+        page = paginator.paginate_queryset(queryset, request)
+
+        serializer_context = {
+            "request": request,
+        }
+        serializer = ArticlePageSerializer(page, context=serializer_context, many=True)
+        response = paginator.get_paginated_response(serializer.data)
+        return response

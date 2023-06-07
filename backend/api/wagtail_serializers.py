@@ -78,3 +78,12 @@ class ArticlePageSerializer(serializers.Serializer):
     preview_text = serializers.CharField()
     source = ArticleSourceSerializer(source="*")
     banner = CustomImageSerializer()
+
+
+class APIPreloadArticlesSerializer(fields.JSONField):
+    def to_representation(self, news_page):
+        from api.views import APIArticlesView
+
+        request = self.context["request"]
+        response = APIArticlesView().get(request, news_page.pk)
+        return response.data

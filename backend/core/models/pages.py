@@ -167,10 +167,46 @@ class ArticlePage(DefaultPage):
             .live()
             .public()
             .type(ArticlePage)
-            .specific
+            .specific()
+            .order_by("-articlepage__datetime")
         )
 
     class Meta:
         verbose_name = "Статья"
         verbose_name_plural = "Статьи"
         ordering = ["-datetime"]
+
+
+class NewsPage(DefaultPage):
+    subpage_types = ["core.ArticlePage"]
+
+    articles_count = models.PositiveIntegerField(
+        default=6,
+        verbose_name="Количество статей на странице",
+        validators=[MinValueValidator(1), MaxValueValidator(100)],
+    )
+
+    content_panels = DefaultPage.content_panels + [
+        FieldPanel("articles_count"),
+    ]
+
+    api_fields = [
+        APIField(
+            "articles", serializer=serializers.APIPreloadArticlesSerializer(source="*")
+        ),
+    ]
+
+    @property
+    def articles(self):
+        return (
+            self.get_children()
+            .live()
+            .public()
+            .type(ArticlePage)
+            .specific()
+            .order_by("-articlepage__datetime")
+        )
+
+    class Meta:
+        verbose_name = "Вестник"
+        verbose_name_plural = "Вестник"

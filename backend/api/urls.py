@@ -19,5 +19,10 @@ urlpatterns = [
         views.APIGalleryVideosView.as_view(),
         name="gallery-videos",
     ),
+    path(
+        "articles/<int:news_page_id>/",
+        views.APIArticlesView.as_view(),
+        name="articles-list",
+    ),
     path("", api_router.urls),
 ]
