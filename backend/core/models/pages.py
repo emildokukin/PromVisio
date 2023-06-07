@@ -103,6 +103,8 @@ class PotentialPage(DefaultPage):
 
 
 class ArticlePage(DefaultPage):
+    parent_page_types = ["core.NewsPage"]
+
     datetime = models.DateTimeField(default=timezone.now, verbose_name="Дата и время")
 
     source_link = models.URLField(
