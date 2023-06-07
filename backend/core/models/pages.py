@@ -1,3 +1,5 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db import models
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.api import APIField
 from wagtail.fields import StreamField
@@ -38,9 +40,21 @@ class HomePage(DefaultPage):
 
 
 class GalleryPage(DefaultPage):
+    pagination_page_size = models.IntegerField(
+        default=6,
+        verbose_name="Размер страницы пагинации галереи",
+        validators=[MinValueValidator(1), MaxValueValidator(100)],
+    )
+
     content_panels = DefaultPage.content_panels + [
-        InlinePanel("images", label="Фото"),
-        InlinePanel("videos", label="Видео"),
+        FieldPanel("pagination_page_size"),
+        MultiFieldPanel(
+            [
+                InlinePanel("images", label="Фото"),
+                InlinePanel("videos", label="Видео"),
+            ],
+            heading="Галерея",
+        ),
     ]
 
     api_fields = [
@@ -55,7 +69,14 @@ class GalleryPage(DefaultPage):
 
 
 class PotentialPage(DefaultPage):
+    pagination_page_size = models.IntegerField(
+        default=6,
+        verbose_name="Размер страницы пагинации галереи",
+        validators=[MinValueValidator(1), MaxValueValidator(100)],
+    )
+
     content_panels = DefaultPage.content_panels + [
+        FieldPanel("pagination_page_size"),
         MultiFieldPanel(
             [
                 InlinePanel("images", label="Фото"),

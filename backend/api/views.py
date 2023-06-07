@@ -90,3 +90,11 @@ class FeedbackCreateView(generics.CreateAPIView):
         origin_page = self.request.META.get("HTTP_REFERER")
         serializer.save(origin_page=origin_page)
         notify_admin_about_feedback(serializer)
+
+
+class APIGalleryImagesView(generics.ListAPIView):
+    pass
+
+
+class APIGalleryVideosView(generics.ListAPIView):
+    pass
