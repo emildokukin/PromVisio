@@ -8,10 +8,14 @@ from rest_framework import generics
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from wagtail.api.v2.views import PagesAPIViewSet
+from wagtail.models import Page
 from wagtail_headless_preview.models import PagePreview
 
 from api import serializers
+from api.pagination import GalleryVideosPagination, GalleryPagination
+from api.wagtail_serializers import PotentialPageVideoSerializer
 from core import models
+from core.blocks import CustomImageSerializer
 from core.services import notify_admin_about_feedback
 
 
@@ -92,9 +96,38 @@ class FeedbackCreateView(generics.CreateAPIView):
         notify_admin_about_feedback(serializer)
 
 
-class APIGalleryImagesView(generics.ListAPIView):
-    pass
-
-
 class APIGalleryVideosView(generics.ListAPIView):
-    pass
+    serializer_class = PotentialPageVideoSerializer
+    pagination_class = GalleryVideosPagination
+    list_page = None
+    paginator_obj = None
+
+    def page(self):
+        if not self.list_page:
+            page_id = self.kwargs["page_id"]
+            self.list_page = get_object_or_404(Page, id=page_id).specific
+
+        if not isinstance(self.list_page, (models.PotentialPage, models.GalleryPage)):
+            raise Http404()
+
+        return self.list_page
+
+    def get_queryset(self):
+        return self.page().videos.select_related("thumbnail")
+
+    @property
+    def paginator(self):
+        """
+        The paginator instance associated with the view, or `None`.
+        """
+        if not self.paginator_obj:
+            self.paginator_obj = self.pagination_class(page_id=self.page().pk)
+        return self.paginator_obj
+
+
+class APIGalleryImagesView(APIGalleryVideosView):
+    serializer_class = CustomImageSerializer
+    pagination_class = GalleryPagination
+
+    def get_queryset(self):
+        return [slide.image for slide in self.page().images.select_related("image")]
