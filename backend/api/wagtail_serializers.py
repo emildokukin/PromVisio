@@ -39,18 +39,14 @@ class PotentialPageGallerySerializer(fields.JSONField):
             videos, self.context["request"]
         )
 
-        images_serializer = CustomImageSerializer(
+        images_data = CustomImageSerializer(
             images_page, many=True, context=self.context
-        )
-        videos_serializer = PotentialPageVideoSerializer(
+        ).data
+        videos_data = PotentialPageVideoSerializer(
             videos_page, many=True, context=self.context
-        )
+        ).data
 
         return {
-            "images": images_paginator.get_paginated_response(
-                images_serializer.data
-            ).data,
-            "videos": videos_paginator.get_paginated_response(
-                videos_serializer.data
-            ).data,
+            "images": images_paginator.get_paginated_response(images_data).data,
+            "videos": videos_paginator.get_paginated_response(videos_data).data,
         }
