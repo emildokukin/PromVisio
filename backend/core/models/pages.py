@@ -1,8 +1,10 @@
+from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
+from django.utils import timezone
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.api import APIField
-from wagtail.fields import StreamField
+from wagtail.fields import StreamField, RichTextField
 from wagtail.models import Page
 from wagtail_headless_preview.models import HeadlessMixin
 
@@ -98,3 +100,71 @@ class PotentialPage(DefaultPage):
     class Meta:
         verbose_name = "ПРО Потенциал"
         verbose_name_plural = "ПРО Потенциал"
+
+
+class ArticlePage(DefaultPage):
+    datetime = models.DateTimeField(default=timezone.now, verbose_name="Дата и время")
+
+    source_link = models.URLField(
+        verbose_name="Ссылка внешний источник", null=True, blank=True
+    )
+    source_link_name = models.CharField(
+        verbose_name="Название ссылки на внешний источник", null=True, blank=True
+    )
+    source_link_in_new_tab = models.BooleanField(
+        blank=True, verbose_name="Открывать в новой вкладке"
+    )
+
+    body = RichTextField(verbose_name="Контент")
+
+    right_side = StreamField(
+        blocks.ARTICLE_BLOCKS,
+        use_json_field=True,
+        verbose_name="Контент справа",
+    )
+
+    content_panels = DefaultPage.content_panels + [
+        FieldPanel("datetime"),
+        MultiFieldPanel(
+            [
+                FieldPanel("source_link_name"),
+                FieldPanel("source_link"),
+                FieldPanel("source_link_in_new_tab"),
+            ],
+            heading="Источник",
+            classname="collapsible collapsed",
+        ),
+        FieldPanel("body"),
+        FieldPanel("right_side"),
+    ]
+
+    api_fields = [
+        APIField("datetime"),
+        APIField("source", serializer=serializers.ArticleSourceSerializer(source="*")),
+        APIField("body", serializer=serializers.APIRichTextSerializer()),
+        APIField("right_side"),
+        APIField("similar", serializer=serializers.ArticlePageSerializer(many=True)),
+    ]
+
+    def clean(self):
+        if self.source_link and not self.source_link_name:
+            raise ValidationError('Нужно указать "Название ссылки на внешний источник"')
+
+    @property
+    def banner(self):
+        for block in self.right_side:
+            if block.block_type == "image":
+                return block.value
+
+    @property
+    def preview_text(self) -> str:
+        return RichTextField().get_searchable_content(self.body)[0][:300]
+
+    @property
+    def similar(self):
+        return self.get_siblings(inclusive=False).type(ArticlePage).specific
+
+    class Meta:
+        verbose_name = "Статья"
+        verbose_name_plural = "Статьи"
+        ordering = ["-datetime"]

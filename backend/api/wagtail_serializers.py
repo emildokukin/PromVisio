@@ -1,4 +1,5 @@
 from rest_framework import fields, serializers
+from wagtail.rich_text import expand_db_html
 
 from api.pagination import GalleryPagination, GalleryVideosPagination
 from core.blocks.technical import CustomImageSerializer
@@ -50,3 +51,29 @@ class PotentialPageGallerySerializer(fields.JSONField):
             "images": images_paginator.get_paginated_response(images_data).data,
             "videos": videos_paginator.get_paginated_response(videos_data).data,
         }
+
+
+class APIRichTextSerializer(fields.CharField):
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        return expand_db_html(representation)
+
+
+class ArticleSourceSerializer(fields.JSONField):
+    def to_representation(self, article_page):
+        if not article_page.source_link:
+            return None
+
+        return {
+            "label": article_page.source_link_name,
+            "link": article_page.source_link,
+            "in_new_tab": article_page.source_link_in_new_tab,
+        }
+
+
+class ArticlePageSerializer(serializers.Serializer):
+    title = serializers.CharField()
+    url = serializers.CharField()
+    datetime = serializers.DateTimeField()
+    preview_text = serializers.CharField()
+    banner = CustomImageSerializer()
