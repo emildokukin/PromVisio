@@ -1,5 +1,8 @@
+from collections import OrderedDict
+
 from django.urls import reverse
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
 from rest_framework.utils.urls import replace_query_param, remove_query_param
 
 
@@ -32,6 +35,19 @@ class GalleryPagination(PageNumberPagination):
         if page_number == 1:
             return remove_query_param(url, self.page_query_param)
         return replace_query_param(url, self.page_query_param, page_number)
+
+    def get_paginated_response(self, data):
+        return Response(
+            OrderedDict(
+                [
+                    ("count", self.page.paginator.count),
+                    ("total_pages", self.page.paginator.num_pages),
+                    ("next", self.get_next_link()),
+                    ("previous", self.get_previous_link()),
+                    ("results", data),
+                ]
+            )
+        )
 
 
 class GalleryVideosPagination(GalleryPagination):
