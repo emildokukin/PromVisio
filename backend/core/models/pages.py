@@ -162,7 +162,13 @@ class ArticlePage(DefaultPage):
 
     @property
     def similar(self):
-        return self.get_siblings(inclusive=False).type(ArticlePage).specific
+        return (
+            self.get_siblings(inclusive=False)
+            .live()
+            .public()
+            .type(ArticlePage)
+            .specific
+        )
 
     class Meta:
         verbose_name = "Статья"
