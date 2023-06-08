@@ -33,7 +33,7 @@ class CustomPagesAPIViewSet(PagesAPIViewSet):
             path("find/", cls.as_view({"get": "find_view"}), name="find"),
         ]
 
-    @cache_page(5)
+    @method_decorator(cache_page(5))
     @extend_schema(
         parameters=[
             OpenApiParameter(name="html_path", description="Path", type=str),
