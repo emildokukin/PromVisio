@@ -12,7 +12,7 @@ interface SliderButtonProps {
 const SliderButton = ({onClick, next = false, disabled = false, className}: SliderButtonProps) => (
   <button
     className={clsx(styles.arrow, {[styles.prev]: !next, [styles.next]: next, [styles.disabled]: disabled}, className)}
-    onClick={onClick}
+    onClick={() => (!disabled ? onClick?.() : null)}
   >
     <SliderArrow />
   </button>

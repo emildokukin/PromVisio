@@ -7,6 +7,8 @@ import {GALLERY_ITEM_TYPE, GalleryItem} from './GalleryItem'
 import {GalleryModalContext} from '../../common/modal/GalleryModalContext'
 import Pagination from '../news/Pagination'
 import {Images, Videos} from './types'
+import API from '../../utils/API'
+import {ENDPOINT} from '../../utils/endpoints'
 
 enum SECTION {
   PHOTO,
@@ -17,10 +19,13 @@ interface GalleryProps {
   className?: string
   images?: Images
   videos?: Videos
+  pageID?: number
 }
 
-export const Gallery = ({className, images, videos}: GalleryProps) => {
+export const Gallery = ({className, images: initialImages, videos: initialVideos, pageID}: GalleryProps) => {
   const [section, setSection] = useState(SECTION.PHOTO)
+  const [images, setImages] = useState(initialImages)
+  const [videos, setVideos] = useState(initialVideos)
   const {toggle, updateItems, updateIndex} = useContext(GalleryModalContext)
 
   const toggleModalVisibility = useCallback((items: string[] | undefined, index: number) => {
@@ -28,6 +33,25 @@ export const Gallery = ({className, images, videos}: GalleryProps) => {
     updateIndex(index)
     toggle()
   }, [])
+
+  const fetchData = useCallback(
+    async (page: number) => {
+      if (section === SECTION.PHOTO) {
+        const data = await API.GET(`${ENDPOINT.gallery}/${pageID}/images/`, {params: {page: page}}).then(
+          (res) => res.data as Images
+        )
+
+        setImages(data)
+      } else if (section === SECTION.VIDEO) {
+        const data = await API.GET(`${ENDPOINT.gallery}/${pageID}/videos/`, {params: {page: page}}).then(
+          (res) => res.data as Videos
+        )
+
+        setVideos(data)
+      }
+    },
+    [initialImages, initialVideos]
+  )
 
   return (
     <section className={clsx(styles.content, className)}>
@@ -82,7 +106,11 @@ export const Gallery = ({className, images, videos}: GalleryProps) => {
           ))}
       </div>
 
-      <Pagination className={styles.pagination} />
+      <Pagination
+        className={styles.pagination}
+        onDotClick={fetchData}
+        totalPages={section === SECTION.PHOTO ? images?.total_pages : videos?.total_pages}
+      />
     </section>
   )
 }
