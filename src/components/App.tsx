@@ -12,35 +12,47 @@ import {GalleryModalProvider} from './common/modal/GalleryModalContext'
 import Header from './common/page/Header'
 import Cookies from './common/cookie/Cookies'
 import {HireFormModalProvider} from './common/modal/FormModalContext'
+import {queryClient} from './utils/API'
+import {QueryClientProvider} from '@tanstack/react-query'
+import {PreviewProvider} from './utils/preview'
+import {ReactNode} from 'react'
+
+const Providers = ({children}: {children: ReactNode}) => (
+  <QueryClientProvider client={queryClient}>
+    <PreviewProvider>
+      <HelmetProvider>
+        <HireFormModalProvider>
+          <GalleryModalProvider>{children}</GalleryModalProvider>
+        </HireFormModalProvider>
+      </HelmetProvider>
+    </PreviewProvider>
+  </QueryClientProvider>
+)
 
 const App = () => (
-  <HelmetProvider>
-    <HireFormModalProvider>
-      <GalleryModalProvider>
-        <Router>
-          <ScrollToTop />
-          <ScrollToHashElement />
+  <Providers>
+    <Router>
+      <ScrollToTop />
+      <ScrollToHashElement />
 
-          <Helmet titleTemplate={`%s | ПРОМВИЗИО`} defaultTitle={'ПРОМВИЗИО'} />
+      <Helmet titleTemplate={`%s | ПРОМВИЗИО`} defaultTitle={'ПРОМВИЗИО'} />
 
-          <Header />
+      <Header />
 
-          <Cookies />
+      <Cookies />
 
-          <Routes>
-            <Route path='/' element={<HomePage />} />
-            <Route path='/gallery' element={<GalleryPage />} />
-            <Route path='/news' element={<NewsPage />} />
-            <Route path='/news/:id' element={<ArticlePage />} />
-            <Route path='/project' element={<ProjectPage />} />
-            <Route path='/potential' element={<PotentialPage />} />
+      <Routes>
+        <Route path='/' element={<HomePage />} />
+        <Route path='/gallery' element={<GalleryPage />} />
+        <Route path='/news' element={<NewsPage />} />
+        <Route path='/news/:id' element={<ArticlePage />} />
+        <Route path='/project' element={<ProjectPage />} />
+        <Route path='/potential' element={<PotentialPage />} />
 
-            <Route path='*' element={<Navigate to='/' replace />} />
-          </Routes>
-        </Router>
-      </GalleryModalProvider>
-    </HireFormModalProvider>
-  </HelmetProvider>
+        <Route path='*' element={<Navigate to='/' replace />} />
+      </Routes>
+    </Router>
+  </Providers>
 )
 
 export default App

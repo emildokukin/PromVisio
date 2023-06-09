@@ -23,6 +23,7 @@
       display: flex;
       width: 64px;
       height: 64px;
+      flex-shrink: 0;
       align-items: center;
       justify-content: center;
       border: 2px solid $general-accent;
@@ -30,6 +31,7 @@
       background-color: $general-accent;
       color: $black;
       transition: background-color 0.25s ease-in-out;
+      user-select: none;
 
       &:not(&-active) {
         border-color: $general-accent;

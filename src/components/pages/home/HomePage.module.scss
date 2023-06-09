@@ -272,6 +272,7 @@
   h1,
   h2,
   h3 {
+    padding-right: $padding-x;
     padding-left: 272px;
 
     @include mobile {
@@ -299,6 +300,7 @@
   h3 {
     @include desktop {
       max-width: 60%;
+      padding-right: 0;
     }
 
     @include mobile {

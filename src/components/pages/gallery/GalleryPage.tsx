@@ -5,43 +5,56 @@ import {Helmet} from 'react-helmet-async'
 import clsx from 'clsx'
 import {GALLERY_ITEM_TYPE, GalleryItem} from './GalleryItem'
 import {GalleryModalContext} from '../../common/modal/GalleryModalContext'
+import Pagination from '../news/Pagination'
+import {GalleryData, Images, Videos} from './types'
+import API from '../../utils/API'
+import {ENDPOINT} from '../../utils/endpoints'
+import PreviewContext from '../../utils/preview'
+import {useQueryFindData} from '../../utils/useQueryData'
+import Loading from '../../common/loading/Loading'
 
 enum SECTION {
   PHOTO,
   VIDEO
 }
 
-const PHOTOS = [
-  {src: '/media/gallery/photo1.png'},
-  {src: '/media/gallery/photo2.png'},
-  {src: '/media/gallery/photo3.png'},
-  {src: '/media/gallery/photo4.png'},
-  {src: '/media/gallery/photo5.png'},
-  {src: '/media/gallery/photo6.png'}
-]
-
-const VIDEOS = [
-  {src: '/media/gallery/photo2.png'},
-  {src: '/media/gallery/photo1.png'},
-  {src: '/media/gallery/photo4.png'},
-  {src: '/media/gallery/photo5.png'},
-  {src: '/media/gallery/photo3.png'},
-  {src: '/media/gallery/photo6.png'}
-]
-
 interface GalleryProps {
   className?: string
+  images?: Images
+  videos?: Videos
+  pageID?: number
 }
 
-export const Gallery = ({className}: GalleryProps) => {
+export const Gallery = ({className, images: initialImages, videos: initialVideos, pageID}: GalleryProps) => {
   const [section, setSection] = useState(SECTION.PHOTO)
+  const [images, setImages] = useState(initialImages)
+  const [videos, setVideos] = useState(initialVideos)
   const {toggle, updateItems, updateIndex} = useContext(GalleryModalContext)
 
-  const toggleModalVisibility = useCallback((items: string[], index: number) => {
-    updateItems(items)
+  const toggleModalVisibility = useCallback((items: string[] | undefined, index: number) => {
+    updateItems(items || [])
     updateIndex(index)
     toggle()
   }, [])
+
+  const fetchData = useCallback(
+    async (page: number) => {
+      if (section === SECTION.PHOTO) {
+        const data = await API.GET(`${ENDPOINT.gallery}/${pageID}/images/`, {params: {page: page}}).then(
+          (res) => res.data as Images
+        )
+
+        setImages(data)
+      } else if (section === SECTION.VIDEO) {
+        const data = await API.GET(`${ENDPOINT.gallery}/${pageID}/videos/`, {params: {page: page}}).then(
+          (res) => res.data as Videos
+        )
+
+        setVideos(data)
+      }
+    },
+    [initialImages, initialVideos]
+  )
 
   return (
     <section className={clsx(styles.content, className)}>
@@ -66,45 +79,62 @@ export const Gallery = ({className}: GalleryProps) => {
         })}
       >
         {section === SECTION.PHOTO &&
-          PHOTOS.map((photo, index) => (
+          images?.results?.map((photo, index) => (
             <GalleryItem
-              thumbnail={photo.src}
-              key={photo.src}
+              thumbnail={photo.url}
+              alt={photo.alt}
+              key={photo.url}
               onClick={() =>
                 toggleModalVisibility(
-                  PHOTOS.map((photo) => photo.src),
+                  images?.results?.map((photo) => photo.url),
                   index
                 )
               }
             />
           ))}
         {section === SECTION.VIDEO &&
-          VIDEOS.map((video, index) => (
+          videos?.results?.map((video, index) => (
             <GalleryItem
-              thumbnail={video.src}
+              thumbnail={video.thumbnail.url}
+              alt={video.thumbnail.alt}
               type={GALLERY_ITEM_TYPE.VIDEO}
-              key={video.src}
+              key={video.thumbnail.url}
               onClick={() =>
                 toggleModalVisibility(
-                  VIDEOS.map((photo) => photo.src),
+                  videos?.results?.map((video) => video.iframe),
                   index
                 )
               }
             />
           ))}
       </div>
+
+      <Pagination
+        className={styles.pagination}
+        onDotClick={fetchData}
+        totalPages={section === SECTION.PHOTO ? images?.total_pages : videos?.total_pages}
+      />
     </section>
   )
 }
 
 const GalleryPage = () => {
+  const {preview} = useContext(PreviewContext)
+  const {data, isLoading} = useQueryFindData<GalleryData>(['gallery'])
+
+  const parsedData = preview ? preview : data
+
   return (
     <Page>
       <Helmet>
-        <title>Галерея</title>
+        <title>{parsedData?.title || 'Галерея'}</title>
       </Helmet>
 
-      <Gallery />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Gallery images={parsedData?.gallery?.images} videos={parsedData?.gallery?.videos} pageID={parsedData?.id} />
+      )}
     </Page>
   )
 }

@@ -1,4 +1,4 @@
-import {ChangeEvent, useCallback} from 'react'
+import {ChangeEvent, useCallback, useState} from 'react'
 import {Input} from '../input/Input'
 import {Textarea} from '../input/Textarea'
 import {CloseButton} from './CloseButton'
@@ -6,6 +6,12 @@ import styles from './FormModal.module.scss'
 import Modal, {ModalBasedProps} from './Modal'
 import {getPhoneNumber} from '../../utils/getPhoneNumber'
 import clsx from 'clsx'
+import {useMutation} from '@tanstack/react-query'
+import {FormProvider, useForm} from 'react-hook-form'
+import {yupResolver} from '@hookform/resolvers/yup'
+import {FormSchema, formSchema} from './schema'
+import {ENDPOINT} from '../../utils/endpoints'
+import API from '../../utils/API'
 
 interface FormModalProps extends ModalBasedProps {
   title: string
@@ -14,23 +20,55 @@ interface FormModalProps extends ModalBasedProps {
   className?: string
 }
 
-const FormModal = ({active, toggle, title, image, onSubmit, className}: FormModalProps) => {
+interface FormProps {
+  title: string
+}
+
+const Form = ({title}: FormProps) => {
+  const [serverErrors, setServerErrors] = useState<{
+    [key in keyof FormSchema]?: string | string[]
+  }>({})
+
+  const methods = useForm<FormSchema>({resolver: yupResolver(formSchema)})
+
+  const {
+    handleSubmit,
+    formState: {errors},
+    reset
+  } = methods
+
+  const {mutate, isLoading} = useMutation(
+    (data: FormSchema) => API.POST(ENDPOINT.feedback, data).then((res) => res.data),
+    {
+      onSuccess: () => {
+        setServerErrors({})
+        alert('Ваши данные были успешно отправлены, мы свяжемся с Вами в ближайшее время!')
+        reset()
+      },
+      onError: ({response}: {response: {data: FormSchema}}) => {
+        setServerErrors({...response.data})
+      }
+    }
+  )
+
   const handlePhoneChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     getPhoneNumber(e)
   }, [])
 
   return (
-    <Modal active={active} toggle={toggle} contentClassName={clsx(styles.content, className)}>
-      <div className={styles.logo}>
-        <img src={image} alt='logo' />
-      </div>
-
-      <form className={styles.form} onSubmit={onSubmit}>
+    <FormProvider {...methods}>
+      <form className={styles.form} onSubmit={handleSubmit((data: FormSchema) => mutate({...data}))}>
         <h2>{title}</h2>
 
         <div className={styles.inputs}>
-          <Input label='Тема' name='theme' type='text' required />
-          <Textarea label='Текст сообщения' name='message' />
+          <Input
+            label='Тема'
+            type='text'
+            name='subject'
+            required
+            error={errors.subject?.message || serverErrors?.subject}
+          />
+          <Textarea label='Текст сообщения' name='message' error={errors.message?.message || serverErrors?.message} />
           <Input
             label='Номер телефона'
             name='phone_number'
@@ -38,12 +76,13 @@ const FormModal = ({active, toggle, title, image, onSubmit, className}: FormModa
             type='tel'
             required
             onChange={handlePhoneChange}
+            error={errors.phone_number?.message || serverErrors?.phone_number}
           />
-          <Input label='Email' name='email' type='email' required />
+          <Input label='Email' type='text' name='email' required error={errors.email?.message || serverErrors?.email} />
         </div>
 
         <div className={styles.bottom}>
-          <button type='submit' className={styles.button}>
+          <button type='submit' className={styles.button} disabled={isLoading}>
             ОТПРАВИТЬ
           </button>
 
@@ -52,6 +91,18 @@ const FormModal = ({active, toggle, title, image, onSubmit, className}: FormModa
           </p>
         </div>
       </form>
+    </FormProvider>
+  )
+}
+
+const FormModal = ({active, toggle, title, image, className}: FormModalProps) => {
+  return (
+    <Modal active={active} toggle={toggle} contentClassName={clsx(styles.content, className)}>
+      <div className={styles.logo}>
+        <img src={image} alt='logo' />
+      </div>
+
+      <Form title={title} />
 
       <CloseButton onClick={toggle} />
     </Modal>

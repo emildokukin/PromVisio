@@ -11,13 +11,26 @@
 }
 
 .swiper {
-  max-width: 80vw;
+  min-width: 75vw;
+  max-width: 85vw;
   height: 100%;
   user-select: none;
 
-  :global .swiper-slide img {
-    @include mobile {
-      object-fit: contain;
+  :global .swiper-slide {
+    div:has(iframe),
+    iframe {
+      height: 100%;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+    }
+
+    img {
+      @include mobile {
+        object-fit: contain;
+      }
     }
   }
 

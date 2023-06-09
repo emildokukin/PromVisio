@@ -8,7 +8,7 @@ const cookiesName = 'cookies'
 const Cookies = () => {
   const [cookieState, setCookieState] = useState(true)
 
-  useEffect(() => setCookieState(false), [])
+  useEffect(() => setCookieState(!!cookies.get(cookiesName)), [])
 
   return (
     <div className={clsx(styles.cookiesWrapper, {[styles.visible]: !cookieState, ['cookie-visible']: !cookieState})}>

@@ -10,12 +10,13 @@ export enum GALLERY_ITEM_TYPE {
 
 interface GalleryItemProps {
   thumbnail: string | undefined
+  alt?: string
   type?: GALLERY_ITEM_TYPE
   className?: string
   onClick?: () => void
 }
 
-export const GalleryItem = ({thumbnail, type = GALLERY_ITEM_TYPE.PHOTO, onClick, className}: GalleryItemProps) => (
+export const GalleryItem = ({thumbnail, alt, type = GALLERY_ITEM_TYPE.PHOTO, onClick, className}: GalleryItemProps) => (
   <div
     className={clsx(
       styles.item,
@@ -27,7 +28,7 @@ export const GalleryItem = ({thumbnail, type = GALLERY_ITEM_TYPE.PHOTO, onClick,
     )}
     onClick={onClick}
   >
-    <img src={thumbnail} alt='gallery item thumbnail' />
+    <img src={thumbnail} alt={alt || 'gallery item thumbnail'} />
     <div className={styles.decor}>
       {type === GALLERY_ITEM_TYPE.PHOTO && <PlusSVG />}
       {type === GALLERY_ITEM_TYPE.VIDEO && (
