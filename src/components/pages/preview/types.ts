@@ -1,3 +1,5 @@
+import {Image} from '../../utils/types'
+
 export interface Preview {
   id?: number
   meta?: Meta
@@ -6,20 +8,15 @@ export interface Preview {
 }
 
 export interface Content {
-  type: string
-  value: Value
-  id: string
+  type?: string
+  value?: Value
+  id?: string
 }
 
 export interface Value {
-  title: string
+  title?: string
   text?: string
   image?: Image
-}
-
-export interface Image {
-  alt: string
-  url: string
 }
 
 export interface Meta {
