@@ -20,7 +20,7 @@ class SiteSettings(BaseSiteSetting):
 
 class Feedback(models.Model):
     subject = models.CharField(max_length=255, verbose_name="Тема")
-    message = models.TextField(verbose_name="Сообщение")
+    message = models.TextField(verbose_name="Сообщение", blank=True)
     phone_number = models.CharField(max_length=15, verbose_name="Номер телефона")
     email = models.EmailField(verbose_name="Email")
 
