@@ -86,8 +86,8 @@ const REVIEWS: Review[] = [
 ]
 
 interface Slide {
+  items: Image[] | undefined
   className?: string
-  items?: Image[]
 }
 
 export const Slider = ({className, items}: Slide) => {
@@ -103,7 +103,7 @@ export const Slider = ({className, items}: Slide) => {
       speed={600}
       autoplay={{delay: 2500, disableOnInteraction: false}}
     >
-      {items?.map((slide, index) => (
+      {((items?.length || 0) <= 7 ? items?.concat(items) : items)?.map((slide, index) => (
         <SwiperSlide className={styles.slide} key={index}>
           <img src={slide.url} alt={slide.alt} />
         </SwiperSlide>

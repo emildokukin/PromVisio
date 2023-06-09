@@ -18,11 +18,20 @@ import {Slider} from '../home/HomePage'
 import {Gallery} from '../gallery/GalleryPage'
 import NewsPagination from '../news/NewsPagination'
 import useMedia from '../../utils/useMedia'
-import {useCallback, useState} from 'react'
+import {useCallback, useContext, useState} from 'react'
 import FormModal from '../../common/modal/FormModal'
+import PreviewContext from '../../utils/preview'
+import {useQueryFindData} from '../../utils/useQueryData'
+import {Potential} from './types'
+import Loading from '../../common/loading/Loading'
 
 const PotentialPage = () => {
   const {isMobile, isDesktop} = useMedia()
+  const {preview} = useContext(PreviewContext)
+  const {data, isLoading} = useQueryFindData<Potential>(['potential'])
+
+  const parsedData = preview ? preview : data
+
   const [isModalVisible, setIsModalVisible] = useState(false)
 
   const toggleModalVisibility = useCallback(() => setIsModalVisible((prev) => !prev), [])
@@ -30,7 +39,7 @@ const PotentialPage = () => {
   return (
     <Page className={styles.page} scrollButton={isDesktop}>
       <Helmet>
-        <title>История одного проекта</title>
+        <title>{parsedData?.title || 'История одного проекта'}</title>
       </Helmet>
 
       <div className={styles.wrapper}>
@@ -55,7 +64,7 @@ const PotentialPage = () => {
         </div>
       </section>
 
-      <Slider className={styles.slider} />
+      {isLoading ? <Loading /> : <Slider className={styles.slider} items={parsedData?.slider} />}
 
       <section className={styles.format}>
         <h1>

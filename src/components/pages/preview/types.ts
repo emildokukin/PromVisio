@@ -1,10 +1,13 @@
 import {Image} from '../../utils/types'
+import {Gallery} from '../potential/types'
 
 export interface Preview {
   id?: number
   meta?: Meta
   title?: string
   content?: Content[]
+  slider?: Image[]
+  gallery?: Gallery
 }
 
 export interface Content {
