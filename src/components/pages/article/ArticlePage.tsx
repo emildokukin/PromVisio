@@ -28,23 +28,50 @@ const parseNewsData = (item: Article): NewsItemProps => ({
   innerLink: item.source
 })
 
-const ArticlePage = () => {
-  const {isMobile, isDesktop} = useMedia()
+const RecommendedSlider = ({isMobile, items}: {isMobile: boolean; items: Article[] | undefined}) => {
   const [swiper, setSwiper] = useState<SwiperType>()
-  const {id} = useParams()
-
   const [isBeginning, setIsBeginning] = useState(true)
   const [isEnd, setIsEnd] = useState(false)
-
-  const {preview} = useContext(PreviewContext)
-  const {data, isLoading} = useQueryFindData<ArticleData>([`news-${id}`])
-
-  const parsedData = preview ? preview : data
 
   const onSlideChange = (swiper: SwiperType) => {
     setIsBeginning(swiper.isBeginning)
     setIsEnd(swiper.isEnd)
   }
+  return (
+    <>
+      <Swiper
+        className={styles.swiper}
+        modules={[Autoplay]}
+        slidesPerView={isMobile ? 'auto' : 2}
+        speed={600}
+        onSwiper={(swiper: SetStateAction<SwiperType | undefined>) => setSwiper(swiper)}
+        spaceBetween={32}
+        direction={isMobile ? 'vertical' : 'horizontal'}
+        onSlideChange={onSlideChange}
+        autoplay={{delay: 2500, disableOnInteraction: false}}
+      >
+        {items?.map((newsItem, index) => (
+          <SwiperSlide key={index}>
+            <NewsItem {...parseNewsData(newsItem)} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      <div className={styles.navigation}>
+        <SliderButton onClick={() => swiper?.slidePrev()} disabled={isBeginning} className={styles.arrow} />
+        <SliderButton onClick={() => swiper?.slideNext()} next disabled={isEnd} className={styles.arrow} />
+      </div>
+    </>
+  )
+}
+
+const ArticlePage = () => {
+  const {id} = useParams()
+  const {isMobile, isDesktop} = useMedia()
+  const {preview} = useContext(PreviewContext)
+  const {data, isLoading} = useQueryFindData<ArticleData>([`news-${id}`])
+
+  const parsedData = preview ? preview : data
 
   return (
     <Page className={styles.page} scrollButton={isDesktop}>
@@ -107,32 +134,7 @@ const ArticlePage = () => {
           <div className={styles.recommended}>
             <Line className={styles.line} />
 
-            {isDesktop && (
-              <>
-                <Swiper
-                  className={styles.swiper}
-                  modules={[Autoplay]}
-                  slidesPerView={isMobile ? 'auto' : 2}
-                  speed={600}
-                  onSwiper={(swiper: SetStateAction<SwiperType | undefined>) => setSwiper(swiper)}
-                  spaceBetween={32}
-                  direction={isMobile ? 'vertical' : 'horizontal'}
-                  onSlideChange={onSlideChange}
-                  autoplay={{delay: 2500, disableOnInteraction: false}}
-                >
-                  {parsedData?.similar?.map((newsItem, index) => (
-                    <SwiperSlide key={index}>
-                      <NewsItem {...parseNewsData(newsItem)} />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-
-                <div className={styles.navigation}>
-                  <SliderButton onClick={() => swiper?.slidePrev()} disabled={isBeginning} className={styles.arrow} />
-                  <SliderButton onClick={() => swiper?.slideNext()} next disabled={isEnd} className={styles.arrow} />
-                </div>
-              </>
-            )}
+            {isDesktop && <RecommendedSlider items={parsedData?.similar} isMobile={isMobile} />}
 
             {isMobile && (
               <>
