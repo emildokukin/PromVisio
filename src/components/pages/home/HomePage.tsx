@@ -10,6 +10,12 @@ import clsx from 'clsx'
 import CurvedText from '../../common/curved-text/CurvedText'
 import {useContext} from 'react'
 import {HireFormModalContext} from '../../common/modal/FormModalContext'
+import PreviewContext from '../../utils/preview'
+import {useQueryFindData} from '../../utils/useQueryData'
+import {Data, Home, blockTypes} from './types'
+import useParsedData from '../../utils/useParsedData'
+import Loading from '../../common/loading/Loading'
+import {Image} from '../../utils/types'
 
 const HELP_ITEMS: HelpItem[] = [
   {
@@ -81,9 +87,10 @@ const REVIEWS: Review[] = [
 
 interface Slide {
   className?: string
+  items?: Image[]
 }
 
-export const Slider = ({className}: Slide) => {
+export const Slider = ({className, items}: Slide) => {
   const {isMobile} = useMedia()
 
   return (
@@ -96,9 +103,9 @@ export const Slider = ({className}: Slide) => {
       speed={600}
       autoplay={{delay: 2500, disableOnInteraction: false}}
     >
-      {[1, 2, 3, 4, 5, 6, 7, 8].map((slide, index) => (
+      {items?.map((slide, index) => (
         <SwiperSlide className={styles.slide} key={index}>
-          <img src={`/media/home/slide-${slide}.jpg`} alt='team picture' />
+          <img src={slide.url} alt={slide.alt} />
         </SwiperSlide>
       ))}
     </Swiper>
@@ -108,11 +115,14 @@ export const Slider = ({className}: Slide) => {
 const HomePage = () => {
   const {isDesktop} = useMedia()
   const {toggle: formToggle} = useContext(HireFormModalContext)
+  const {preview} = useContext(PreviewContext)
+  const {data, isLoading} = useQueryFindData<Home>(['home'])
+  const {parsedData} = useParsedData<Data>(data?.content, preview?.content, [...blockTypes])
 
   return (
     <Page scrollButton={isDesktop} className={styles.page}>
       <Helmet>
-        <title>Главная</title>
+        <title>{data?.title || 'Главная'}</title>
       </Helmet>
 
       <section className={styles.banner}>
@@ -189,51 +199,48 @@ const HomePage = () => {
 
       <Reviews items={REVIEWS} />
 
-      <section className={styles.team}>
-        <h1>
-          Команда и <br />
-          оборудование
-        </h1>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <section className={styles.team}>
+          <h1>{parsedData?.team?.title}</h1>
 
-        <h2>
-          Специалисты ПРОМВИЗИО – это операторы, пилоты БВС, монтажёры и видеографы с уникальным опытом индустриального
-          видеопроизводства.
-          {isDesktop && (
-            <span className={styles.icons}>
-              <img src='/icons/lightning.svg' alt='lightning' />
-              <img src='/icons/lightning.svg' alt='lightning' />
-            </span>
-          )}
-        </h2>
+          <h2>
+            {parsedData?.team?.text1}
 
-        <Slider />
+            {isDesktop && (
+              <span className={styles.icons}>
+                <img src='/icons/lightning.svg' alt='lightning' />
+                <img src='/icons/lightning.svg' alt='lightning' />
+              </span>
+            )}
+          </h2>
 
-        <div className={styles.members}>
-          <h3>
-            Все сотрудники, задействованные в съёмочном процессе на производственных объектах, снабжены персональными
-            СИЗ, имеют актуальные удостоверения по охране труда, а также действующие сертификаты BOSIET/FOET. При
-            необходимости наши специалисты могут пройти необходимое специализированное дополнительное обучение.
-          </h3>
+          <Slider items={parsedData?.team?.images} />
 
-          {isDesktop ? (
-            <CurvedText
-              size={160}
-              radius={52}
-              text='ХОЧУ В КОМАНДУ —  ХОЧУ В КОМАНДУ —  '
-              textFontSize={16}
-              textFontWeight={700}
-              speed={0.3}
-              symbol={<img src='/icons/circle-plus.svg' />}
-              className={styles.participate}
-              onClick={formToggle}
-            />
-          ) : (
-            <p className={styles.participate} onClick={formToggle}>
-              <img src='/icons/circle-plus-mobile.svg' /> Хочу в команду
-            </p>
-          )}
-        </div>
-      </section>
+          <div className={styles.members}>
+            <h3>{parsedData?.team?.text2}</h3>
+
+            {isDesktop ? (
+              <CurvedText
+                size={160}
+                radius={52}
+                text='ХОЧУ В КОМАНДУ —  ХОЧУ В КОМАНДУ —  '
+                textFontSize={16}
+                textFontWeight={700}
+                speed={0.3}
+                symbol={<img src='/icons/circle-plus.svg' />}
+                className={styles.participate}
+                onClick={formToggle}
+              />
+            ) : (
+              <p className={styles.participate} onClick={formToggle}>
+                <img src='/icons/circle-plus-mobile.svg' /> Хочу в команду
+              </p>
+            )}
+          </div>
+        </section>
+      )}
     </Page>
   )
 }
