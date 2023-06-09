@@ -1,5 +1,5 @@
 import {Image} from '../../utils/types'
-import {Gallery} from '../potential/types'
+import {Gallery} from '../gallery/types'
 
 export interface Preview {
   id?: number
