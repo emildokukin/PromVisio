@@ -15,15 +15,6 @@ import Loading from '../../common/loading/Loading'
 import API from '../../utils/API'
 import {ENDPOINT} from '../../utils/endpoints'
 
-export interface News {
-  id: number
-  title: string
-  description: string
-  date: string
-  innerLink?: string
-  mediaLinks: string[]
-}
-
 export interface Line {
   className?: string
 }
