@@ -5,13 +5,15 @@ import NewsItem from './NewsItem'
 import Pagination from './Pagination'
 import arrowSVG from '../../../icons/arrow-circleless.svg'
 import useMedia from '../../utils/useMedia'
-import {Fragment, useContext, useEffect, useState} from 'react'
+import {Fragment, useCallback, useContext, useEffect, useState} from 'react'
 import clsx from 'clsx'
 import LinkComponent from '../../common/link-component/LinkComponent'
 import {useQueryFindData} from '../../utils/useQueryData'
 import PreviewContext from '../../utils/preview'
-import {Article, NewsData} from './types'
+import {Article, Articles, NewsData} from './types'
 import Loading from '../../common/loading/Loading'
+import API from '../../utils/API'
+import {ENDPOINT} from '../../utils/endpoints'
 
 export interface News {
   id: number
@@ -41,6 +43,17 @@ const NewsPage = () => {
   useEffect(() => {
     setNews(parsedData?.articles?.results)
   }, [preview, data])
+
+  const fetchData = useCallback(
+    async (page: number) => {
+      const data = await API.GET(`${ENDPOINT.articles}/${parsedData?.id}/`, {params: {page: page}}).then(
+        (res) => res.data as Articles
+      )
+
+      setNews(data.results)
+    },
+    [preview, data]
+  )
 
   return (
     <Page>
@@ -85,7 +98,7 @@ const NewsPage = () => {
             ))}
           </div>
 
-          <Pagination className={styles.dots} />
+          <Pagination className={styles.dots} totalPages={parsedData?.articles?.total_pages} onDotClick={fetchData} />
         </section>
       )}
     </Page>

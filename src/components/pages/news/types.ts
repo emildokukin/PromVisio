@@ -1,6 +1,7 @@
 import {Image} from '../../utils/types'
 
 export interface NewsData {
+  id: number
   title?: string
   heading?: string
   articles?: Articles
