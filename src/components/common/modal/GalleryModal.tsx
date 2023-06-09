@@ -33,7 +33,11 @@ const GalleryModal = () => {
       >
         {items.map((item, index) => (
           <SwiperSlide key={index}>
-            <img src={item} alt='gallery image or video' />
+            {item.includes('<iframe') ? (
+              <div dangerouslySetInnerHTML={{__html: item}}></div>
+            ) : (
+              <img src={item} alt='gallery image or video' />
+            )}
           </SwiperSlide>
         ))}
       </Swiper>

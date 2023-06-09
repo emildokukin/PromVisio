@@ -121,7 +121,7 @@ const PotentialPage = () => {
           </div>
         </div>
 
-        <Gallery className={styles.gallery} />
+        <Gallery className={styles.gallery} images={parsedData?.gallery?.images} videos={parsedData?.gallery?.videos} />
       </section>
 
       <FormModal

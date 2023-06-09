@@ -6,40 +6,25 @@ import clsx from 'clsx'
 import {GALLERY_ITEM_TYPE, GalleryItem} from './GalleryItem'
 import {GalleryModalContext} from '../../common/modal/GalleryModalContext'
 import Pagination from '../news/Pagination'
+import {Images, Videos} from './types'
 
 enum SECTION {
   PHOTO,
   VIDEO
 }
 
-const PHOTOS = [
-  {src: '/media/gallery/photo1.png'},
-  {src: '/media/gallery/photo2.png'},
-  {src: '/media/gallery/photo3.png'},
-  {src: '/media/gallery/photo4.png'},
-  {src: '/media/gallery/photo5.png'},
-  {src: '/media/gallery/photo6.png'}
-]
-
-const VIDEOS = [
-  {src: '/media/gallery/photo2.png'},
-  {src: '/media/gallery/photo1.png'},
-  {src: '/media/gallery/photo4.png'},
-  {src: '/media/gallery/photo5.png'},
-  {src: '/media/gallery/photo3.png'},
-  {src: '/media/gallery/photo6.png'}
-]
-
 interface GalleryProps {
   className?: string
+  images?: Images
+  videos?: Videos
 }
 
-export const Gallery = ({className}: GalleryProps) => {
+export const Gallery = ({className, images, videos}: GalleryProps) => {
   const [section, setSection] = useState(SECTION.PHOTO)
   const {toggle, updateItems, updateIndex} = useContext(GalleryModalContext)
 
-  const toggleModalVisibility = useCallback((items: string[], index: number) => {
-    updateItems(items)
+  const toggleModalVisibility = useCallback((items: string[] | undefined, index: number) => {
+    updateItems(items || [])
     updateIndex(index)
     toggle()
   }, [])
@@ -67,27 +52,29 @@ export const Gallery = ({className}: GalleryProps) => {
         })}
       >
         {section === SECTION.PHOTO &&
-          PHOTOS.map((photo, index) => (
+          images?.results?.map((photo, index) => (
             <GalleryItem
-              thumbnail={photo.src}
-              key={photo.src}
+              thumbnail={photo.url}
+              alt={photo.alt}
+              key={photo.url}
               onClick={() =>
                 toggleModalVisibility(
-                  PHOTOS.map((photo) => photo.src),
+                  images?.results?.map((photo) => photo.url),
                   index
                 )
               }
             />
           ))}
         {section === SECTION.VIDEO &&
-          VIDEOS.map((video, index) => (
+          videos?.results?.map((video, index) => (
             <GalleryItem
-              thumbnail={video.src}
+              thumbnail={video.thumbnail.url}
+              alt={video.thumbnail.alt}
               type={GALLERY_ITEM_TYPE.VIDEO}
-              key={video.src}
+              key={video.thumbnail.url}
               onClick={() =>
                 toggleModalVisibility(
-                  VIDEOS.map((photo) => photo.src),
+                  videos?.results?.map((video) => video.iframe),
                   index
                 )
               }
