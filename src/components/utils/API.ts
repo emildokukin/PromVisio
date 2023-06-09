@@ -1,7 +1,7 @@
 import {QueryClient} from '@tanstack/react-query'
 import axios from 'axios'
 
-const ORIGIN = process.env.NODE_ENV === 'development' ? 'https://promvisio.ru/' : window.location.origin
+const ORIGIN = process.env.NODE_ENV === 'development' ? 'https://promvisio.ru' : window.location.origin
 
 const DEFAULT_OPTIONS = {}
 
