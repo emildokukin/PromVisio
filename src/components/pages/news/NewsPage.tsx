@@ -109,25 +109,29 @@ const NewsPage = () => {
           {news.map((newsItem, index) => (
             <Fragment key={index}>
               {index === 3 ? (
-                <LinkComponent link='/project' className={styles.circleWrapper}>
-                  <div className={styles.circle}>
-                    <img src={arrowSVG} alt='arrow' />
-                    <h2>Почитать историю проекта в Арктике</h2>
-                  </div>
-                </LinkComponent>
-              ) : (
-                <NewsItem
-                  key={newsItem.id}
-                  title={newsItem.title}
-                  description={newsItem.description}
-                  imgLink={newsItem.mediaLinks[0]}
-                  date={newsItem.date}
-                  link={newsItem.id.toString()}
-                  innerLink={newsItem.innerLink}
-                />
-              )}
+                <>
+                  <LinkComponent link='/project' className={styles.circleWrapper}>
+                    <div className={styles.circle}>
+                      <img src={arrowSVG} alt='arrow' />
+                      <h2>Почитать историю проекта в Арктике</h2>
+                    </div>
+                  </LinkComponent>
 
-              {index % 2 !== 0 || index == news.length - 1 || isMobile ? <Line /> : null}
+                  <Line />
+                </>
+              ) : null}
+
+              <NewsItem
+                key={newsItem.id}
+                title={newsItem.title}
+                description={newsItem.description}
+                imgLink={newsItem.mediaLinks[0]}
+                date={newsItem.date}
+                link={newsItem.id.toString()}
+                innerLink={newsItem.innerLink}
+              />
+
+              {isMobile || (index % 2 !== 0 && index !== 3) || index === news.length - 1 ? <Line /> : null}
             </Fragment>
           ))}
         </div>
