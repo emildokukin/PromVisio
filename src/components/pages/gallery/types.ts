@@ -1,5 +1,11 @@
 import {Image} from '../../utils/types'
 
+export interface GalleryData {
+  id?: number
+  title?: string
+  gallery?: Gallery
+}
+
 export interface Gallery {
   images?: Images
   videos?: Videos

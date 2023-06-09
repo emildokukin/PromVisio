@@ -6,9 +6,12 @@ import clsx from 'clsx'
 import {GALLERY_ITEM_TYPE, GalleryItem} from './GalleryItem'
 import {GalleryModalContext} from '../../common/modal/GalleryModalContext'
 import Pagination from '../news/Pagination'
-import {Images, Videos} from './types'
+import {GalleryData, Images, Videos} from './types'
 import API from '../../utils/API'
 import {ENDPOINT} from '../../utils/endpoints'
+import PreviewContext from '../../utils/preview'
+import {useQueryFindData} from '../../utils/useQueryData'
+import Loading from '../../common/loading/Loading'
 
 enum SECTION {
   PHOTO,
@@ -116,13 +119,22 @@ export const Gallery = ({className, images: initialImages, videos: initialVideos
 }
 
 const GalleryPage = () => {
+  const {preview} = useContext(PreviewContext)
+  const {data, isLoading} = useQueryFindData<GalleryData>(['gallery'])
+
+  const parsedData = preview ? preview : data
+
   return (
     <Page>
       <Helmet>
-        <title>Галерея</title>
+        <title>{parsedData?.title || 'Галерея'}</title>
       </Helmet>
 
-      <Gallery />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Gallery images={parsedData?.gallery?.images} videos={parsedData?.gallery?.videos} pageID={parsedData?.id} />
+      )}
     </Page>
   )
 }
