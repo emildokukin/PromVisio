@@ -29,8 +29,10 @@
 }
 
 .error {
-  margin-top: 4px;
-  color: $general-accent;
+  @include font-small;
+
+  margin-top: 10px;
+  color: $red;
 }
 
 .default {
@@ -52,12 +54,14 @@
     padding: 12px;
   }
 
-  @include hover {
-    border-color: $gray;
-  }
+  &:not(&-error) {
+    @include hover {
+      border-color: $gray;
+    }
 
-  &:focus {
-    border-color: $gray;
+    &:focus {
+      border-color: $gray;
+    }
   }
 
   &::placeholder {
@@ -70,6 +74,10 @@
     @include mobile {
       @include font-adapt-txt-regular;
     }
+  }
+
+  &-error {
+    border-color: #5d2323;
   }
 }
 

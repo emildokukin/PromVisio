@@ -1,13 +1,13 @@
 import {ReactNode} from 'react'
 import styles from './Input.module.scss'
 
-export const Error = ({error}: {error?: string}) => <p className={styles.error}>{error}</p>
+export const Error = ({error}: {error?: string | string[]}) => <p className={styles.error}>{error}</p>
 
 export interface DefaultInputProps {
   label?: string
   className?: string
   children?: ReactNode
-  error?: string
+  error?: string | string[]
 }
 
 export const InputLayout = (props: {
