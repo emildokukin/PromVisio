@@ -128,6 +128,7 @@ class APIGalleryVideosView(generics.ListAPIView):
         """
         if not self.paginator_obj:
             self.paginator_obj = self.pagination_class(page_id=self.page().pk)
+            self.paginator_obj.page_size = self.page().pagination_page_size
         return self.paginator_obj
 
     @method_decorator(cache_page(10))
