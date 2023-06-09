@@ -24,10 +24,10 @@ export interface Videos {
   total_pages?: number
   next?: string | null
   previous?: string | null
-  results?: Result[]
+  results?: Video[]
 }
 
-export interface Result {
+export interface Video {
   thumbnail: Image
   iframe: string
 }
