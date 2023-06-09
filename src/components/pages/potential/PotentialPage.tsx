@@ -21,13 +21,13 @@ import {useCallback, useContext, useState} from 'react'
 import FormModal from '../../common/modal/FormModal'
 import PreviewContext from '../../utils/preview'
 import {useQueryFindData} from '../../utils/useQueryData'
-import {Potential} from './types'
+import {PotentialData} from './types'
 import Loading from '../../common/loading/Loading'
 
 const PotentialPage = () => {
   const {isMobile, isDesktop} = useMedia()
   const {preview} = useContext(PreviewContext)
-  const {data, isLoading} = useQueryFindData<Potential>(['potential'])
+  const {data, isLoading} = useQueryFindData<PotentialData>(['potential'])
 
   const parsedData = preview ? preview : data
 

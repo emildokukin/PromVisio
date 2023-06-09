@@ -8,7 +8,7 @@ export interface Data {
   team?: Team
 }
 
-export interface Home {
+export interface HomeData {
   title?: string
   content?: Content[]
 }

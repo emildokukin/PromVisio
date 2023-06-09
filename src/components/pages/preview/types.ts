@@ -1,25 +1,12 @@
-import {Image} from '../../utils/types'
-import {Gallery} from '../gallery/types'
+import {GalleryData} from '../gallery/types'
+import {HomeData} from '../home/types'
+import {NewsData} from '../news/types'
+import {PotentialData} from '../potential/types'
 
-export interface Preview {
+export interface Preview extends GalleryData, PotentialData, HomeData, NewsData {
   id?: number
+  title?: string
   meta?: Meta
-  title?: string
-  content?: Content[]
-  slider?: Image[]
-  gallery?: Gallery
-}
-
-export interface Content {
-  type?: string
-  value?: Value
-  id?: string
-}
-
-export interface Value {
-  title?: string
-  text?: string
-  image?: Image
 }
 
 export interface Meta {
