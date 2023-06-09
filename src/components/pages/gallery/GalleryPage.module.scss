@@ -78,3 +78,15 @@
     }
   }
 }
+
+.pagination {
+  padding-top: 55px;
+  border-top: 2px solid #202020;
+  margin-top: 80px;
+
+  @include mobile {
+    padding: 0;
+    border-top: none;
+    margin-top: 30px;
+  }
+}

@@ -5,6 +5,7 @@ import {Helmet} from 'react-helmet-async'
 import clsx from 'clsx'
 import {GALLERY_ITEM_TYPE, GalleryItem} from './GalleryItem'
 import {GalleryModalContext} from '../../common/modal/GalleryModalContext'
+import Pagination from '../news/Pagination'
 
 enum SECTION {
   PHOTO,
@@ -93,6 +94,8 @@ export const Gallery = ({className}: GalleryProps) => {
             />
           ))}
       </div>
+
+      <Pagination className={styles.pagination} />
     </section>
   )
 }
