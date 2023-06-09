@@ -16,6 +16,7 @@ import {queryClient} from './utils/API'
 import {QueryClientProvider} from '@tanstack/react-query'
 import {PreviewProvider} from './utils/preview'
 import {ReactNode} from 'react'
+import Preview from './pages/preview/Preview'
 
 const Providers = ({children}: {children: ReactNode}) => (
   <QueryClientProvider client={queryClient}>
@@ -48,6 +49,8 @@ const App = () => (
         <Route path='/news/:id' element={<ArticlePage />} />
         <Route path='/project' element={<ProjectPage />} />
         <Route path='/potential' element={<PotentialPage />} />
+
+        <Route path='/page_preview_admin' element={<Preview />} />
 
         <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
