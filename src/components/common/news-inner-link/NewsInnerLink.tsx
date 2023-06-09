@@ -11,8 +11,8 @@ interface NewsInnerLink {
 
 const NewsInnerLink = ({link, text, className}: NewsInnerLink) => (
   <object className={clsx(className)}>
-    <GlobeSVG className={styles.globe} />
-    <LinkComponent className={styles.link} link={link} linkExternal={true}>
+    <LinkComponent className={styles.link} link={link} linkExternal>
+      <GlobeSVG className={styles.globe} />
       {text}
     </LinkComponent>
   </object>

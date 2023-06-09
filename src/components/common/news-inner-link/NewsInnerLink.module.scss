@@ -1,8 +1,4 @@
 object {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
   @include mobile {
     font-size: 14px;
   }
@@ -29,7 +25,9 @@ object {
   }
 
   .link {
-    display: inline;
+    display: flex;
+    align-items: center;
     color: $general-accent;
+    gap: 8px;
   }
 }
