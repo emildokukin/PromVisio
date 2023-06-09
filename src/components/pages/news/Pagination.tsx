@@ -1,21 +1,15 @@
 import clsx from 'clsx'
-import styles from './NewsPagination.module.scss'
+import styles from './Pagination.module.scss'
 import useMedia from '../../utils/useMedia'
 import SliderButton from '../../common/slider/SliderButton'
 
-// TODO: use to determine dots count
-// interface newsPagination {
-//     newsTotal: number
-//     maxPoints: number
-// }
-
 const totalCircles = 6
 
-interface NewsPaginationProps {
+interface PaginationProps {
   className?: string
 }
 
-const NewsPagination = ({className}: NewsPaginationProps) => {
+const Pagination = ({className}: PaginationProps) => {
   const {isDesktop} = useMedia()
 
   return (
@@ -40,4 +34,4 @@ const NewsPagination = ({className}: NewsPaginationProps) => {
   )
 }
 
-export default NewsPagination
+export default Pagination

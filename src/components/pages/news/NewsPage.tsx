@@ -2,7 +2,7 @@ import styles from './NewsPage.module.scss'
 import Page from '../../common/page/Page'
 import {Helmet} from 'react-helmet-async'
 import NewsItem from './NewsItem'
-import NewsPagination from './NewsPagination'
+import Pagination from './Pagination'
 import arrowSVG from '../../../icons/arrow-circleless.svg'
 import useMedia from '../../utils/useMedia'
 import {Fragment} from 'react'
@@ -132,7 +132,7 @@ const NewsPage = () => {
           ))}
         </div>
 
-        <NewsPagination className={styles.dots} />
+        <Pagination className={styles.dots} />
       </section>
     </Page>
   )

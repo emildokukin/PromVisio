@@ -16,7 +16,7 @@ import {ReactComponent as StarSVG} from '../../../icons/star.svg'
 import MenIMG from '/media/potential/men.jpg'
 import {Slider} from '../home/HomePage'
 import {Gallery} from '../gallery/GalleryPage'
-import NewsPagination from '../news/NewsPagination'
+import Pagination from '../news/Pagination'
 import useMedia from '../../utils/useMedia'
 import {useCallback, useContext, useState} from 'react'
 import FormModal from '../../common/modal/FormModal'
@@ -124,7 +124,7 @@ const PotentialPage = () => {
 
         <Gallery className={styles.gallery} />
 
-        <NewsPagination className={styles.pagination} />
+        <Pagination className={styles.pagination} />
       </section>
 
       <FormModal
