@@ -2,7 +2,7 @@ import styles from './ArticlePage.module.scss'
 import Page from '../../common/page/Page'
 import {Helmet} from 'react-helmet-async'
 import useMedia from '../../utils/useMedia'
-import {Line, News, news} from '../news/NewsPage'
+import {Line} from '../news/NewsPage'
 import NewsInnerLink from '../../common/news-inner-link/NewsInnerLink'
 import {useParams} from 'react-router-dom'
 import LinkComponent from '../../common/link-component/LinkComponent'
@@ -11,131 +11,176 @@ import {Autoplay, Swiper as SwiperType} from 'swiper'
 import {Swiper, SwiperSlide} from 'swiper/react'
 import NewsItem, {NewsItemProps} from '../news/NewsItem'
 import SliderButton from '../../common/slider/SliderButton'
-import {Fragment, SetStateAction, useState} from 'react'
+import {Fragment, SetStateAction, useCallback, useContext, useEffect, useState} from 'react'
 import arrowSVG from '../../../icons/arrow-circleless.svg'
+import PreviewContext from '../../utils/preview'
+import {useQueryFindData} from '../../utils/useQueryData'
+import {ArticleData, Media} from './types'
+import {Article} from '../news/types'
+import Loading from '../../common/loading/Loading'
+import {GalleryModalContext} from '../../common/modal/GalleryModalContext'
 
-const parseNewsData = (item: News): NewsItemProps => ({
+const parseNewsData = (item: Article): NewsItemProps => ({
   title: item.title,
-  description: item.description,
-  imgLink: item.mediaLinks[0],
-  link: '/news/' + item.id,
-  innerLink: item.innerLink,
-  date: item.date
+  description: item.preview_text,
+  image: item.banner,
+  date: item.datetime,
+  link: item.url,
+  innerLink: item.source
 })
 
-const ArticlePage = () => {
-  const {isMobile, isDesktop} = useMedia()
+const RecommendedSlider = ({isMobile, items}: {isMobile: boolean; items: Article[] | undefined}) => {
   const [swiper, setSwiper] = useState<SwiperType>()
-
   const [isBeginning, setIsBeginning] = useState(true)
   const [isEnd, setIsEnd] = useState(false)
-  const {id} = useParams()
 
   const onSlideChange = (swiper: SwiperType) => {
     setIsBeginning(swiper.isBeginning)
     setIsEnd(swiper.isEnd)
   }
+  return (
+    <>
+      <Swiper
+        className={styles.swiper}
+        modules={[Autoplay]}
+        slidesPerView={isMobile ? 'auto' : 2}
+        speed={600}
+        onSwiper={(swiper: SetStateAction<SwiperType | undefined>) => setSwiper(swiper)}
+        spaceBetween={32}
+        direction={isMobile ? 'vertical' : 'horizontal'}
+        onSlideChange={onSlideChange}
+        autoplay={{delay: 2500, disableOnInteraction: false}}
+      >
+        {items?.map((newsItem, index) => (
+          <SwiperSlide key={index}>
+            <NewsItem {...parseNewsData(newsItem)} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
 
-  const currentNews = news.filter((news) => news.id === parseInt(id || '0'))[0]
+      <div className={styles.navigation}>
+        <SliderButton onClick={() => swiper?.slidePrev()} disabled={isBeginning} className={styles.arrow} />
+        <SliderButton onClick={() => swiper?.slideNext()} next disabled={isEnd} className={styles.arrow} />
+      </div>
+    </>
+  )
+}
+
+const MediaItems = ({items, isMobile}: {items: Media[] | undefined; isMobile: boolean}) => {
+  const {toggle, updateItems, updateIndex} = useContext(GalleryModalContext)
+
+  const toggleModalVisibility = useCallback((index: number) => {
+    updateIndex(index)
+    toggle()
+  }, [])
+
+  useEffect(() => {
+    updateItems(items?.map((item) => item.value.url) || [])
+  }, [])
+
+  return isMobile ? (
+    <Swiper className={styles.swiper} slidesPerView={1} spaceBetween={8}>
+      {items?.map((media, index) => (
+        <SwiperSlide key={index}>
+          <GalleryItem
+            thumbnail={media.value.url}
+            className={styles.mediaItem}
+            onClick={() => toggleModalVisibility(index)}
+          />
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  ) : (
+    <div className={styles.right}>
+      {items?.map((media, index) => (
+        <GalleryItem
+          key={index}
+          thumbnail={media.value.url}
+          className={styles.mediaItem}
+          onClick={() => toggleModalVisibility(index)}
+        />
+      ))}
+    </div>
+  )
+}
+
+const ArticlePage = () => {
+  const {id} = useParams()
+  const {isMobile, isDesktop} = useMedia()
+  const {preview} = useContext(PreviewContext)
+  const {data, isLoading} = useQueryFindData<ArticleData>([`news-${id}`])
+
+  const parsedData = preview ? preview : data
 
   return (
     <Page className={styles.page} scrollButton={isDesktop}>
       <Helmet>
-        <title>{currentNews.title || 'Новость'}</title>
+        <title>{parsedData?.title || 'Новость'} </title>
       </Helmet>
 
       {isDesktop && <Line />}
 
-      <div className={styles.wrapper}>
-        <div className={styles.article}>
-          {isMobile && (
-            <>
-              <LinkComponent link='/news' className={styles.back}>
-                <img src={arrowSVG} alt='arrow' /> <span>Обратно в вестник</span>
-              </LinkComponent>
-
-              <Swiper className={styles.swiper} slidesPerView={1} spaceBetween={8}>
-                {currentNews.mediaLinks.map((media, index) => (
-                  <SwiperSlide key={index}>
-                    <GalleryItem thumbnail={media} className={styles.mediaItem} />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-            </>
-          )}
-
-          <div className={styles.left}>
-            {isDesktop && (
-              <div className={styles.breadCrumbs}>
-                <LinkComponent link='/' className={styles.mainPageLink}>
-                  Вестник
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className={styles.wrapper}>
+          <div className={styles.article}>
+            {isMobile && (
+              <>
+                <LinkComponent link='/news' className={styles.back}>
+                  <img src={arrowSVG} alt='arrow' /> <span>Обратно в вестник</span>
                 </LinkComponent>
-                <span className={styles.currentPageLink}> • {currentNews.title}</span>
-              </div>
+
+                <MediaItems items={parsedData?.right_side} isMobile />
+              </>
             )}
 
-            <h2>{currentNews.title}</h2>
-            <time>{currentNews.date}</time>
-            <Line className={styles.line} />
-            <p>{currentNews.description}</p>
+            <div className={styles.left}>
+              {isDesktop && (
+                <div className={styles.breadCrumbs}>
+                  <LinkComponent link='/' className={styles.mainPageLink}>
+                    Вестник
+                  </LinkComponent>
+                  <span className={styles.currentPageLink}> • {parsedData?.title}</span>
+                </div>
+              )}
 
-            {currentNews.innerLink ? <NewsInnerLink className={styles.link} link={currentNews.innerLink} /> : null}
+              <h2>{parsedData?.title}</h2>
+              <time>{new Date(parsedData?.datetime as Date).toLocaleDateString()}</time>
+              <Line className={styles.line} />
+              <div dangerouslySetInnerHTML={{__html: parsedData?.body as TrustedHTML}}></div>
+
+              {parsedData?.source ? (
+                <NewsInnerLink className={styles.link} link={parsedData?.source.link} text={parsedData.source.label} />
+              ) : null}
+            </div>
+
+            {isDesktop && <MediaItems items={parsedData?.right_side} isMobile={false} />}
           </div>
 
-          {isDesktop && (
-            <div className={styles.right}>
-              {currentNews.mediaLinks.map((media, index) => (
-                <GalleryItem key={index} thumbnail={media} className={styles.mediaItem} />
-              ))}
-            </div>
-          )}
+          <div className={styles.recommended}>
+            <Line className={styles.line} />
+
+            {isDesktop && <RecommendedSlider items={parsedData?.similar} isMobile={isMobile} />}
+
+            {isMobile && (
+              <>
+                <h1>Похожие новости</h1>
+
+                <div className={styles.newsMobile}>
+                  {parsedData?.similar?.map((newsItem, index) => (
+                    <Fragment key={index}>
+                      <NewsItem key={index} {...parseNewsData(newsItem)} />
+
+                      {index !== (parsedData?.similar?.length || 0) - 1 ? <Line className={styles.line} /> : null}
+                    </Fragment>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
         </div>
-
-        <div className={styles.recommended}>
-          <Line className={styles.line} />
-
-          {isDesktop && (
-            <>
-              <Swiper
-                className={styles.swiper}
-                modules={[Autoplay]}
-                slidesPerView={isMobile ? 'auto' : 2}
-                speed={600}
-                onSwiper={(swiper: SetStateAction<SwiperType | undefined>) => setSwiper(swiper)}
-                spaceBetween={32}
-                direction={isMobile ? 'vertical' : 'horizontal'}
-                onSlideChange={onSlideChange}
-                autoplay={{delay: 2500, disableOnInteraction: false}}
-              >
-                {news.map((newsItem, index) => (
-                  <SwiperSlide key={index}>
-                    <NewsItem {...parseNewsData(newsItem)} />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-
-              <div className={styles.navigation}>
-                <SliderButton onClick={() => swiper?.slidePrev()} disabled={isBeginning} className={styles.arrow} />
-                <SliderButton onClick={() => swiper?.slideNext()} next disabled={isEnd} className={styles.arrow} />
-              </div>
-            </>
-          )}
-
-          {isMobile && (
-            <>
-              <h1>Похожие новости</h1>
-              <div className={styles.newsMobile}>
-                {news.map((newsItem, index) => (
-                  <Fragment key={index}>
-                    <NewsItem key={index} {...parseNewsData(newsItem)} />
-                    {index !== news.length - 1 ? <Line className={styles.line} /> : null}
-                  </Fragment>
-                ))}
-              </div>
-            </>
-          )}
-        </div>
-      </div>
+      )}
     </Page>
   )
 }

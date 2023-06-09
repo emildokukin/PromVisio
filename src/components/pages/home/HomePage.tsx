@@ -12,7 +12,7 @@ import {useContext} from 'react'
 import {HireFormModalContext} from '../../common/modal/FormModalContext'
 import PreviewContext from '../../utils/preview'
 import {useQueryFindData} from '../../utils/useQueryData'
-import {Data, Home, blockTypes} from './types'
+import {Data, HomeData, blockTypes} from './types'
 import useParsedData from '../../utils/useParsedData'
 import Loading from '../../common/loading/Loading'
 import {Image} from '../../utils/types'
@@ -116,7 +116,7 @@ const HomePage = () => {
   const {isDesktop} = useMedia()
   const {toggle: formToggle} = useContext(HireFormModalContext)
   const {preview} = useContext(PreviewContext)
-  const {data, isLoading} = useQueryFindData<Home>(['home'])
+  const {data, isLoading} = useQueryFindData<HomeData>(['home'])
   const {parsedData} = useParsedData<Data>(data?.content, preview?.content, [...blockTypes])
 
   return (

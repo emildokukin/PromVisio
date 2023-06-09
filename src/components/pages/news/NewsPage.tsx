@@ -5,135 +5,93 @@ import NewsItem from './NewsItem'
 import Pagination from './Pagination'
 import arrowSVG from '../../../icons/arrow-circleless.svg'
 import useMedia from '../../utils/useMedia'
-import {Fragment} from 'react'
+import {Fragment, useCallback, useContext, useEffect, useState} from 'react'
 import clsx from 'clsx'
 import LinkComponent from '../../common/link-component/LinkComponent'
-
-export interface News {
-  id: number
-  title: string
-  description: string
-  date: string
-  innerLink?: string
-  mediaLinks: string[]
-}
+import {useQueryFindData} from '../../utils/useQueryData'
+import PreviewContext from '../../utils/preview'
+import {Article, Articles, NewsData} from './types'
+import Loading from '../../common/loading/Loading'
+import API from '../../utils/API'
+import {ENDPOINT} from '../../utils/endpoints'
 
 export interface Line {
   className?: string
 }
 
-export const news: News[] = [
-  {
-    id: 0,
-    title: 'Арктические учения 2020 1',
-    description:
-      'Компания "Промвизио" успешно завершила первый проект по фото- и видеосъёмке учений аварийно-спасательных формирований в Карском море.',
-    date: '12.05.2023',
-    innerLink: 'google.com',
-    mediaLinks: [
-      '/media/gallery/photo1.png',
-      '/media/gallery/photo2.png',
-      '/media/gallery/photo3.png',
-      '/media/gallery/photo4.png'
-    ]
-  },
-  {
-    id: 1,
-    title: 'Длинный заголовок в две или даже в три строки 2',
-    description: 'Компания Промвизио успешно завершила.',
-    date: '10.03.2023',
-    mediaLinks: [
-      '/media/gallery/photo2.png',
-      '/media/gallery/photo1.png',
-      '/media/gallery/photo3.png',
-      '/media/gallery/photo4.png'
-    ]
-  },
-  {
-    id: 2,
-    title: 'Длинный заголовок в две или даже в три строки 3',
-    description: 'Компания Промвизио успешно завершила.',
-    date: '10.03.2023',
-    mediaLinks: [
-      '/media/gallery/photo3.png',
-      '/media/gallery/photo1.png',
-      '/media/gallery/photo2.png',
-      '/media/gallery/photo4.png'
-    ]
-  },
-  {
-    id: 3,
-    title: 'Арктические учения 2500 4',
-    description:
-      'Компания Промвизио успешно завершила первый проект по фото- и видеосъёмке учений аварийно-спасательных формирований в Карском море.',
-    date: '01.12.2020',
-    innerLink: 'google.com',
-    mediaLinks: [
-      '/media/gallery/photo4.png',
-      '/media/gallery/photo1.png',
-      '/media/gallery/photo2.png',
-      '/media/gallery/photo3.png'
-    ]
-  },
-  {
-    id: 4,
-    title: 'Арктические учения 2500 5',
-    description:
-      'Компания Промвизио успешно завершила первый проект по фото- и видеосъёмке учений аварийно-спасательных формирований в Карском море.',
-    date: '01.12.2020',
-    innerLink: 'google.com',
-    mediaLinks: [
-      '/media/gallery/photo1.png',
-      '/media/gallery/photo2.png',
-      '/media/gallery/photo3.png',
-      '/media/gallery/photo4.png'
-    ]
-  }
-]
-
 export const Line = ({className}: Line) => <hr className={clsx(styles.line, className)} />
+
+const CIRCLE_INDEX = 3
 
 const NewsPage = () => {
   const {isMobile} = useMedia()
+  const {preview} = useContext(PreviewContext)
+  const {data, isLoading} = useQueryFindData<NewsData>(['news'])
+  const [news, setNews] = useState<Article[]>()
+
+  const parsedData = preview ? preview : data
+
+  useEffect(() => {
+    setNews(parsedData?.articles?.results)
+  }, [preview, data])
+
+  const fetchData = useCallback(
+    async (page: number) => {
+      const data = await API.GET(`${ENDPOINT.articles}/${parsedData?.id}/`, {params: {page: page}}).then(
+        (res) => res.data as Articles
+      )
+
+      setNews(data.results)
+    },
+    [preview, data]
+  )
 
   return (
     <Page>
       <Helmet>
-        <title>Вестник</title>
+        <title>{parsedData?.title || 'Вестник'}</title>
       </Helmet>
 
-      <section className={styles.news}>
-        <h1>Вестник</h1>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <section className={styles.news}>
+          <h1>{parsedData?.heading || 'Вестник'}</h1>
 
-        <div className={styles.newsWrapper}>
-          {news.map((newsItem, index) => (
-            <Fragment key={index}>
-              {index === 3 ? (
-                <LinkComponent link='/project' className={styles.circleWrapper}>
-                  <div className={styles.circle}>
-                    <img src={arrowSVG} alt='arrow' />
-                    <h2>Почитать историю проекта в Арктике</h2>
-                  </div>
-                </LinkComponent>
-              ) : (
+          <div className={styles.newsWrapper}>
+            {news?.map((item, index) => (
+              <Fragment key={index}>
+                {index === CIRCLE_INDEX ? (
+                  <>
+                    <LinkComponent link='/project' className={styles.circleWrapper}>
+                      <div className={styles.circle}>
+                        <img src={arrowSVG} alt='arrow' />
+                        <h2>Почитать историю проекта в Арктике</h2>
+                      </div>
+                    </LinkComponent>
+
+                    <Line />
+                  </>
+                ) : null}
+
                 <NewsItem
-                  key={newsItem.id}
-                  title={newsItem.title}
-                  description={newsItem.description}
-                  imgLink={newsItem.mediaLinks[0]}
-                  date={newsItem.date}
-                  link={newsItem.id.toString()}
-                  innerLink={newsItem.innerLink}
+                  key={item?.url}
+                  title={item?.title}
+                  description={item?.preview_text}
+                  image={item?.banner}
+                  date={item?.datetime}
+                  link={item?.url}
+                  innerLink={item?.source}
                 />
-              )}
 
-              {index % 2 !== 0 || index == news.length - 1 || isMobile ? <Line /> : null}
-            </Fragment>
-          ))}
-        </div>
+                {isMobile || (index % 2 !== 0 && index !== CIRCLE_INDEX) || index === news.length - 1 ? <Line /> : null}
+              </Fragment>
+            ))}
+          </div>
 
-        <Pagination className={styles.dots} />
-      </section>
+          <Pagination className={styles.dots} totalPages={parsedData?.articles?.total_pages} onDotClick={fetchData} />
+        </section>
+      )}
     </Page>
   )
 }

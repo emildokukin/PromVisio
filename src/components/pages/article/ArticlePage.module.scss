@@ -111,6 +111,7 @@
       }
 
       .link {
+        display: block;
         margin-top: 36px;
 
         @include mobile {
