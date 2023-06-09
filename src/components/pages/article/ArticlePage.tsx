@@ -11,13 +11,14 @@ import {Autoplay, Swiper as SwiperType} from 'swiper'
 import {Swiper, SwiperSlide} from 'swiper/react'
 import NewsItem, {NewsItemProps} from '../news/NewsItem'
 import SliderButton from '../../common/slider/SliderButton'
-import {Fragment, SetStateAction, useContext, useState} from 'react'
+import {Fragment, SetStateAction, useCallback, useContext, useEffect, useState} from 'react'
 import arrowSVG from '../../../icons/arrow-circleless.svg'
 import PreviewContext from '../../utils/preview'
 import {useQueryFindData} from '../../utils/useQueryData'
-import {ArticleData} from './types'
+import {ArticleData, Media} from './types'
 import {Article} from '../news/types'
 import Loading from '../../common/loading/Loading'
+import {GalleryModalContext} from '../../common/modal/GalleryModalContext'
 
 const parseNewsData = (item: Article): NewsItemProps => ({
   title: item.title,
@@ -65,6 +66,44 @@ const RecommendedSlider = ({isMobile, items}: {isMobile: boolean; items: Article
   )
 }
 
+const MediaItems = ({items, isMobile}: {items: Media[] | undefined; isMobile: boolean}) => {
+  const {toggle, updateItems, updateIndex} = useContext(GalleryModalContext)
+
+  const toggleModalVisibility = useCallback((index: number) => {
+    updateIndex(index)
+    toggle()
+  }, [])
+
+  useEffect(() => {
+    updateItems(items?.map((item) => item.value.url) || [])
+  }, [])
+
+  return isMobile ? (
+    <Swiper className={styles.swiper} slidesPerView={1} spaceBetween={8}>
+      {items?.map((media, index) => (
+        <SwiperSlide key={index}>
+          <GalleryItem
+            thumbnail={media.value.url}
+            className={styles.mediaItem}
+            onClick={() => toggleModalVisibility(index)}
+          />
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  ) : (
+    <div className={styles.right}>
+      {items?.map((media, index) => (
+        <GalleryItem
+          key={index}
+          thumbnail={media.value.url}
+          className={styles.mediaItem}
+          onClick={() => toggleModalVisibility(index)}
+        />
+      ))}
+    </div>
+  )
+}
+
 const ArticlePage = () => {
   const {id} = useParams()
   const {isMobile, isDesktop} = useMedia()
@@ -92,13 +131,7 @@ const ArticlePage = () => {
                   <img src={arrowSVG} alt='arrow' /> <span>Обратно в вестник</span>
                 </LinkComponent>
 
-                <Swiper className={styles.swiper} slidesPerView={1} spaceBetween={8}>
-                  {parsedData?.right_side?.map((media, index) => (
-                    <SwiperSlide key={index}>
-                      <GalleryItem thumbnail={media.value?.url} className={styles.mediaItem} />
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+                <MediaItems items={parsedData?.right_side} isMobile />
               </>
             )}
 
@@ -122,13 +155,7 @@ const ArticlePage = () => {
               ) : null}
             </div>
 
-            {isDesktop && (
-              <div className={styles.right}>
-                {parsedData?.right_side?.map((media, index) => (
-                  <GalleryItem key={index} thumbnail={media.value?.url} className={styles.mediaItem} />
-                ))}
-              </div>
-            )}
+            {isDesktop && <MediaItems items={parsedData?.right_side} isMobile={false} />}
           </div>
 
           <div className={styles.recommended}>

@@ -12,6 +12,6 @@ export interface ArticleData {
 
 export interface Media {
   type?: string
-  value?: Image
+  value: Image
   id?: string
 }
