@@ -17,7 +17,7 @@
   user-select: none;
 
   :global .swiper-slide {
-    div:has(iframe),
+    div,
     iframe {
       height: 100%;
     }
