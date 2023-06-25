@@ -137,7 +137,6 @@ const HomePage = () => {
           loop
           muted
         />
-        <img className={styles.image} src='/media/home/banner.png' alt='helicopter flying near ship' />
 
         <div className={styles.content}>
           <h1>
