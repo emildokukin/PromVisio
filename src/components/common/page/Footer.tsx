@@ -4,6 +4,7 @@ import {ReactComponent as PhoneSVG} from '../../../icons/phone-small.svg'
 import {ReactComponent as EnvelopeSVG} from '../../../icons/envelope.svg'
 import {ReactComponent as DzenSVG} from '../../../icons/dzen.svg'
 import {ReactComponent as RutubeSVG} from '../../../icons/rutube.svg'
+import {ReactComponent as TelegramSVG} from '../../../icons/tg.svg'
 import useMedia from '../../utils/useMedia'
 import clsx from 'clsx'
 
@@ -58,6 +59,10 @@ const Footer = () => {
 
           <LinkComponent link='https://rutube.ru/channel/31324384/' linkExternal className={styles.social}>
             <RutubeSVG /> {isMobile && <span>RUTUBE</span>}
+          </LinkComponent>
+
+          <LinkComponent link='https://t.me/promvisio ' linkExternal className={styles.social}>
+            <TelegramSVG /> {isMobile && <span>Telegram</span>}
           </LinkComponent>
 
           {isDesktop && <Email />}
