@@ -73,7 +73,7 @@ const PotentialPage = () => {
         <ul className={styles.list}>
           <li>
             <PromoSVG />
-            <span>Короткий промо-ролик</span>
+            <span>Короткий проморолик</span>
           </li>
           <li>
             <ShortMovieSVG />
