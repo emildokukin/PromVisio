@@ -50,7 +50,7 @@ const REVIEWS: Review[] = [
     title: '«Работы выполнены на высоком профессиональном уровне, в полном объеме, с надлежащим качеством»',
     signature: '/media/home/signature-1.png',
     format: 'PDF',
-    link: '#',
+    link: '/media/files/Благодарственное письмо ГПН 2022г.pdf',
     name: 'В.В. Черепанов',
     role: 'Генеральный директор • ООО «Газпром Недра»',
     image: '/media/home/gazprom-nedra.png'
@@ -59,7 +59,7 @@ const REVIEWS: Review[] = [
     title: '«Был создан качественный имиджевый медиапродукт, который отображает компетенции и опыт специалистов»',
     signature: '/media/home/signature-2.png',
     format: 'PDF',
-    link: '#',
+    link: '/media/files/Благодарственное письмо_22-0705-АВР-22-1083.pdf',
     name: 'С.А. Обухов',
     role: 'Заместитель генерального директора по строительству скважин',
     image: '/media/home/customer-left-1.svg'
@@ -68,7 +68,7 @@ const REVIEWS: Review[] = [
     title: '«Четкая организация труда, высокий профессионализм отвечают требованиям ООО «Газпром недра»',
     signature: '/media/home/signature-3.png',
     format: 'PDF',
-    link: '#',
+    link: '/media/files/Благодарственное письмо №2 ГПН 2022г.pdf',
     name: 'В.Л. Плотников',
     role: 'Заместитель генерального директора — главный инженер',
     image: '/media/home/gazprom-nedra.png'
@@ -78,7 +78,7 @@ const REVIEWS: Review[] = [
       '«За успешное выполнение работ по фото- и видеосъемке комплексных морских учений аварийно-спасательных формирований в акватории Карского моря»',
     signature: '/media/home/signature-4.png',
     format: 'PDF',
-    link: '#',
+    link: '/media/files/Благодарственное письмо ИЭПИ 2020г.pdf',
     name: 'В.Ю. Слободян',
     role: 'Генеральный директор • ИЭПИ',
     image: '/media/home/institute.png'
