@@ -123,8 +123,16 @@
   max-height: 160px;
   object-fit: contain;
 
+  @include mobile {
+    max-width: 75%;
+  }
+
   &-shifted {
     bottom: 25%;
+
+    &-mobile {
+      bottom: 50%;
+    }
   }
 }
 

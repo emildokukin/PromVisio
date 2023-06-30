@@ -1,4 +1,4 @@
-import {useContext, useEffect, useRef} from 'react'
+import {useCallback, useContext, useEffect, useRef} from 'react'
 import {CloseButton} from './CloseButton'
 import styles from './GalleryModal.module.scss'
 import Modal from './Modal'
@@ -10,14 +10,40 @@ import {Swiper as SwiperType, EffectFade} from 'swiper'
 import useMedia from '../../utils/useMedia'
 
 const GalleryModal = () => {
+  const swiperRef = useRef<SwiperRef>(null)
   const {isMobile} = useMedia()
   const {active, items, index, updateIndex, toggle} = useContext(GalleryModalContext)
 
-  const swiperRef = useRef<SwiperRef>(null)
+  const toPrevSlide = useCallback(() => updateIndex(Math.max(index - 1, 0)), [index])
+  const toNextSlide = useCallback(() => updateIndex(Math.min(index + 1, items.length - 1)), [index, items.length])
+  const onKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (!active) return
+
+      switch (e.code) {
+        case 'Escape':
+          toggle()
+          break
+        case 'ArrowLeft':
+          toPrevSlide()
+          break
+        case 'ArrowRight':
+          toNextSlide()
+          break
+      }
+    },
+    [active, toPrevSlide, toNextSlide]
+  )
 
   useEffect(() => {
     swiperRef.current?.swiper.slideTo(index)
   }, [index])
+
+  useEffect(() => {
+    document.addEventListener('keydown', onKeyDown)
+
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [onKeyDown])
 
   return (
     <Modal active={active} toggle={toggle} modalClassName={styles.modal} contentClassName={styles.content}>
@@ -42,13 +68,13 @@ const GalleryModal = () => {
         ))}
       </Swiper>
 
-      <div className={clsx(styles.arrow, {[styles.disabled]: index === 0})} onClick={() => updateIndex(index - 1)}>
+      <div className={clsx(styles.arrow, {[styles.disabled]: index === 0})} onClick={toPrevSlide}>
         <GalleryArrow />
       </div>
 
       <div
         className={clsx(styles.arrow, styles.arrowNext, {[styles.disabled]: index + 1 >= items.length})}
-        onClick={() => updateIndex(index + 1)}
+        onClick={toNextSlide}
       >
         <GalleryArrow />
       </div>

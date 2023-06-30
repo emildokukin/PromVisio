@@ -47,13 +47,14 @@ const Slider = ({items}: {items: Review[]}) => {
             <h2>{item.title}</h2>
 
             <div className={styles.content}>
-              {isDesktop && (
-                <img
-                  className={clsx(styles.signature, {[styles.signatureShifted]: index === 1})}
-                  src={item.signature}
-                  alt='signature'
-                />
-              )}
+              <img
+                className={clsx(styles.signature, {
+                  [styles.signatureShifted]: index === 1,
+                  [styles.signatureShiftedMobile]: index === 3
+                })}
+                src={item.signature}
+                alt='signature'
+              />
 
               <hr />
 
