@@ -21,6 +21,7 @@ from api.pagination import (
 from api.wagtail_serializers import PotentialPageVideoSerializer, ArticlePageSerializer
 from core import models
 from core.blocks import CustomImageSerializer
+from core.models import SiteSettings
 from core.services import notify_admin_about_feedback
 
 
@@ -162,3 +163,14 @@ class APIArticlesView(APIView):
         serializer = ArticlePageSerializer(page, context=serializer_context, many=True)
         response = paginator.get_paginated_response(serializer.data)
         return response
+
+
+class ConfigView(APIView):
+    @method_decorator(cache_page(60))
+    def get(self, request):
+        config = SiteSettings.for_request(request)
+        return Response(
+            {
+                "analytics_code": config.analytics_code,
+            }
+        )

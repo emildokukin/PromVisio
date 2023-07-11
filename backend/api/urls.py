@@ -24,5 +24,6 @@ urlpatterns = [
         views.APIArticlesView.as_view(),
         name="articles-list",
     ),
+    path("config/", views.ConfigView.as_view()),
     path("", api_router.urls),
 ]
