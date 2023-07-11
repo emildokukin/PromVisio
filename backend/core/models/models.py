@@ -8,9 +8,13 @@ class SiteSettings(BaseSiteSetting):
     feedback_email = models.EmailField(
         verbose_name="Email для обратной связи", default="info@promvisio.ru"
     )
+    analytics_code = models.TextField(
+        blank=True, verbose_name="Код счетчиков аналитики"
+    )
 
     panels = [
         FieldPanel("feedback_email"),
+        FieldPanel("analytics_code"),
     ]
 
     class Meta:
